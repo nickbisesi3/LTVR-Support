@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Headset Tour - LearningTime VR Support</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            margin: 20px 0; /* Add some spacing */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <img src="assets/logo.png" alt="LearningTime VR Logo" class="logo"> <!-- Placeholder for logo -->
+            </a>
+            <button id="schedule-header-btn" class="schedule-btn">Schedule Virtual Training</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Headset Tour</h1>
+        <p>Watch this video for a tour of the VR headset.</p>
+        
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/sXqeELFQJNc?si=uvJxl7iGF6Yv5WeO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <a href="index.html">&larr; Back to Support Home</a>
+
+    </main>
+
+    <footer>
+        <!-- Footer content can go here -->
+    </footer>
+
+    <!-- Calendly script needed if header button is clicked from this page -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script>
+         document.addEventListener('DOMContentLoaded', function() {
+            const calendlyUrl = 'https://calendly.com/learningtimevr-demo/30min';
+
+            function openCalendly(url) {
+                Calendly.initPopupWidget({ url: url });
+                return false;
+            }
+
+            const scheduleHeaderBtn = document.getElementById('schedule-header-btn');
+            if (scheduleHeaderBtn) {
+                scheduleHeaderBtn.addEventListener('click', function() {
+                    openCalendly(calendlyUrl);
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

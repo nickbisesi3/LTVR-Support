@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson View - LearningTime VR Support</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add specific styles for lesson view if needed */
+        .lesson-container {
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            border-right: 1px solid #eee;
+            padding-right: 20px;
+            margin-right: 20px;
+        }
+        .sidebar h2 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar li a {
+            display: block;
+            padding: 10px 0;
+            text-decoration: none;
+            color: #333;
+            /* Add active state styling */
+        }
+        .sidebar li a:hover {
+            color: #007bff; /* Example hover color */
+        }
+        .lesson-content {
+            flex-grow: 1;
+        }
+        .next-btn {
+            display: inline-block;
+            padding: 10px 20px;
+             background: linear-gradient(to right, #6a11cb, #2575fc); /* Match nav card */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+        }
+        .nav-button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .back-link {
+             text-decoration: none;
+             color: #007bff; /* Example color */
+        }
+        .back-link:hover {
+             text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <img src="assets/logo.png" alt="LearningTime VR Logo" class="logo"> <!-- Placeholder for logo -->
+            </a>
+            <button id="schedule-header-btn" class="schedule-btn">Schedule Virtual Training</button>
+        </div>
+    </header>
+
+    <main class="container lesson-container">
+        <aside class="sidebar">
+            <h2 id="sidebar-topic">Topic</h2>
+            <ul id="sidebar-nav">
+                <!-- Sidebar links will be populated by JS -->
+                 <!-- Static links removed -->
+            </ul>
+        </aside>
+        <section class="lesson-content">
+            <h1 id="lesson-title">Lesson Title</h1>
+            <div id="lesson-body">
+                <!-- Lesson content will be loaded here -->
+                <p>This is placeholder content for the lesson. It will be replaced dynamically or built out later.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, quidem asperiores? Voluptates, quasi! Quisquam, quod.</p>
+            </div>
+            <div style="clear:both;"></div>
+        </section>
+    </main>
+
+    <div class="container">
+        <hr style="margin-top: 40px; margin-bottom: 0; border: 0; border-top: 1px solid #eee;">
+        <div class="nav-button-container">
+             <a href="index.html" class="back-link">&larr; Back to Support Home</a>
+             <a href="#" id="next-lesson-btn" class="next-btn">Next Section →</a>
+        </div>
+    </div>
+
+    <footer>
+        <!-- Footer content can go here -->
+    </footer>
+
+    <!-- Calendly script needed if header button is clicked from this page -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendlyUrl = 'https://calendly.com/learningtimevr-demo/30min';
+
+            // --- Lesson Data Structure ---
+            const lessonsData = {
+                'start-here': {
+                    name: 'Start Here',
+                    lessons: [
+                        { id: 'ltvr-intro', title: 'LTVR Support Introduction' },
+                        { id: 'arborxr-intro', title: 'ArborXR Introduction' }
+                    ]
+                },
+                'setup': {
+                    name: 'Set Up',
+                    lessons: [
+                        { id: 'headset-numbers', title: 'Headset Numbers' },
+                        { id: 'intro-presentation', title: 'Introduction Presentation' }
+                    ]
+                },
+                'content-library': {
+                    name: 'Content Library',
+                    lessons: [
+                        { id: 'available-arborxr', title: 'Available Through ArborXR' },
+                        { id: 'vxr-labs', title: 'VXR Labs Only' },
+                        { id: 'request-content', title: 'Request New Content' }
+                    ]
+                },
+                'class-management': {
+                    name: 'Class Management',
+                    lessons: [
+                        { id: 'view-screens', title: 'View Student Screens' },
+                        { id: 'cleaning', title: 'Cleaning Your Headsets' },
+                        { id: 'storage', title: 'Putting Headsets Away' }
+                    ]
+                }
+                // Add other topics from index.html if needed
+            };
+
+            // Define the order of topics for navigation
+            const topicOrder = ['start-here', 'setup', 'content-library', 'class-management'];
+
+            // --- Elements ---
+            const sidebarNav = document.getElementById('sidebar-nav');
+            const sidebarTopicEl = document.getElementById('sidebar-topic');
+            const lessonTitleEl = document.getElementById('lesson-title');
+            const lessonBodyEl = document.getElementById('lesson-body');
+            const nextBtn = document.getElementById('next-lesson-btn');
+            const scheduleHeaderBtn = document.getElementById('schedule-header-btn');
+
+            // --- Calendly --- (Keep existing logic)
+            function openCalendly(url) {
+                Calendly.initPopupWidget({ url: url });
+                return false;
+            }
+            if (scheduleHeaderBtn) {
+                scheduleHeaderBtn.addEventListener('click', () => openCalendly(calendlyUrl));
+            }
+
+            // --- Lesson Loading and Sidebar Population ---
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentTopicId = urlParams.get('topic') || topicOrder[0]; // Default to first topic
+            const currentTopicData = lessonsData[currentTopicId];
+            let currentLessonIndex = 0;
+
+            function loadLesson(lessonIndex) {
+                if (!currentTopicData || !currentTopicData.lessons[lessonIndex]) return;
+
+                const lesson = currentTopicData.lessons[lessonIndex];
+                lessonTitleEl.textContent = lesson.title;
+                lessonBodyEl.innerHTML = `<p>Content for <strong>${lesson.title}</strong> goes here. This is a placeholder.</p>`; // Placeholder
+                currentLessonIndex = lessonIndex;
+
+                // Update active state in sidebar
+                document.querySelectorAll('#sidebar-nav li a').forEach((link, index) => {
+                    // Added safety check for toggle method if needed, but classList should be standard
+                    if (link.classList) {
+                         link.classList.toggle('active', index === lessonIndex);
+                    }
+                });
+
+                // --- Update Next button state and text ---
+                const isLastLesson = lessonIndex >= currentTopicData.lessons.length - 1;
+                const currentTopicOrderIndex = topicOrder.indexOf(currentTopicId);
+                const isLastTopic = currentTopicOrderIndex >= topicOrder.length - 1;
+
+                if (isLastLesson) {
+                    if (isLastTopic) {
+                        nextBtn.style.display = 'none'; // Hide on last lesson of last topic
+                    } else {
+                        // Show "Next Topic" button
+                        const nextTopicId = topicOrder[currentTopicOrderIndex + 1];
+                        const nextTopicName = lessonsData[nextTopicId]?.name || 'Next Topic';
+                        nextBtn.textContent = `Next Topic: ${nextTopicName} →`;
+                        nextBtn.style.display = 'inline-block';
+                        nextBtn.setAttribute('data-action', 'next-topic'); // Mark action type
+                        nextBtn.setAttribute('data-next-topic', nextTopicId); // Store next topic id
+                    }
+                } else {
+                    // Show "Next Section" button
+                    nextBtn.textContent = 'Next Section →';
+                    nextBtn.style.display = 'inline-block';
+                     nextBtn.setAttribute('data-action', 'next-section'); // Mark action type
+                     nextBtn.removeAttribute('data-next-topic');
+                }
+            }
+
+            function populateSidebar() {
+                if (!currentTopicData) {
+                    sidebarTopicEl.textContent = 'Unknown Topic';
+                    lessonTitleEl.textContent = 'Content not found';
+                    lessonBodyEl.innerHTML = '<p>Please select a topic from the Support Home page.</p>';
+                    sidebarNav.innerHTML = '';
+                     nextBtn.style.display = 'none';
+                    return;
+                }
+
+                sidebarTopicEl.textContent = currentTopicData.name;
+                sidebarNav.innerHTML = ''; // Clear existing static or old items
+
+                currentTopicData.lessons.forEach((lesson, index) => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = `#${lesson.id}`; // Use hash for potential deep linking / identification
+                    a.textContent = lesson.title;
+                    a.addEventListener('click', (e) => {
+                        e.preventDefault(); // Prevent page jump
+                        loadLesson(index);
+                    });
+                    li.appendChild(a);
+                    sidebarNav.appendChild(li);
+                });
+
+                // Load the first lesson initially
+                loadLesson(0);
+            }
+
+            // --- Next Button Logic ---
+            if(nextBtn) {
+                nextBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const action = nextBtn.getAttribute('data-action');
+
+                    if (action === 'next-section') {
+                        const nextIndex = currentLessonIndex + 1;
+                        if (currentTopicData && nextIndex < currentTopicData.lessons.length) {
+                            // Simulate click on the next sidebar link for smooth transition
+                            const nextLink = sidebarNav.querySelectorAll('li a')[nextIndex];
+                            if (nextLink) nextLink.click();
+                        }
+                    } else if (action === 'next-topic') {
+                        const nextTopicId = nextBtn.getAttribute('data-next-topic');
+                        if (nextTopicId) {
+                            window.location.href = `lesson.html?topic=${nextTopicId}`;
+                        }
+                    }
+                });
+            }
+
+            // --- Initial Load ---
+            populateSidebar();
+
+        });
+    </script>
+</body>
+</html> 

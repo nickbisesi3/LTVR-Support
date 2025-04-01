@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Presentation - LearningTime VR Support</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add specific styles for presentation view */
+        .presentation-container {
+            position: relative;
+            width: 90%; /* Responsive width */
+            max-width: 960px; /* Max width */
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            margin: 20px auto; /* Center the container */
+            height: 0;
+            overflow: hidden;
+            border: 1px solid #ccc; /* Optional border */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional shadow */
+        }
+        .presentation-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0; /* Remove iframe border */
+        }
+        .back-link-container { /* Simple container for back link */
+             text-align: center;
+             margin-top: 20px;
+             margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <img src="assets/logo.png" alt="LearningTime VR Logo" class="logo">
+            </a>
+            <button id="schedule-header-btn" class="schedule-btn">Schedule Virtual Training</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Class Introduction Presentation</h1>
+
+        <div class="presentation-container">
+            <iframe src="https://docs.google.com/presentation/d/1jXYUXf-meyHKsK3mvgU8IkY83-fRvG_P95d8a9wUzJs/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+        </div>
+         <div class="back-link-container">
+             <a href="index.html">&larr; Back to Support Home</a>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Footer content -->
+        <p>&copy; LearningTime VR</p>
+    </footer>
+
+    <!-- Calendly script needed if header button is clicked from this page -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script>
+        // Basic script to handle header button
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendlyUrl = 'https://calendly.com/learningtimevr-demo/30min';
+
+            function openCalendly(url) {
+                Calendly.initPopupWidget({ url: url });
+                return false;
+            }
+
+            const scheduleHeaderBtn = document.getElementById('schedule-header-btn');
+            if (scheduleHeaderBtn) {
+                scheduleHeaderBtn.addEventListener('click', function() {
+                    openCalendly(calendlyUrl);
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

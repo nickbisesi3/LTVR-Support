@@ -1,0 +1,396 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+body {
+    /* font-family: sans-serif; */ /* Placeholder font */
+    font-family: 'Poppins', sans-serif; /* Use Poppins */
+    margin: 0;
+    background-color: #ffffff;
+    color: #333; /* Default text color */
+}
+
+.container {
+    max-width: 1100px; /* Slightly narrower container */
+    margin: 0 auto;
+    padding: 0 15px; /* Adjust padding */
+}
+
+header {
+    padding: 10px 0; /* Adjust header padding */
+    border-bottom: 1px solid #eee;
+    background-color: #fff; /* Ensure header bg is white */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 55px; /* Increase logo height further */
+    vertical-align: middle; /* Align logo nicely */
+    transition: transform 0.2s ease; /* Add transition for hover effect */
+}
+
+.schedule-btn {
+    padding: 10px 25px; /* Adjusted padding */
+    /* background-color: #e53935; */ /* Placeholder red, adjust to match */
+    background-color: #e60000; /* Match learningtimevr.com red */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Slightly more rounded corners */
+    cursor: pointer;
+    font-size: 0.95em; /* Adjust font size */
+    font-weight: 600; /* Medium bold */
+    transition: background-color 0.2s ease; /* Smoother hover */
+}
+
+.schedule-btn:hover {
+    /* background-color: #cc0000; */ /* Darken red on hover */
+    opacity: 0.85; /* Lighten button on hover */
+}
+
+main.container {
+    /* padding-top: 40px; */ /* Original space above main content */
+    /* padding-top: 20px; */ /* Previously reduced space */
+    padding-top: 10px; /* Further reduced space above main content */
+    padding-bottom: 40px;
+}
+
+h1 {
+    font-size: 2.2em; /* Adjust heading size */
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #222; /* Darker heading color */
+}
+
+h2 {
+    font-size: 1.4em; /* Adjust heading size */
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Welcome Section */
+.welcome-section h1 {
+    font-size: 2.8em; /* Larger Welcome */
+    margin-bottom: 15px;
+}
+
+/* Updated styles for the Start Here link */
+a.start-here {
+    display: block; /* Make it a block element */
+    margin-bottom: 25px; /* Less space below */
+    /* border: 1px solid #ddd; */ /* Remove border */
+    border-radius: 8px;
+    overflow: hidden; /* Keep this for particles */
+    position: relative; /* Needed for absolute positioning of particles */
+
+    /* Borrow styles from .nav-card */
+    /* background-color: #0052cc; */ /* Solid blue */
+    background-image: linear-gradient(to right, #0052cc, #007bff); /* Blue gradient */
+    color: white;
+    padding: 40px 25px; /* Increase vertical padding */
+    text-decoration: none;
+    text-align: center; /* Center the text */
+    font-size: 1.25em; /* Match nav-card h2 font-size */
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Container for particles inside the button */
+.particle-container {
+    position: relative; /* Keep content flow */
+    z-index: 2; /* Ensure text is above particles */
+}
+
+/* Individual particle styles */
+.particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
+    border-radius: 50%;
+    pointer-events: none; /* Particles shouldn't block interaction */
+    z-index: 1; /* Particles below text */
+    /* animation: particle-fade 0.6s ease-out forwards; */ /* Remove animation */
+    transition: left 0.3s ease-out, top 0.3s ease-out; /* Add transition for smooth movement */
+}
+
+/* Delete the keyframes rule as it's no longer needed */
+
+a.start-here:hover {
+    /* Borrow hover styles from .nav-card:hover */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    /* background-color: #0041a3; */ /* Slightly darker blue on hover */
+    background-image: linear-gradient(to right, #0041a3, #0069d9); /* Darker blue gradient on hover */
+    color: white; /* Ensure text stays white */
+    text-decoration: none; /* Remove underline */
+}
+
+.main-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Adjust minmax */
+    gap: 25px; /* Increase gap */
+    margin-bottom: 50px; /* More space below */
+}
+
+.nav-card {
+    /* background: linear-gradient(to right, #6a11cb, #2575fc); */ /* Example gradient */
+    background-color: #0052cc; /* Solid blue */
+    color: white;
+    padding: 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.nav-card:hover {
+    /* transform: translateY(-5px); */ /* Original effect */
+    transform: translateY(-5px) scale(1.03); /* Combine translate and scale */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.nav-card h2 {
+    margin: 0;
+    font-size: 1.25em;
+    font-weight: 600;
+    color: white; /* Ensure text is white */
+}
+
+.nav-card span {
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+/* Quick Access Section */
+.quick-access h2 {
+    margin-bottom: 25px;
+}
+
+.quick-links {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); */ /* Adjust minmax */
+    grid-template-columns: repeat(3, 1fr); /* Force 3 columns */
+    gap: 20px; /* Increase gap */
+    margin-bottom: 50px;
+}
+
+.quick-link {
+    /* background: linear-gradient(to right, #00c6ff, #0072ff); */ /* Example gradient */
+    background-color: #e60000; /* Solid Red */
+    color: white;
+    padding: 18px 15px; /* Adjust padding */
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.quick-link:hover {
+    /* transform: translateY(-4px); */ /* Original effect */
+    transform: translateY(-4px) scale(1.03); /* Combine translate and scale */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Get Help Section */
+.get-help h2 {
+    margin-bottom: 25px;
+}
+
+.help-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.help-card {
+    /* border: 1px solid #ddd; */ /* Lighter border */
+    border-radius: 8px;
+    padding: 25px;
+    text-align: center;
+    /* background-color: #f9f9f9; */ /* Light background */
+    background-color: #0052cc; /* Match nav-card blue */
+    color: white; /* Default text white */
+    /* transition: box-shadow 0.2s ease, transform 0.2s ease; */ /* Old transition */
+    transition: background-color 0.2s ease; /* Transition for background color */
+}
+
+.help-card:hover {
+     /* box-shadow: 0 4px 10px rgba(0,0,0,0.1); */ /* Remove shadow on hover */
+     /* transform: scale(1.03); */ /* Remove scale effect */
+     background-color: #0041a3; /* Darken blue on hover */
+}
+
+.help-card p {
+    margin: 8px 0;
+    font-size: 1.05em;
+    /* Color is inherited from .help-card */
+}
+
+.phone-card {
+    cursor: default;
+    /* transition: background-color 0.2s ease; */ /* Replaced by box-shadow transition */
+}
+
+/* .phone-card:hover { */
+    /* background-color: #f0f0f0; */ /* Slightly darker hover */
+/* } */
+
+.schedule-link-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #0066cc; /* Default Solid blue */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.schedule-link-btn:hover {
+    opacity: 0.85; /* Default Lighten button on hover */
+}
+
+/* Style buttons specifically inside the blue help cards */
+.help-card .schedule-link-btn {
+    background-color: white;
+    color: #0052cc; /* Use the card's blue for text */
+}
+
+.help-card .schedule-link-btn:hover {
+    background-color: #f0f0f0; /* Light grey background on hover */
+    opacity: 1; /* Override the general opacity hover */
+    color: #0041a3; /* Slightly darker blue text on hover */
+}
+
+/* General Link Styling */
+a {
+    color: #0066cc; /* Consistent link blue */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Footer styling placeholder */
+footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #777;
+    font-size: 0.9em;
+}
+
+/* Specific Lesson Page Styles */
+.lesson-container {
+    display: flex;
+    gap: 30px; /* Add gap between sidebar and content */
+}
+
+.sidebar {
+    width: 220px; /* Adjust width */
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+    border-right: 1px solid #eee;
+    padding-right: 0;
+    margin-right: 0;
+}
+
+.sidebar h2 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    margin-right: 20px; /* Add margin for padding effect */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li a {
+    display: block;
+    padding: 10px 20px 10px 0; /* Adjust padding */
+    text-decoration: none;
+    color: #333;
+    border-right: 3px solid transparent; /* For active state indicator */
+    transition: background-color 0.2s ease, border-right-color 0.2s ease;
+}
+
+.sidebar li a:hover {
+    background-color: #f0f0f0; /* Hover background */
+    text-decoration: none; /* Remove underline on hover */
+    color: #0052a3; /* Darker blue on hover */
+}
+
+.sidebar li a.active { /* Style for active link */
+    font-weight: 600;
+    color: #0066cc;
+    border-right-color: #0066cc;
+}
+
+.lesson-content {
+    flex-grow: 1;
+}
+
+.next-btn {
+    display: inline-block; /* Change display */
+    margin-top: 30px;
+    padding: 10px 25px;
+    /* background: linear-gradient(to right, #6a11cb, #2575fc); */ /* Match nav card */
+    background-color: #0066cc; /* Match schedule button blue */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    /* float: right; */ /* Remove float */
+    transition: background-color 0.2s ease;
+}
+
+.next-btn:hover {
+     background-color: #0052a3; /* Darken blue on hover */
+     text-decoration: none; /* Remove underline */
+     color: white;
+}
+
+/* Headset Tour Page Specific */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    max-width: 1000px; /* Max width for video */
+    margin: 30px auto; /* Center and add margin */
+    background: #000;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0; /* Remove iframe border */
+} 
