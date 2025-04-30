@@ -4,32 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArborXR Guides - LearningTime VR Support</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/support-style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <a href="index.html" class="logo-link">
-                <img src="assets/logo.png" alt="LearningTime VR Logo" class="logo"> <!-- Placeholder for logo -->
-            </a>
-            <button id="schedule-header-btn" class="schedule-btn">Schedule Virtual Training</button>
-        </div>
-    </header>
+    <!-- Header will be dynamically injected by header.js -->
+    
 
     <main class="container">
         <h1>ArborXR Guides</h1>
         <p>This page will contain ArborXR guides, blog posts, and links to resources. Content coming soon!</p>
         
-        <a href="index.html">&larr; Back to Support Home</a>
+        <a href="support.html">&larr; Back to Support Home</a>
     </main>
+<div id="footer-placeholder"></div>
 
-    <footer>
-        <!-- Footer content can go here -->
-    </footer>
+
 
     <!-- Calendly script needed if header button is clicked from this page -->
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script src="js/script.js"></script>
+<script src="js/footer.js"></script>
     <script>
          document.addEventListener('DOMContentLoaded', function() {
             const calendlyUrl = 'https://calendly.com/learningtimevr-demo/30min';
@@ -47,5 +42,6 @@
             }
         });
     </script>
+    <script src="js/header.js"></script>
 </body>
 </html> 

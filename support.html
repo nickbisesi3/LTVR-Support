@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - LearningTime VR</title>
+    <link rel="stylesheet" href="css/support-style.css">
+    <script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+</head>
+<body>
+    <!-- Header will be dynamically injected by header.js -->
+
+    <main class="container">
+        <section class="support-intro-section">
+            <h1>Support</h1>
+            <a href="lesson.html?topic=start-here" class="start-here" id="start-here-link">
+                <div class="particle-container">
+                    <span>Start Here →</span>
+                </div>
+            </a>
+            <div class="main-nav">
+                <a href="lesson.html?topic=setup-class-management" class="nav-card">
+                    <h2>Set Up & Class Management</h2>
+                    <span>→</span>
+                </a>
+                <a href="lesson.html?topic=content-library" class="nav-card">
+                    <h2>Content Library</h2>
+                    <span>→</span>
+                </a>
+                <a href="lesson.html?topic=troubleshooting-support" class="nav-card">
+                    <h2>Troubleshooting & Support</h2>
+                    <span>→</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="quick-access">
+            <h2>Quick Access</h2>
+            <div class="quick-links">
+                <a href="https://api.xrdm.app/login" target="_blank" class="quick-link">Arbor XR</a>
+                <a href="presentation.html" class="quick-link">Class Presentation</a>
+                <a href="lesson.html?topic=content-library&lesson=vxr-labs" class="quick-link">VXR Guide</a>
+                <a href="lesson.html?topic=start-here&lesson=arborxr-intro" class="quick-link">ArborXR Guides</a>
+                <a href="lesson.html?topic=troubleshooting-support&lesson=common-issues" class="quick-link">FAQ</a>
+                <a href="headset-tour.html" class="quick-link">Headset Tour</a>
+            </div>
+        </section>
+
+        <section class="get-help">
+            <h2>Get Help</h2>
+            <div class="help-options">
+                <div class="help-card phone-card">
+                    <p>Call/Text</p>
+                    <p>(317) 937-1919</p>
+                </div>
+                <div class="help-card schedule-card">
+                    <p>Virtual Training & Lesson Planning</p>
+                    <button id="schedule-virtual-btn" class="schedule-link-btn">Schedule</button>
+                </div>
+                <div class="help-card schedule-card">
+                    <p>In-Class Facilitation</p>
+                    <button id="schedule-inclass-btn" class="schedule-link-btn">Schedule Visit</button>
+                </div>
+            </div>
+        </section>
+    </main>
+<div id="footer-placeholder"></div>
+
+    <!-- Calendly link widget begin -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <!-- Calendly link widget end -->
+    <script src="js/script.js"></script>
+<script src="js/footer.js"></script>
+    <!-- Zapier Chatbot Embed Removed -->
+
+    <!-- Removed auto-open script as it might be causing issues -->
+    <!-- 
+    <script>
+        // Function to attempt opening the chatbot
+        // ... (previous script content) ...
+    </script>
+    -->
+     <script>
+        // Update copyright year automatically
+        document.getElementById("copyright-year").textContent = new Date().getFullYear();
+    </script>
+    <script src="js/header.js"></script>
+</body>
+</html>

@@ -3,82 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LearningTime VR - Support</title>
-    <link rel="stylesheet" href="style.css">
+    <title>LearningTime VR - Home</title>
+    <link rel="stylesheet" href="css/support-style.css">
+    <script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
 </head>
 <body>
-    <header>
+    <!-- Header dynamically injected by header.js -->
+
+    <section class="welcome-section" style="margin-bottom: 0;">
         <div class="container">
-            <a href="index.html" class="logo-link">
-                <img src="assets/logo.png" alt="LearningTime VR Logo" class="logo"> <!-- Placeholder for logo -->
-            </a>
-            <button id="schedule-header-btn" class="schedule-btn">Schedule Virtual Training</button>
+            <h1>Learn Beyond Limits</h1>
+            <p>Immersive VR experiences that enhance student learning and empower teachers.</p>
+            <button id="hero-schedule-btn" class="schedule-btn" style="background-color: white; color: #0052cc;">Talk With Us</button>
         </div>
-    </header>
+    </section>
 
-    <main class="container">
-        <section class="welcome-section">
-            <h1>Support</h1>
-            <a href="lesson.html?topic=start-here" class="start-here" id="start-here-link">
-                <div class="particle-container">
-                    <span>Start Here →</span>
+    <section class="unforgettable-experience">
+        <div class="container">
+            <div class="text-content">
+                <h2>An Unforgettable Learning Experience</h2>
+                <p>Imagine a classroom where students are fully immersed in hands-on learning, exploring subjects in ways that ignite curiosity and keep them deeply engaged with every lesson.</p>
+            </div>
+            <div class="image-content">
+                <img src="assets/Classroom-1.gif" alt="Students using VR headsets in a classroom">
+            </div>
+        </div>
+    </section>
+
+    <section class="support-onboarding-section">
+        <div class="container">
+            <div class="image-content">
+                <img src="assets/KidsinLTVRHeadsets.gif" alt="Students receiving support with VR headsets">
+            </div>
+            <div class="text-content">
+                <h2>Seamless Onboarding & Support</h2>
+                <p>We don't just provide the technology; we ensure you're confident using it. Our dedicated support team provides comprehensive onboarding and ongoing assistance to help you integrate VR smoothly into your curriculum.</p>
+            </div>
+        </div>
+    </section>
+
+    <main style="margin-top: 0;">
+        <!-- Main Nav moved here -->
+        <div class="container">
+            <section class="main-nav" style="margin-bottom: 50px;">
+            <div class="nav-card" style="background-color: #e60000;">
+                <h2>Our Mission</h2>
+                <p style="color: white; font-size: 0.9em;">To improve student outcomes, reduce educational costs, and simplify the implementation of VR technology, equipping learners with real-world skills through scalable, experiential learning.</p>
+           </div>
+            <div class="nav-card" style="background-color: #e60000;">
+               <h2>Why Virtual Reality?</h2>
+               <p style="color: white; font-size: 0.9em;">Engage students, improve retention, and provide safe, cost-effective access to experiences impossible in a traditional classroom.</p>
+            </div>
+       </section>
+        </div>
+
+        <!-- School Logos Section moved here -->
+        <div class="container">
+            <section class="school-logos-section">
+                <h2>Trusted by Future-Focused Schools</h2>
+            <div class="logo-grid-scroll-container">
+                <div class="logo-grid">
+                    <div class="logo-item"><img src="assets/School Logos/Options.png" alt="Options Schools Logo"></div>
+                    <div class="logo-item"><img src="assets/School Logos/ecesc.png" alt="ECESC Logo"></div>
+                    <div class="logo-item"><img src="assets/School Logos/Nashville Logo.png" alt="Nashville School Logo"></div>
+                    <div class="logo-item"><img src="assets/School Logos/GEO_Academies-Logo.png" alt="GEO Academies Logo"></div>
+                    <div class="logo-item"><img src="assets/School Logos/HSE Schools.webp" alt="HSE Schools Logo"></div>
+                    <div class="logo-item"><img src="assets/School Logos/16Tech Color Logo.png" alt="16Tech Logo"></div>
+                    <div class="logo-item"><img src="assets/School Logos/IVY tech.png" alt="IVY Tech Logo"></div>
+                    <div class="logo-item"><img src="assets/School Logos/PHM.png" alt="PHM Logo"></div>
+                    <!-- Duplicate set for infinite scroll -->
+                    <div class="logo-item"><img src="assets/School Logos/Options.png" alt="Options Schools Logo"></div>
+                    <div class="logo-item"><img src="assets/School Logos/ecesc.png" alt="ECESC Logo"></div>
+                    <div class="logo-item"><img src="assets/School Logos/Nashville Logo.png" alt="Nashville School Logo"></div>
+                    <div class="logo-item"><img src="assets/School Logos/GEO_Academies-Logo.png" alt="GEO Academies Logo"></div>
+                    <div class="logo-item"><img src="assets/School Logos/HSE Schools.webp" alt="HSE Schools Logo"></div>
+                    <div class="logo-item"><img src="assets/School Logos/16Tech Color Logo.png" alt="16Tech Logo"></div>
+                    <div class="logo-item"><img src="assets/School Logos/IVY tech.png" alt="IVY Tech Logo"></div>
+                    <div class="logo-item"><img src="assets/School Logos/PHM.png" alt="PHM Logo"></div>
                 </div>
-            </a>
-            <div class="main-nav">
-                <a href="lesson.html?topic=setup-class-management" class="nav-card">
-                    <h2>Set Up & Class Management</h2>
-                    <span>→</span>
-                </a>
-                <a href="lesson.html?topic=content-library" class="nav-card">
-                    <h2>Content Library</h2>
-                    <span>→</span>
-                </a>
-                <a href="lesson.html?topic=troubleshooting-support" class="nav-card">
-                    <h2>Troubleshooting & Support</h2>
-                    <span>→</span>
-                </a>
+            </div>
+            </section>
+        </div>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section" style="padding: 30px 0 50px 0; position: relative; overflow: hidden; margin-bottom: 40px; background: linear-gradient(to right, #f8f9fa, #ffffff, #f8f9fa); border-bottom: none; position: relative; margin-top: 0; box-shadow: none;">
+            <!-- Gradient bottom transition -->
+            <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 20px; background: linear-gradient(to bottom, rgba(248,249,250,1), rgba(255,255,255,0)); z-index: 1;"></div>
+            
+            <!-- Animated Floating Elements -->
+            <style>
+                @keyframes float1 {
+                    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.15; }
+                    50% { transform: translate(15px, -15px) rotate(5deg); opacity: 0.25; }
+                    100% { transform: translate(0, 0) rotate(0deg); opacity: 0.15; }
+                }
+                @keyframes float2 {
+                    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.15; }
+                    50% { transform: translate(-20px, 10px) rotate(-8deg); opacity: 0.25; }
+                    100% { transform: translate(0, 0) rotate(0deg); opacity: 0.15; }
+                }
+                @keyframes float3 {
+                    0% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+                    50% { transform: translate(10px, 10px) scale(1.1); opacity: 0.25; }
+                    100% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+                }
+            </style>
+            
+            <div style="position: absolute; top: 20px; left: 5%; width: 80px; height: 80px; background: rgba(0,82,204,0.15); border-radius: 50%; z-index: 1; animation: float1 8s ease-in-out infinite;"></div>
+            <div style="position: absolute; bottom: 40px; right: 10%; width: 120px; height: 120px; background: rgba(220,53,69,0.15); border-radius: 50%; z-index: 1; animation: float2 12s ease-in-out infinite;"></div>
+            <div style="position: absolute; top: 60%; left: 15%; width: 40px; height: 40px; background: rgba(40,167,69,0.15); border-radius: 50%; z-index: 1; animation: float3 10s ease-in-out infinite;"></div>
+            
+            <div class="container" style="position: relative; z-index: 2; max-width: 1200px; margin: 0 auto;">
+                <h2 style="text-align: center; font-size: 2.2em; margin-bottom: 15px; color: #111; font-weight: 600;">What Our Teachers Say</h2>
+                <p style="text-align: center; max-width: 700px; margin: 0 auto 30px; color: #444; font-size: 1.1em; line-height: 1.5;">See why teachers and administrators choose Learning Time VR for their classrooms</p>
+                
+                <div class="testimonials-grid" style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; max-width: 1000px; margin: 0 auto;">
+                    <div class="testimonial-card" style="background: #fff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,82,204,0.12); padding: 30px; max-width: 340px; flex: 1 1 300px; border-top: 4px solid #0052cc; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 35px rgba(0,82,204,0.18)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(0,82,204,0.12)';">
+                        <div style="display: flex;">
+                            <div style="color: #0052cc; font-size: 2.5em; line-height: 1; margin-right: 12px; font-family: 'Georgia', serif; font-weight: bold;">"</div>
+                            <p style="font-style: italic; font-size: 1.1em; line-height: 1.6; margin: 0; color: #333;">Jim and Nick brought the technology to life with engaging, hands-on sessions that completely captured our attention—we lost track of time!</p>
+                        </div>
+                        <div style="display: flex; align-items: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eaeaea;">
+                            <div style="width: 50px; height: 50px; background-color: #0052cc; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1em; margin-right: 15px; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,82,204,0.2);">MC</div>
+                            <div>
+                                <strong style="display: block; font-size: 1.1em; color: #222;">Maenecia Cole</strong>
+                                <span style="color: #555; font-size: 0.9em;">Director of Experiential Learning, 16 Tech</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card" style="background: #fff; border-radius: 16px; box-shadow: 0 10px 30px rgba(220,53,69,0.12); padding: 30px; max-width: 340px; flex: 1 1 300px; border-top: 4px solid #dc3545; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 35px rgba(220,53,69,0.18)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(220,53,69,0.12)';">
+                        <div style="display: flex;">
+                            <div style="color: #dc3545; font-size: 2.5em; line-height: 1; margin-right: 12px; font-family: 'Georgia', serif; font-weight: bold;">"</div>
+                            <p style="font-style: italic; font-size: 1.1em; line-height: 1.6; margin: 0; color: #333;">I see the value VR can offer across so many disciplines. We'll keep finding ways to bring Learning Time VR into our school.</p>
+                        </div>
+                        <div style="display: flex; align-items: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eaeaea;">
+                            <div style="width: 50px; height: 50px; background-color: #dc3545; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1em; margin-right: 15px; flex-shrink: 0; box-shadow: 0 4px 10px rgba(220,53,69,0.2);">AO</div>
+                            <div>
+                                <strong style="display: block; font-size: 1.1em; color: #222;">Annie O'Rourke</strong>
+                                <span style="color: #555; font-size: 0.9em;">6th-Grade Teacher, Hamilton Southeastern Schools</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="quick-access">
-            <h2>Quick Access</h2>
-            <div class="quick-links">
-                <a href="https://api.xrdm.app/login" target="_blank" class="quick-link">Arbor XR</a>
-                <a href="presentation.html" class="quick-link">Class Presentation</a>
-                <a href="lesson.html?topic=content-library&lesson=vxr-labs" class="quick-link">VXR Guide</a>
-                <a href="lesson.html?topic=start-here&lesson=arborxr-intro" class="quick-link">ArborXR Guides</a>
-                <a href="lesson.html?topic=troubleshooting-support&lesson=common-issues" class="quick-link">FAQ</a>
-                <a href="headset-tour.html" class="quick-link">Headset Tour</a>
+        <!-- Products Overview Card Section -->
+        <div class="container">
+        <section class="products-overview-cards" style="padding: 40px 0;">
+            <h2 style="text-align: center; font-size: 2em; margin-bottom: 10px;">Products Overview</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 40px auto; font-size: 1.1em;">Everything You Need to Launch VR Learning</p>
+            <div class="product-cards-container">
+                <!-- Card 1: VR Headsets -->
+                <a href="#product-headsets" class="product-card" style="background-color: #0052cc;" onmouseover="this.style.transform='translateY(-5px) scale(1.03)'; this.style.boxShadow='0 0 15px rgba(0,82,204,0.6), 0 4px 10px rgba(0,0,0,0.15)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                    <h3>VR Headsets</h3>
+                    <p>State-of-the-art VR headsets with charging cases, onboarding support and content included.</p>
+                </a>
+                <!-- Card 2: Ongoing Support (Classroom Visits Card) -->
+                <a href="#product-visits" class="product-card" style="background-color: #e60000;" onmouseover="this.style.transform='translateY(-5px) scale(1.03)'; this.style.boxShadow='0 0 15px rgba(230,0,0,0.6), 0 4px 10px rgba(0,0,0,0.15)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                    <!-- Keep title as Classroom Visits for card consistency or change to Support? Using existing for now -->
+                    <h3>Ongoing Support & Training</h3>
+                    <p>Continuous support, PD, and classroom visits to ensure your success with VR.</p>
+                </a>
+                <!-- Card 3: Content Library -->
+                <a href="#product-content" class="product-card" style="background-color: #6f42c1;" onmouseover="this.style.transform='translateY(-5px) scale(1.03)'; this.style.boxShadow='0 0 15px rgba(111,66,193,0.6), 0 4px 10px rgba(0,0,0,0.15)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                    <h3>Content Library</h3>
+                    <p>60+ stem standard aligned VR lessons, plus easy lesson building tools.</p>
+                </a>
+                <!-- Card 4: Management Software -->
+                <a href="#product-software" class="product-card" style="background-color: #28a745;" onmouseover="this.style.transform='translateY(-5px) scale(1.03)'; this.style.boxShadow='0 0 15px rgba(40,167,69,0.6), 0 4px 10px rgba(0,0,0,0.15)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                    <h3>Headset Management Software</h3>
+                    <p>Live monitoring, usage analytics, and easy lesson launch.</p>
+                </a>
+            </div>
+        </section>
+        </div>
+
+        <!-- Product Section 2: VR Headsets -->
+        <section id="product-headsets" class="product-section" style="background: linear-gradient(135deg, #ffffff, #f8f9fa); border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <div class="container product-section-grid grid-reverse">
+                <div class="product-image" style="position: relative; overflow: hidden;">
+                    <img src="assets/LTVR-Pico4E-headset.png" alt="Pico 4 Enterprise VR Headset" style="max-width: 85%; height: auto; display: block; margin: 20px auto; transition: transform 0.3s ease; border-radius: 8px;">
+                    <div style="position: absolute; bottom: 10px; left: 10px; background-color: #0052cc; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 600;">Enterprise Grade</div>
+                </div>
+                <div class="product-content">
+                    <h2 style="color: #222; font-size: 1.8em; margin-bottom: 15px;">VR Headsets</h2>
+                    <p style="margin-bottom: 20px; line-height: 1.6;">State-of-the-art VR headsets with charging cases, onboarding support and content included.</p>
+                    <div style="background-color: #f0f7ff; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <h4 style="margin-top: 0; color: #0052cc;">Educational Benefits:</h4>
+                        <ul style="padding-left: 20px; margin-bottom: 0;">
+                            <li>Classroom-ready with easy setup</li>
+                            <li>Durable design for educational settings</li>
+                            <li>Comprehensive content library included</li>
+                        </ul>
+                    </div>
+                    <a href="vr-headsets.html" class="learn-more-btn" style="display: inline-block; background: linear-gradient(to right, #0052cc, #0069d9); box-shadow: 0 2px 5px rgba(0,82,204,0.3);">Learn More</a>
+                </div>
             </div>
         </section>
 
-        <section class="get-help">
-            <h2>Get Help</h2>
-            <div class="help-options">
-                <div class="help-card phone-card">
-                    <p>Call/Text</p>
-                    <p>(317) 937-1919</p>
+        <!-- Product Section 1: Classroom Visits / Support moved here -->
+        <section id="product-visits" class="product-section" style="background: linear-gradient(135deg, #f8f9fa, #ffffff); border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <div class="container product-section-grid">
+                <div class="product-image" style="position: relative; overflow: hidden;">
+                    <img src="assets/Classroom Visits.jpg" alt="Classroom VR Visit" style="max-width: 85%; height: auto; display: block; margin: 20px auto; transition: transform 0.3s ease; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    <div style="position: absolute; bottom: 10px; right: 10px; background-color: #e60000; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 600;">Support</div>
                 </div>
-                <div class="help-card schedule-card">
-                    <p>Virtual Training & Lesson Planning</p>
-                    <button id="schedule-virtual-btn" class="schedule-link-btn">Schedule</button>
-                </div>
-                <div class="help-card schedule-card">
-                    <p>In-Class Facilitation</p>
-                    <button id="schedule-inclass-btn" class="schedule-link-btn">Schedule Visit</button>
+                <div class="product-content">
+                    <h2 style="color: #222; font-size: 1.8em; margin-bottom: 15px;">Ongoing Support & Training</h2>
+                    <p style="margin-bottom: 20px; line-height: 1.6;">We provide continuous support to ensure your success with VR, including professional development and resources for teachers.</p>
+                    <div style="background-color: #f0f7ff; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <h4 style="margin-top: 0; color: #0052cc;">Support Features:</h4>
+                        <ul style="padding-left: 20px; margin-bottom: 0;">
+                            <li>Classroom Visits: Hands-on sessions to build excitement and confidence.</li>
+                            <li>Professional Development: Training tailored to educator needs.</li>
+                            <li>Dedicated Support Team: Ongoing assistance for smooth integration.</li>
+                        </ul>
+                    </div>
+                    <a href="support-and-training.html" class="learn-more-btn" style="display: inline-block; background: linear-gradient(to right, #e60000, #cc0000); box-shadow: 0 2px 5px rgba(230,0,0,0.3);">Learn More</a>
                 </div>
             </div>
         </section>
+
+        <!-- Product Section 4: Content Library moved here -->
+        <section id="product-content" class="product-section" style="background: linear-gradient(135deg, #ffffff, #f8f9fa); border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <div class="container product-section-grid grid-reverse">
+                <div class="product-image" style="position: relative; overflow: hidden;">
+                    <img src="assets/Content Library.png" alt="Content Library - VR Lessons and Builder" style="max-width: 85%; height: auto; display: block; margin: 20px auto; transition: transform 0.3s ease; border-radius: 8px; box-shadow: 0 4px 10px rgba(111,66,193,0.1);">
+                    <div style="position: absolute; bottom: 10px; left: 10px; background-color: #6f42c1; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 600;">Library</div>
+                </div>
+                <div class="product-content">
+                    <h2 style="color: #222; font-size: 1.8em; margin-bottom: 15px;">Content Library</h2>
+                    <p style="margin-bottom: 20px; line-height: 1.6;">Unlock a vast library of VR lessons and experiences across science, history, career exploration, and more. All content is standards-aligned and classroom-ready. Create your own with our easy lesson builder.</p>
+                    <div style="background-color: #f0f7ff; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <h4 style="margin-top: 0; color: #0052cc;">Highlights:</h4>
+                        <ul style="padding-left: 20px; margin-bottom: 0;">
+                            <li>60+ stem standard aligned VR lessons</li>
+                            <li>Wide range of subjects (Science, History, CTE)</li>
+                            <li>Easy-to-use lesson building tools</li>
+                        </ul>
+                    </div>
+                    <a href="vr-curriculum.html" class="learn-more-btn" style="display: inline-block; background: linear-gradient(to right, #6f42c1, #8a63d2); box-shadow: 0 2px 5px rgba(111,66,193,0.3);">Explore Library</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Section 3: Management Software -->
+        <section id="product-software" class="product-section" style="background: linear-gradient(135deg, #f8f9fa, #ffffff); border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <div class="container product-section-grid">
+                <div class="product-image" style="position: relative; overflow: visible; perspective: 1000px;">
+                    <img src="assets/ArborXR.png" alt="ArborXR Management Software" style="max-width: 85%; height: auto; display: block; margin: 20px auto; transition: all 0.5s ease; border-radius: 8px; transform: translateZ(20px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); animation: float 4s ease-in-out infinite;" onmouseover="this.style.transform='translateZ(50px) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.25)';" onmouseout="this.style.transform='translateZ(20px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.15)';">
+                    <div style="position: absolute; bottom: 10px; right: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 600; z-index: 2;">Teacher-friendly</div>
+                    <style>
+                        @keyframes float {
+                            0% { transform: translateZ(20px); }
+                            50% { transform: translateZ(40px); }
+                            100% { transform: translateZ(20px); }
+                        }
+                    </style>
+                </div>
+                <div class="product-content">
+                    <h2 style="color: #222; font-size: 1.8em; margin-bottom: 15px;">Headset Management Software</h2>
+                    <p style="margin-bottom: 20px; line-height: 1.6;">Live monitoring, usage analytics, and easy lesson launch for seamless classroom integration.</p>
+                    <div style="background-color: #f0f7ff; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <h4 style="margin-top: 0; color: #0052cc;">Educational Benefits:</h4>
+                        <ul style="padding-left: 20px; margin-bottom: 0;">
+                            <li>Usage analytics for headsets</li>
+                            <li>Simplified classroom management</li>
+                            <li>Centralized content distribution</li>
+                        </ul>
+                    </div>
+                    <a href="management-software.html" class="learn-more-btn" style="display: inline-block; background: linear-gradient(to right, #28a745, #218838); box-shadow: 0 2px 5px rgba(40,167,69,0.3);">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Library Section -->
+        <div class="container">
+        <section id="content-library" class="content-library-section" style="padding: 60px 0;">
+            <div class="container">
+                <h2 style="text-align: center; font-size: 2em; margin-bottom: 40px;">Explore Our Content Library</h2>
+            </div>
+            <div class="content-scroll-container">
+                <div class="content-topic-cards">
+                    <a href="vr-curriculum.html" class="content-topic-card" data-category="field-trip">
+                        <h3>Field Trips</h3>
+                        <p>Explore historical sites, famous landmarks, and diverse ecosystems.</p>
+                    </a>
+                    <a href="vr-curriculum.html" class="content-topic-card" data-category="science">
+                        <h3>Science</h3>
+                        <p>Engage in interactive experiments in biology, chemistry, and physics.</p>
+                    </a>
+                    <a href="vr-curriculum.html" class="content-topic-card" data-category="career">
+                        <h3>Career Exploration</h3>
+                        <p>Step into various professions and explore future career paths.</p>
+                    </a>
+                     <a href="vr-curriculum.html" class="content-topic-card" data-category="earth-space">
+                        <h3>Earth & Space</h3>
+                        <p>Explore the cosmos, geological formations, and weather phenomena.</p>
+                    </a>
+                     <a href="vr-curriculum.html" class="content-topic-card" data-category="engineering">
+                        <h3>Engineering</h3>
+                        <p>Design, build, and test structures, machines, and systems.</p>
+                    </a>
+                    <!-- Duplicate set for infinite scroll -->
+                    <a href="vr-curriculum.html" class="content-topic-card" data-category="field-trip">
+                        <h3>Field Trips</h3>
+                        <p>Explore historical sites, famous landmarks, and diverse ecosystems.</p>
+                    </a>
+                    <a href="vr-curriculum.html" class="content-topic-card" data-category="science">
+                        <h3>Science</h3>
+                        <p>Engage in interactive experiments in biology, chemistry, and physics.</p>
+                    </a>
+                    <a href="vr-curriculum.html" class="content-topic-card" data-category="career">
+                        <h3>Career Exploration</h3>
+                        <p>Step into various professions and explore future career paths.</p>
+                    </a>
+                     <a href="vr-curriculum.html" class="content-topic-card" data-category="earth-space">
+                        <h3>Earth & Space</h3>
+                        <p>Explore the cosmos, geological formations, and weather phenomena.</p>
+                    </a>
+                     <a href="vr-curriculum.html" class="content-topic-card" data-category="engineering">
+                        <h3>Engineering</h3>
+                        <p>Design, build, and test structures, machines, and systems.</p>
+                    </a>
+                </div>
+            </div>
+            <div class="container">
+                 <div style="text-align: center; margin-top: 40px;">
+                     <a href="vr-curriculum.html" class="learn-more-btn">View Full Library</a>
+                 </div>
+            </div>
+        </section>
+        </div>
+
     </main>
 
-    <footer>
-        <!-- Footer content can go here -->
-    </footer>
+    <div id="footer-placeholder"></div>
 
-    <!-- Calendly link widget begin -->
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-    <!-- Calendly link widget end -->
-    <script src="script.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/script.js"></script>
 </body>
-</html> 
+</html>

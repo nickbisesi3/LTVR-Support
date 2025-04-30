@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Detail - LearningTime VR</title>
+    <link rel="stylesheet" href="css/support-style.css">
+    <style>
+        /* Add specific styles for detail view if needed */
+        .experience-details {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #f8f9fa; /* Light background for each experience */
+            border-radius: 8px;
+            border-left: 5px solid #0052cc; /* Accent border */
+        }
+        .experience-details h3 {
+            margin-top: 0;
+            color: #0052cc;
+        }
+        .experience-details p {
+            margin-bottom: 5px;
+        }
+        .experience-details strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header will be dynamically injected by header.js -->
+
+    <main class="container">
+        <h1 id="application-title">Loading Curriculum Details...</h1>
+        <p><a href="vr-curriculum.html">&larr; Back to Curriculum Library</a></p>
+        <div id="details-content">
+            <!-- Details will be loaded here by JS -->
+        </div>
+    </main>
+<div id="footer-placeholder"></div>
+
+
+
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script src="js/script.js"></script>
+<script src="js/footer.js"></script>
+    <script>
+         document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            // Get the application name from the URL parameter
+            const appNameParam = urlParams.get('app') ? decodeURIComponent(urlParams.get('app')).trim().toLowerCase() : null;
+            // Use correct element IDs from the HTML
+            const titleEl = document.getElementById('application-title'); 
+            const contentEl = document.getElementById('details-content'); 
+
+            if (!appNameParam) {
+                titleEl.textContent = 'Error: Invalid or missing application name provided.';
+                contentEl.innerHTML = '';
+                return;
+            }
+
+            // Robust CSV Parser Function
+            function robustParseCSV(csvText) {
+                const rows = [];
+                let currentRow = [];
+                let currentField = '';
+                let inQuotes = false;
+                // Normalize line endings and handle potential UTF-8 BOM
+                csvText = csvText.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+                for (let i = 0; i < csvText.length; i++) {
+                    const char = csvText[i];
+                    const nextChar = csvText[i + 1];
+
+                    if (!inQuotes) {
+                        if (char === ',') {
+                            currentRow.push(currentField);
+                            currentField = '';
+                        } else if (char === '\n') {
+                            currentRow.push(currentField);
+                            rows.push(currentRow);
+                            currentRow = [];
+                            currentField = '';
+                        } else if (char === '"' && currentField === '') {
+                            // Start of a quoted field
+                            inQuotes = true;
+                        } else {
+                            currentField += char;
+                        }
+                    } else { // Inside quotes
+                        if (char === '"') {
+                            if (nextChar === '"') {
+                                // Escaped quote ""
+                                currentField += '"';
+                                i++; // Skip the next quote
+                            } else {
+                                // End of quoted field
+                                inQuotes = false;
+                            }
+                        } else {
+                            // Preserve character, including newline
+                            currentField += char;
+                        }
+                    }
+                }
+                // Add the last field and row if they exist
+                if (currentField !== '' || currentRow.length > 0) {
+                    currentRow.push(currentField);
+                    rows.push(currentRow);
+                }
+
+                if (rows.length < 2) return []; // No data rows
+
+                // DEBUG: Log the number of raw rows found after splitting
+                console.log('Detail page parser: Raw rows array length (including header):', rows.length);
+
+                const headers = rows[0].map(h => h.trim());
+                const data = [];
+                for (let i = 1; i < rows.length; i++) {
+                    // DEBUG: Log rows near the end that the detail page was skipping
+                    if (i >= 167 && i < 186) { // Log lines 168-185 (data indices 167-184)
+                        console.log(`Detail page parser: Checking row index ${i} (line ${i+1}). Parsed columns: ${rows[i].length}. Content:`, JSON.stringify(rows[i]));
+                    }
+                    if (rows[i].length === headers.length) {
+                        const entry = {};
+                        for (let j = 0; j < headers.length; j++) {
+                            entry[headers[j]] = rows[i][j];
+                        }
+                        data.push(entry);
+                    } else {
+                        // Make the warning more prominent on the detail page too
+                        console.warn(`!!! DETAIL PAGE PARSER: Skipping CSV row ${i+1} due to column mismatch: expected ${headers.length}, got ${rows[i].length}`);
+                    }
+                }
+                return data;
+            }
+
+            // Define colors for experience types
+            const experienceTypeColors = {
+                'VR Field Trip': '#007bff',       // Blue (Same as Field Trip filter)
+                'Interactive Experience': '#ffc107', // Yellow (Same as Engineering filter)
+                '2D Video': '#17a2b8',            // Teal
+                '360 Video': '#6f42c1',         // Purple (Same as Earth/Space filter)
+                'Virtual Comic Book': '#fd7e14', // Orange
+                'Journey': '#20c997',           // Cyan-Green
+                'default': '#6c757d'             // Grey for others/missing
+            };
+
+            try {
+                 const response = await fetch('../data/VictoryXR Dataset.csv'); // Fetch the CSV
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const csvText = await response.text();
+                const curriculumData = robustParseCSV(csvText); // Parse the entire CSV
+                
+                // DEBUG: Log the actual length of the parsed data array
+                console.log(`Detail page: Parsed CSV. Curriculum data array length: ${curriculumData ? curriculumData.length : 'null/undefined'}`);
+
+                // Find the specific record using the Application name (case-insensitive, trimmed)
+                const record = curriculumData.find(item => (item.Application || '').trim().toLowerCase() === appNameParam);
+
+                if (!record) {
+                    // DEBUG: Log the array if the record wasn't found
+                    console.error('Failed to find record for application name', appNameParam);
+                    titleEl.textContent = 'Error: Curriculum item not found for application name: ' + appNameParam;
+                    contentEl.innerHTML = '';
+                    return;
+                }
+
+                // Populate the page (Keep existing logic below)
+                titleEl.textContent = record.Application || 'Unnamed Application';
+                contentEl.innerHTML = ''; // Clear loading/error message
+
+                if (record['How to Access'] && record['How to Access'].toLowerCase() !== 'arborxr') {
+                     contentEl.innerHTML += `<p><strong>Access Method:</strong> ${record['How to Access']}</p>`;
+                }
+                // ... loop through experiences ...
+                for (let i = 1; i <= 5; i++) {
+                    const title = record[`Experience ${i} Title`];
+                    const description = record[`Experience ${i} Description`];
+                    const type = (record[`Experience ${i} Type`] || '').trim(); // Get type, ensure string
+                    const runtime = record[`Experience ${i} Run Time`];
+                    const standards = record[`Experience ${i} Standards`];
+
+                    if (title) {
+                        // Determine the color based on type
+                        const borderColor = experienceTypeColors[type] || experienceTypeColors['default'];
+
+                        // Add inline style for border-left-color
+                        let experienceHTML = `<div class="experience-details" style="border-left-color: ${borderColor};">`;
+                        experienceHTML += `<h3>${title}</h3>`;
+                        if (type) experienceHTML += `<p><strong>Type:</strong> ${type}</p>`;
+                        if (runtime) experienceHTML += `<p><strong>Run Time:</strong> ${runtime}</p>`;
+                        if (standards) experienceHTML += `<p><strong>Standards:</strong> ${(standards || '').replace(/\\n|\n/g, '<br>')}</p>`;
+                        if (description) experienceHTML += `<p><strong>Description:</strong> ${(description || '').replace(/\\n|\n/g, '<br>')}</p>`;
+                        experienceHTML += '</div>';
+                        contentEl.innerHTML += experienceHTML;
+                    }
+                }
+                // ... handle no experiences ...
+                if (contentEl.innerHTML === '' && !record['How to Access']) {
+                     contentEl.innerHTML = '<p>No specific experience details available for this item.</p>';
+                }
+
+            } catch (error) {
+                console.error('Error loading curriculum details:', error);
+                titleEl.textContent = 'Error loading curriculum details.';
+                contentEl.innerHTML = `<p>Could not load data. Please check the console for errors or try again later. Error: ${error.message}</p>`;
+            }
+
+             // Update copyright year dynamically 
+             const yearSpan = document.getElementById("copyright-year");
+             if(yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+             }
+        });
+    </script>
+
+    <script src="js/header.js"></script>
+</body>
+</html> 

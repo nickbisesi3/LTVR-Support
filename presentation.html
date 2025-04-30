@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Presentation - LearningTime VR Support</title>
-    <link rel="stylesheet" href="style.css">
+    <title>LearningTime VR - Presentation</title>
+    <link rel="stylesheet" href="css/support-style.css">
     <style>
         /* Add specific styles for presentation view */
         .presentation-container {
@@ -34,14 +34,8 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <a href="index.html" class="logo-link">
-                <img src="assets/logo.png" alt="LearningTime VR Logo" class="logo">
-            </a>
-            <button id="schedule-header-btn" class="schedule-btn">Schedule Virtual Training</button>
-        </div>
-    </header>
+    <!-- Header will be dynamically injected by header.js -->
+    
 
     <main class="container">
         <h1>Class Introduction Presentation</h1>
@@ -50,18 +44,16 @@
             <iframe src="https://docs.google.com/presentation/d/1jXYUXf-meyHKsK3mvgU8IkY83-fRvG_P95d8a9wUzJs/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
         </div>
          <div class="back-link-container">
-             <a href="index.html">&larr; Back to Support Home</a>
+             <a href="support.html">&larr; Back to Support Home</a>
         </div>
     </main>
-
-    <footer>
-        <!-- Footer content -->
-        <p>&copy; LearningTime VR</p>
-    </footer>
+<div id="footer-placeholder"></div>
 
     <!-- Calendly script needed if header button is clicked from this page -->
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script src="js/script.js"></script>
+    <script src="js/footer.js"></script>
     <script>
         // Basic script to handle header button
         document.addEventListener('DOMContentLoaded', function() {
@@ -80,5 +72,6 @@
             }
         });
     </script>
+    <script src="js/header.js"></script>
 </body>
 </html> 

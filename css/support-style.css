@@ -1,0 +1,1200 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+body {
+    /* font-family: sans-serif; */ /* Placeholder font */
+    font-family: 'Poppins', sans-serif; /* Use Poppins */
+    margin: 0;
+    background-color: #ffffff;
+    color: #333; /* Default text color */
+}
+
+.container {
+    max-width: 1100px; /* Slightly narrower container */
+    margin: 0 auto;
+    padding: 0 15px; /* Adjust padding */
+}
+
+header {
+    padding: 10px 0; /* Adjust header padding */
+    border-bottom: 1px solid #eee;
+    background-color: #fff; /* Ensure header bg is white */
+    position: relative; /* Needed for z-index */
+    z-index: 1100; /* Increase z-index further */
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+}
+
+/* Add style for the nav element itself */
+header .header-nav {
+    margin-left: auto; /* Push nav to the right */
+    display: flex; /* Align items inside nav */
+    align-items: center;
+}
+
+/* Adjust spacing for items within the nav if needed */
+header .header-nav > * {
+    margin-left: 20px; /* Add space between nav items */
+}
+header .header-nav > a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+/* Remove margin-right from individual links as it's handled by nav spacing */
+
+.logo {
+    height: 55px; /* Increase logo height further */
+    vertical-align: middle; /* Align logo nicely */
+    transition: transform 0.2s ease; /* Add transition for hover effect */
+}
+
+.schedule-btn {
+    padding: 10px 25px; /* Adjusted padding */
+    /* background-color: #e53935; */ /* Placeholder red, adjust to match */
+    background-color: #e60000; /* Match learningtimevr.com red */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Slightly more rounded corners */
+    cursor: pointer;
+    font-size: 0.95em; /* Adjust font size */
+    font-weight: 600; /* Medium bold */
+    transition: background-color 0.2s ease; /* Smoother hover */
+}
+
+.schedule-btn:hover {
+    /* background-color: #cc0000; */ /* Darken red on hover */
+    opacity: 0.85; /* Lighten button on hover */
+}
+
+main.container {
+    /* padding-top: 40px; */ /* Original space above main content */
+    /* padding-top: 20px; */ /* Previously reduced space */
+    padding-top: 10px; /* Further reduced space above main content */
+    padding-bottom: 40px;
+}
+
+h1 {
+    font-size: 2.2em; /* Adjust heading size */
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #222; /* Darker heading color */
+}
+
+#lesson-title {
+    text-align: left;
+}
+
+#application-title {
+    text-align: left;
+}
+
+
+
+h2 {
+    font-size: 1.4em; /* Adjust heading size */
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Welcome Section */
+.welcome-section {
+    position: relative; 
+    text-align: center;
+    padding: 120px 20px; /* Reduced vertical padding */
+    background-image: url('../assets/Hero-image.gif'); 
+    background-size: cover;
+    background-position: center; 
+    color: white;
+    margin-bottom: 40px; 
+    overflow: hidden; 
+}
+
+/* Add an overlay for better text readability */
+.welcome-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(160deg, rgba(0, 82, 204, 0.75), rgba(0, 123, 255, 0)); /* Angled blue gradient to transparent */
+    z-index: 1;
+}
+
+/* Ensure content is above the overlay */
+.welcome-section > * {
+    position: relative;
+    z-index: 2;
+}
+
+.welcome-section h1 {
+    font-size: 3.2em; /* Slightly larger */
+    font-weight: 700; /* Bolder */
+    margin-bottom: 15px; /* Reduced margin */
+    color: white; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Adjusted shadow */
+    text-align: center; /* Ensure centered */
+}
+
+.welcome-section p {
+    font-size: 1.15em; /* Adjusted size */
+    margin-bottom: 30px; /* Slightly reduced margin */
+    color: rgba(255, 255, 255, 0.95); /* Slightly brighter white */
+    max-width: 650px; /* Slightly narrower */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; /* Ensure centered */
+    line-height: 1.6; /* Add line-height */
+}
+
+/* Adjust button styles for Welcome Section */
+.welcome-section .schedule-btn {
+     font-size: 1.1em;
+     padding: 15px 35px;
+     background-color: white; /* Solid white background */
+     border: none; /* Remove border */
+     color: #0052cc; /* Blue text */
+     transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+.welcome-section .schedule-btn:hover {
+    background-color: #f0f0f0; /* Light grey hover */
+    color: #0041a3; /* Darker blue hover */
+    opacity: 1; 
+}
+
+/* Updated styles for the Start Here link */
+a.start-here {
+    display: block; /* Make it a block element */
+    margin-bottom: 25px; /* Less space below */
+    border-radius: 8px;
+    overflow: hidden; 
+    position: relative; 
+
+    /* Styles for Support Page */
+    background-color: #0052cc; /* Solid Blue */
+    background-image: linear-gradient(to right, #0052cc, #007bff); /* Blue gradient */ /* Keep gradient from image */
+    color: white;
+    padding: 30px 25px; /* Adjust padding */
+    text-decoration: none;
+    text-align: center; /* Center the text */
+    font-size: 1.1em; /* Adjust font size */
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Hide particles on support page if needed */
+.particle-container {
+    position: relative; /* Keep content flow */
+    z-index: 2; /* Ensure text is above particles */
+    /* display: none; */ /* Hide particles if they conflict */
+}
+
+/* Individual particle styles */
+.particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
+    border-radius: 50%;
+    pointer-events: none; /* Particles shouldn't block interaction */
+    z-index: 1; /* Particles below text */
+    /* animation: particle-fade 0.6s ease-out forwards; */ /* Remove animation */
+    transition: left 0.3s ease-out, top 0.3s ease-out; /* Add transition for smooth movement */
+}
+
+/* Delete the keyframes rule as it's no longer needed */
+
+a.start-here:hover {
+    /* Borrow hover styles from .nav-card:hover */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    /* background-color: #0041a3; */ /* Slightly darker blue on hover */
+    background-image: linear-gradient(to right, #0041a3, #0069d9); /* Darker blue gradient on hover */
+    color: white; /* Ensure text stays white */
+    text-decoration: none; /* Remove underline */
+}
+
+.main-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Adjust minmax */
+    gap: 25px; /* Increase gap */
+    margin-bottom: 50px; /* More space below */
+}
+
+.nav-card {
+    background-color: #0052cc; /* Solid blue default for support page */
+    color: white;
+    padding: 25px; 
+    border-radius: 8px;
+    text-decoration: none;
+    display: flex; 
+    /* Default layout: Stack vertically */
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: flex-start; 
+    /* justify-content: space-between; */ /* Removed default */
+    /* align-items: center; */ /* Removed default */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    position: relative; 
+    overflow: hidden;
+}
+
+/* Specific Gradients for Mission and Why VR cards */
+.main-nav .nav-card:nth-child(1) {
+    background: linear-gradient(135deg, #0052cc, #007bff); /* Blue gradient */
+}
+
+/* Specific selector for the Content Library card on support page */
+.support-intro-section .main-nav .nav-card:nth-child(2) {
+    background: linear-gradient(135deg, #0052cc, #0069d9); /* Blue gradient */
+}
+
+.nav-card:hover {
+    transform: translateY(-5px) scale(1.02); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+}
+
+/* Revert specific hover gradients if they were only for index */
+.main-nav .nav-card:nth-child(1):hover { 
+    /* background: linear-gradient(135deg, #e60000, #ff1a1a); */ 
+    background-color: #0041a3; /* Darker solid blue hover */
+}
+.main-nav .nav-card:nth-child(2):hover {
+    /* background: linear-gradient(135deg, #0069d9, #008cff); */
+     background-color: #0041a3; /* Darker solid blue hover */
+}
+.main-nav .nav-card:nth-child(3):hover { /* Apply hover to 3rd card too */
+     background-color: #0041a3; /* Darker solid blue hover */
+}
+
+.nav-card h2 {
+    margin: 0;
+    font-size: 1.25em; /* Adjust size */
+    font-weight: 600;
+    color: white;
+    margin-bottom: 15px; /* Restore space for homepage cards */
+}
+
+.nav-card p {
+   /* display: none; */ /* REMOVE general rule hiding paragraph */
+   /* Add back default styles if they were removed */
+   font-size: 0.95em;
+   line-height: 1.6;
+   margin: 0;
+   color: rgba(255, 255, 255, 0.9);
+}
+
+/* Restore the span arrow */
+.nav-card span {
+    /* display: inline; */ /* REMOVE general rule showing span */
+    /* font-size: 1.6em; */
+    /* font-weight: bold; */
+    display: none; /* Default state should be hidden (homepage doesn't use it) */
+}
+
+/* Specific styles for nav-cards on the support page */
+.support-intro-section .nav-card { /* Override defaults for support page layout */
+    flex-direction: row; /* Display side-by-side */
+    justify-content: space-between;
+    align-items: center;
+}
+.support-intro-section .nav-card h2 {
+    margin-bottom: 0; /* Remove margin only on support page */
+}
+.support-intro-section .nav-card p {
+    display: none; /* Hide paragraph only on support page */
+}
+.support-intro-section .nav-card span {
+    display: inline; /* Show arrow only on support page */
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+/* Quick Access Section */
+.quick-access h2 {
+    margin-bottom: 25px;
+}
+
+.quick-links {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); */ /* Adjust minmax */
+    grid-template-columns: repeat(3, 1fr); /* Force 3 columns */
+    gap: 20px; /* Increase gap */
+    margin-bottom: 50px;
+}
+
+.quick-link {
+    /* background: linear-gradient(to right, #00c6ff, #0072ff); */ /* Example gradient */
+    background-color: #e60000; /* Solid Red */
+    color: white;
+    padding: 18px 15px; /* Adjust padding */
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.quick-link:hover {
+    transform: translateY(-4px) scale(1.03); 
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    background-color: #cc0000; /* Darker red hover */
+}
+
+/* Get Help Section */
+.get-help h2 {
+    margin-bottom: 25px;
+}
+
+.help-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.help-card {
+    /* border: 1px solid #ddd; */ /* Lighter border */
+    border-radius: 8px;
+    padding: 25px;
+    text-align: center;
+    /* background-color: #f9f9f9; */ /* Light background */
+    background-color: #0052cc; /* Solid blue */
+    color: white; /* Default text white */
+    /* transition: box-shadow 0.2s ease, transform 0.2s ease; */ /* Old transition */
+    transition: background-color 0.2s ease; /* Transition for background color */
+}
+
+.help-card:hover {
+     /* box-shadow: 0 4px 10px rgba(0,0,0,0.1); */ /* Remove shadow on hover */
+     /* transform: scale(1.03); */ /* Remove scale effect */
+     background-color: #0041a3; /* Darken blue on hover */
+}
+
+.help-card p {
+    margin: 8px 0;
+    font-size: 1.05em;
+    color: white;
+}
+
+.phone-card {
+    cursor: default;
+    /* transition: background-color 0.2s ease; */ /* Replaced by box-shadow transition */
+}
+
+/* .phone-card:hover { */
+    /* background-color: #f0f0f0; */ /* Slightly darker hover */
+/* } */
+
+.schedule-link-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 25px; /* Adjust padding */
+    background-color: white; /* White background */
+    color: #0052cc; /* Blue text */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.schedule-link-btn:hover {
+    opacity: 1; /* Remove default opacity */
+    background-color: #f0f0f0; /* Light grey background on hover */
+    color: #0041a3; /* Slightly darker blue text on hover */
+}
+
+/* Style buttons specifically inside the blue help cards */
+/* .help-card .schedule-link-btn { ... } */
+/* .help-card .schedule-link-btn:hover { ... } */
+
+/* General Link Styling */
+a {
+    color: #0066cc; /* Consistent link blue */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Footer styling placeholder */
+footer {
+    margin-top: 0;
+    padding: 0 0 40px 0;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #777;
+    font-size: 0.9em;
+}
+
+footer .container {
+    padding-top: 0;
+    padding-bottom: 32px;
+    margin: 0;
+}
+
+footer p {
+    margin: 0;
+    padding: 0;
+    color: #333;
+    font-size: 1em;
+    line-height: 1.2;
+}
+
+/* Specific Lesson Page Styles */
+.lesson-container {
+    display: flex;
+    gap: 30px; /* Add gap between sidebar and content */
+}
+
+.sidebar {
+    width: 220px; /* Adjust width */
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+    border-right: 1px solid #eee;
+    padding-right: 0;
+    margin-right: 0;
+}
+
+.sidebar h2 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    margin-right: 20px; /* Add margin for padding effect */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li a {
+    display: block;
+    padding: 10px 20px 10px 0; /* Adjust padding */
+    text-decoration: none;
+    color: #333;
+    border-right: 3px solid transparent; /* For active state indicator */
+    transition: background-color 0.2s ease, border-right-color 0.2s ease;
+}
+
+.sidebar li a:hover {
+    background-color: #f0f0f0; /* Hover background */
+    text-decoration: none; /* Remove underline on hover */
+    color: #0052a3; /* Darker blue on hover */
+}
+
+.sidebar li a.active { /* Style for active link */
+    font-weight: 600;
+    color: #0066cc;
+    border-right-color: #0066cc;
+}
+
+.lesson-content {
+    flex-grow: 1;
+}
+
+.next-btn {
+    display: inline-block; /* Change display */
+    margin-top: 30px;
+    padding: 10px 25px;
+    /* background: linear-gradient(to right, #6a11cb, #2575fc); */ /* Match nav card */
+    background-color: #0066cc; /* Match schedule button blue */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    /* float: right; */ /* Remove float */
+    transition: background-color 0.2s ease;
+}
+
+.next-btn:hover {
+     background-color: #0052a3; /* Darken blue on hover */
+     text-decoration: none; /* Remove underline */
+     color: white;
+}
+
+/* Headset Tour Page Specific */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    max-width: 1000px; /* Max width for video */
+    margin: 30px auto; /* Center and add margin */
+    background: #000;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0; /* Remove iframe border */
+}
+
+/* Zapier Chatbot Styles */
+zapier-interfaces-chatbot-embed {
+    display: block;
+    position: relative;
+    z-index: 1000;
+}
+
+/* Products Overview Section */
+.product-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 30px; /* Space between cards */
+    margin-top: 30px;
+}
+
+.product-card {
+    background-color: #0052cc; /* Use brand blue */
+    /* background: linear-gradient(to bottom right, #003366, #0052cc); */ /* Dark blue gradient - Removed */
+    color: white; /* White text */
+    padding: 30px 25px; /* Padding */
+    border-radius: 8px;
+    text-decoration: none;
+    display: block; /* Make the link a block */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* box-shadow: 0 2px 5px rgba(0,0,0,0.1); */ /* Removed default shadow */
+    /* border-left: 5px solid #0052cc; */ /* Blue accent border - Removed */
+    position: relative; /* Needed for potential pseudo-elements if added later */
+    overflow: hidden; /* Good practice with gradients/borders */
+}
+
+.product-card:hover {
+    transform: translateY(-5px) scale(1.03); /* Keep scale effect */
+    /* box-shadow: 0 8px 15px rgba(0,0,0,0.15); */ /* Replace shadow with glow */
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.6), 0 4px 10px rgba(0, 0, 0, 0.15); /* Blue glow + subtle shadow */
+    /* background-color: #0041a3; */ /* Darker blue on hover - Replaced by glow */
+    text-decoration: none;
+    color: white; /* Keep text white on hover */
+}
+
+.product-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    font-weight: 600;
+    /* color: #0052cc; */ /* Blue heading */
+    color: white; /* White heading */
+    /* transition: color 0.2s ease; */ /* Remove color transition */
+}
+
+/* No need for h3 hover color change if background changes */
+/* .product-card:hover h3 {
+    color: #0041a3; */ /* Darker blue on hover */
+/* } */
+
+.product-card p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 0;
+    /* color: #555; */ /* Slightly lighter paragraph text */
+    color: rgba(255, 255, 255, 0.9); /* Slightly off-white for better readability */
+}
+
+/* Media Query for smaller screens to make product overview scrollable */
+@media (max-width: 1130px) { /* Adjust breakpoint as needed (4 * 250px + 3 * 30px = 1090px minimum for grid) */
+    .product-cards-container {
+        display: flex; /* Change to flexbox */
+        overflow-x: auto; /* Enable horizontal scrolling */
+        flex-wrap: nowrap; /* Prevent wrapping */
+        padding-bottom: 15px; /* Add space for scrollbar */
+        padding-top: 10px; /* Add top padding to prevent hover clipping */
+        scroll-snap-type: x mandatory; /* Optional: Snap scrolling */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+
+        /* Hide scrollbar */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE and Edge */
+    }
+    .product-cards-container::-webkit-scrollbar { 
+        display: none; /* Chrome, Safari, Opera */
+    }
+
+    .product-card {
+        flex: 0 0 auto; /* Don't shrink, don't grow, base size is auto */
+        width: 280px; /* Set a fixed width for cards in carousel */
+        scroll-snap-align: start; /* Optional: Align card to start on snap */
+        margin-right: 15px; /* Add some space between cards */
+    }
+     .product-card:last-child {
+        margin-right: 0; /* Remove margin from last card */
+    }
+}
+
+/* Individual Product Sections */
+.product-section {
+    padding: 60px 0;
+    border-bottom: 1px solid #eee; /* Separator */
+}
+
+.product-section:last-of-type {
+    border-bottom: none; /* Remove border from last section */
+}
+
+.product-section-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Adjust column ratio as needed */
+    gap: 50px; /* Increased gap */
+    align-items: center;
+}
+
+.product-section-grid.grid-reverse {
+    grid-template-columns: 1.5fr 1fr; /* Reverse column order */
+}
+
+/* Ensure image div comes first in reversed grid for correct visual order */
+.product-section-grid.grid-reverse .product-image {
+    order: 2;
+}
+.product-section-grid.grid-reverse .product-content {
+    order: 1;
+}
+
+.product-content h2 {
+    font-size: 1.8em; /* Adjust heading size */
+    color: #0052cc; /* Brand blue */
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.product-content p {
+    font-size: 1.05em;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.learn-more-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #e60000; /* Brand red */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.learn-more-btn:hover {
+    background-color: #cc0000; /* Darker red */
+    color: white;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+/* School Logos Section */
+.school-logos-section {
+    padding: 50px 0;
+    /* background-color: #f8f9fa; */ /* Light background for contrast - Removed for default bg */
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee; /* Add bottom border too */
+}
+
+.logo-grid-scroll-container {
+    /* overflow-x: auto; */ /* Enable horizontal scroll - REMOVED */
+    /* padding: 20px 0; */ /* Add padding top/bottom - REMOVED */
+    /* Hide scrollbar - optional, depends on desired look */
+    /* -ms-overflow-style: none; */  /* IE and Edge */
+    /* scrollbar-width: none; */  /* Firefox */
+    /* No longer needed as overflow is handled by parent/animation */
+    width: 100%; /* Ensure container takes full width */
+    overflow: hidden; /* Hide the parts of the grid that move out */
+    padding: 10px 0; /* Add vertical padding for hover scale effect */
+}
+/* .logo-grid-scroll-container::-webkit-scrollbar {
+    display: none; */ /* Chrome, Safari, Opera */
+/* } */
+
+@keyframes scroll-logos {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Translate left by 50% (width of the original logo set) */
+        transform: translateX(-50%); 
+    }
+}
+
+.logo-grid {
+    display: flex;
+    flex-wrap: nowrap; /* Ensure single line */
+    align-items: center; /* Center logos vertically */
+    gap: 60px; /* Increased space between logos */
+    /* padding: 0 30px; */ /* Add side padding for scroll - REMOVED */
+    /* min-width: fit-content; */ /* Allow grid to expand - Handled by animation */
+    width: max-content; /* Ensure grid is wide enough for all logos + duplicates */
+    animation: scroll-logos 40s linear infinite; /* Adjust duration (40s) for speed */
+}
+
+.logo-item {
+    text-align: center;
+    /* max-width: 150px; */ /* Optional: constrain width */
+}
+
+.logo-item img {
+    max-height: 100px; /* Increased logo height again */
+    width: auto; /* Maintain aspect ratio */
+    filter: grayscale(100%); /* Apply grayscale */
+    transition: filter 0.3s ease; /* Smooth transition */
+    opacity: 0.8; /* Slightly faded when grayscale */
+}
+
+.logo-item img:hover {
+    filter: grayscale(0%); /* Remove grayscale on hover */
+    opacity: 1; /* Full opacity on hover */
+    transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+/* School Logos Section Heading */
+.school-logos-section h2 {
+    font-size: 2.2em; /* Match testimonial heading */
+    font-weight: 600;
+    color: #111; /* Black text */
+    text-align: center;
+    margin-bottom: 40px; /* Keep original margin */
+}
+
+/* Content Library Section */
+.content-library-section {
+    background-color: white; /* Or keep default */
+    border-top: 1px solid #eee;
+}
+
+.content-scroll-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0; /* Add vertical padding if needed */
+}
+
+@keyframes scroll-topics {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* Scroll left by the width of the original set */
+    }
+}
+
+/* Ensure animation doesn't stop at the end */
+.content-topic-cards:hover {
+    /* animation-play-state: paused; */ /* Pause scroll on hover - REMOVED */
+}
+
+.content-topic-cards {
+    display: flex;
+    width: 200%; /* Double width for duplicated items */
+    gap: 20px; /* Spacing between cards */
+    padding-bottom: 10px; /* Space for potential shadow */
+    animation: scroll-topics 60s linear infinite; /* Apply the scroll animation */
+}
+
+.content-topic-card {
+    /* background-color: #e60000; */ /* Brand Red - REMOVED */
+    color: white; /* White text */
+    padding: 30px 25px; /* Padding */
+    border-radius: 8px;
+    text-decoration: none;
+    display: block; /* Make the link a block */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex-shrink: 0; /* Prevent shrinking */
+    flex-basis: 250px; /* Set the base width */
+    /* width: 250px; */ /* Alternative: set fixed width */
+}
+
+/* Assign colors based on data attribute - using brand colors */
+.content-topic-card[data-category="field-trip"]  { background-color: #0052cc; } /* Brand Blue */
+.content-topic-card[data-category="science"]    { background-color: #e60000; } /* Brand Red */
+.content-topic-card[data-category="earth-space"]{ background-color: #6f42c1; } /* Purple */
+.content-topic-card[data-category="engineering"]{ background-color: #28a745; } /* Green */
+.content-topic-card[data-category="career"]     { background-color: #0052cc; } /* Brand Blue */
+
+.content-topic-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    /* background-color: #cc0000; */ /* Darker Red - REMOVED */
+    text-decoration: none;
+    color: white; /* Keep text white on hover (default) */
+}
+
+/* Update hover colors to darker shades of brand colors */
+.content-topic-card[data-category="field-trip"]:hover  { background-color: #0041a3; } /* Darker Blue */
+.content-topic-card[data-category="science"]:hover    { background-color: #cc0000; } /* Darker Red */
+.content-topic-card[data-category="earth-space"]:hover{ background-color: #5a1e96; } /* Darker Purple */
+.content-topic-card[data-category="engineering"]:hover{ background-color: #218838; } /* Darker Green */
+.content-topic-card[data-category="career"]:hover     { background-color: #0041a3; } /* Darker Blue */
+
+.content-topic-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: white; /* White heading */
+}
+
+/* All cards now have white text */
+
+.content-topic-card p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.9); /* Slightly off-white */
+}
+
+/* --- Hamburger Menu Styles --- */
+#hamburger-btn {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: 15px; /* Space from other elements if needed */
+    z-index: 1101; /* Ensure hamburger is above header */
+}
+
+#hamburger-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #333 !important; /* Icon color - Added !important */
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Mobile Nav - Slide Down (using max-height) */
+header #mobile-nav {
+    display: flex; 
+    flex-direction: column; 
+    position: fixed !important; 
+    top: 75px; 
+    left: 0; 
+    right: 0; 
+    width: 100%; 
+    max-width: none; 
+    /* height: auto; REMOVED */
+    background-color: #f8f9fa; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+    padding: 0 20px; /* Remove vertical padding when closed */
+    z-index: 1050; /* Restore z-index */
+    /* transform: translateY(-100%); REMOVED transform */
+    max-height: 0; /* Collapse element */
+    overflow: hidden; /* Hide content when collapsed */
+    transition: max-height 0.3s ease-in-out; /* Animate max-height */
+}
+
+/* Mobile Nav Links/Buttons */
+header #mobile-nav a, 
+header #mobile-nav button {
+    display: block;
+    color: #333; /* Default dark text */
+    padding: 15px 0;
+    text-decoration: none;
+    font-size: 1.1em;
+    border: none; /* Reset button border */
+    background: none; /* Reset button background */
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    visibility: visible !important; /* Ensure visibility */
+    opacity: 1 !important; /* Ensure not transparent */
+    height: auto !important; /* Ensure height isn't collapsed */
+    overflow: visible !important; /* Ensure content isn't hidden */
+}
+
+/* Ensure text color is forced when nav is active */
+/* Increased specificity */
+body.mobile-nav-active header #mobile-nav a,
+body.mobile-nav-active header #mobile-nav button {
+    color: #111 !important; /* Make color very dark */
+}
+
+/* Increased specificity */
+header #mobile-nav button.schedule-btn {
+    margin-top: 20px;
+    padding: 10px 20px; /* Adjust padding */
+    text-align: center;
+}
+
+/* Active State for Mobile Nav - Expand Height */
+body.mobile-nav-active header #mobile-nav {
+    /* transform: translateY(0); REMOVED transform */
+    max-height: 100vh; /* Allow expansion */
+    padding-top: 20px; /* Restore padding when open */
+    padding-bottom: 20px; /* Restore padding when open */
+    /* transition: transform 0.3s ease-in-out; REMOVED */
+}
+
+body.mobile-nav-active #hamburger-btn span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+body.mobile-nav-active #hamburger-btn span:nth-child(2) {
+    opacity: 0;
+}
+
+body.mobile-nav-active #hamburger-btn span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* --- Media Query for Mobile --- */
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+    header .container {
+        justify-content: space-between; /* Space out logo and hamburger */
+    }
+    header .header-nav {
+        display: none !important; /* Hide standard nav FORCEFULLY */
+    }
+    header #hamburger-btn { /* Increased specificity */
+        display: block; /* Show hamburger */
+    }
+}
+
+/* --- End Hamburger Menu Styles --- */
+
+main.container {
+    /* padding-top: 40px; */ /* Original space above main content */
+    /* padding-top: 20px; */ /* Previously reduced space */
+    padding-top: 10px; /* Further reduced space above main content */
+    padding-bottom: 40px;
+}
+
+/* Style for the overlay - Disable it */
+#mobile-nav-overlay {
+    display: none !important; /* Completely hide the overlay */
+    /* 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1040; 
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    */
+}
+
+/* Show overlay when nav is active - Also disable */
+body.mobile-nav-active #mobile-nav-overlay {
+    display: none !important; /* Keep hidden */
+    /* 
+    display: block;
+    opacity: 1;
+    */
+}
+
+/* Media query for stacking product sections on mobile */
+@media (max-width: 768px) {
+    .product-section-grid {
+        grid-template-columns: 1fr !important; /* Ensure single column */
+        gap: 20px; 
+        text-align: center; 
+    }
+
+    /* Force image first in stack */
+    .product-section-grid .product-image,
+    .product-section-grid.grid-reverse .product-image { /* Add specificity for reverse */
+        order: 1 !important; 
+        max-width: 85%; 
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Force content second in stack */
+    .product-section-grid .product-content,
+    .product-section-grid.grid-reverse .product-content { /* Add specificity for reverse */
+        order: 2 !important; 
+        padding: 0 15px; 
+        max-width: 85%; 
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Remove text-align override if needed, check visual */
+    .product-content {
+         text-align: center; /* Keep content centered */
+    }
+
+    .product-content h2 {
+        font-size: 1.6em; 
+    }
+
+     .product-content .learn-more-btn {
+        margin-top: 15px; 
+    }
+}
+
+/* Unforgettable Experience Section (Aligned with Product Section Style) */
+.unforgettable-experience {
+    /* display: flex; */ /* Remove flex */
+    /* align-items: center; */ /* Remove flex */
+    padding: 60px 0; /* Keep padding */
+    background-color: #ffffff; /* Ensure white background */
+    /* border-top: 1px solid #eee; */ /* Optional: Add border like other sections */
+}
+
+.unforgettable-experience .container {
+    display: grid; /* Use grid layout */
+    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */ /* Replace responsive grid */
+    /* grid-template-columns: 1fr 1.2fr; */ /* Original: Text | Image */
+    /* grid-template-columns: 1fr 1.1fr; */ /* Previous Adjustment: Text | Image (Image slightly smaller) */
+    grid-template-columns: 1fr 1fr; /* Equal Parts: Text | Image */
+    gap: 50px; /* Match product section gap */
+    align-items: center;
+}
+
+.unforgettable-experience .text-content {
+    /* Remove flex/width properties, grid handles it */
+    /* flex: 1; */
+    /* min-width: 300px; */
+    /* max-width: 500px; */
+}
+
+.unforgettable-experience h2 {
+    /* font-size: 2.5em; */ /* Adjust size - larger than product, smaller than hero */
+    font-size: 2.2em; /* Match 'Trusted by Educators' title size */
+    font-weight: 600; /* Match default h2 weight */
+    margin-bottom: 15px; /* Match product h2 margin */
+    line-height: 1.3;
+    /* color: #0052cc; */ /* Match product section h2 color (Brand Blue) */
+    color: #111; /* Change back to dark color */
+}
+
+.unforgettable-experience p {
+    font-size: 1.1em; /* Keep slightly larger */
+    line-height: 1.7; /* Match product p line height */
+    color: #555; /* Match product p color */
+    margin-bottom: 0;
+}
+
+.unforgettable-experience .image-content {
+    /* Remove flex/width properties, grid handles it */
+    /* flex: 1; */
+    /* min-width: 300px; */
+    /* max-width: 600px; */
+}
+
+.unforgettable-experience img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1); /* Slightly softer shadow */
+    display: block;
+}
+
+/* Responsive adjustments for Unforgettable Experience */
+@media (max-width: 768px) {
+    .unforgettable-experience .container {
+        /* Grid automatically handles stacking with auto-fit */
+        grid-template-columns: 1fr; /* Force single column */
+        gap: 30px; /* Reduce gap on mobile */
+        text-align: center; /* Center text */
+    }
+     .unforgettable-experience .image-content {
+        /* order: 1; */ /* Let grid handle order or uncomment if needed */
+        max-width: 90%; /* Limit width */
+        margin: 0 auto; /* Center image container */
+    }
+     .unforgettable-experience .text-content {
+        /* order: 2; */ /* Let grid handle order or uncomment if needed */
+        max-width: 90%; /* Limit width */
+        margin: 0 auto; /* Center text container */
+    }
+     .unforgettable-experience h2 {
+        font-size: 2em; /* Reduce heading size */
+    }
+} 
+
+/* Support & Onboarding Section (Mirrors Unforgettable Experience) */
+.support-onboarding-section {
+    padding: 60px 0;
+    /* background-color: #f8f9fa; */ /* Remove light gray background */
+    background-color: #ffffff; /* Set to white background */
+}
+
+.support-onboarding-section .container {
+    display: grid;
+    /* grid-template-columns: 1.2fr 1fr; */ /* Original Reversed: Image | Text */
+    /* grid-template-columns: 1.1fr 1fr; */ /* Previous Adjustment Reversed: Image | Text (Image slightly smaller) */
+    grid-template-columns: 1fr 1fr; /* Equal Parts: Image | Text */
+    gap: 50px;
+    align-items: center;
+}
+
+.support-onboarding-section .text-content {
+    /* No specific flex/width needed, grid handles it */
+}
+
+.support-onboarding-section h2 {
+    font-size: 2.2em; /* Match previous section */
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 1.3;
+    color: #111; /* Keep heading black */
+}
+
+.support-onboarding-section p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 0;
+}
+
+.support-onboarding-section .image-content {
+    /* No specific flex/width needed, grid handles it */
+}
+
+.support-onboarding-section img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    display: block;
+}
+
+/* Responsive adjustments for Support & Onboarding */
+@media (max-width: 768px) {
+    .support-onboarding-section .container {
+        grid-template-columns: 1fr; /* Single column */
+        gap: 30px;
+        text-align: center;
+    }
+    .support-onboarding-section .image-content {
+         order: 1; /* Ensure image is first on mobile */
+         max-width: 90%;
+         margin: 0 auto;
+    }
+    .support-onboarding-section .text-content {
+         order: 2; /* Ensure text is second on mobile */
+         max-width: 90%;
+         margin: 0 auto;
+    }
+    .support-onboarding-section h2 {
+        font-size: 2em;
+    }
+} 

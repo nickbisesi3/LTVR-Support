@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearningTime VR - Content Library</title>
+    <link rel="stylesheet" href="css/support-style.css">
+    <script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+</head>
+<body>
+    <!-- Header will be dynamically injected by header.js -->
+
+    <main class="container">
+        <h1>Content Library</h1>
+        <p style="margin-bottom: 30px; font-size: 1.1em;">Explore our diverse range of immersive learning modules.</p>
+
+        <!-- Search Box -->
+        <div style="margin-bottom: 30px;">
+            <input type="search" id="search-box" placeholder="Search curriculum..." style="width: 100%; padding: 10px; font-size: 1em; border-radius: 5px; border: 1px solid #ccc;">
+        </div>
+
+        <!-- Filter Buttons -->
+        <section id="filter-buttons" class="quick-access" style="margin-bottom: 40px;">
+            <h2>Filter by Subject</h2>
+            <div class="quick-links filter-links" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+                <button class="quick-link filter-btn active" data-filter="all" style="background-color: #6c757d; border: none; box-shadow: none;">All</button>
+                <button class="quick-link filter-btn" data-filter="field-trip" style="background-color: #0052cc; border: none; box-shadow: none;">Field Trips</button>
+                <button class="quick-link filter-btn" data-filter="science" style="background-color: #e60000; border: none; box-shadow: none;">Science</button>
+                <button class="quick-link filter-btn" data-filter="earth-space" style="background-color: #6f42c1; border: none; box-shadow: none;">Earth & Space</button>
+                <button class="quick-link filter-btn" data-filter="engineering" style="background-color: #28a745; border: none; box-shadow: none;">Engineering</button>
+                <button class="quick-link filter-btn" data-filter="career" style="background-color: #28a745; border: none; box-shadow: none;">Career</button>
+            </div>
+        </section>
+
+        <!-- Container for dynamic curriculum cards -->
+        <section id="curriculum-list" class="main-nav" style="gap: 20px;">
+            <p>Loading curriculum library...</p>
+             <!-- Curriculum cards will be loaded here by JS -->
+        </section>
+
+    </main>
+
+
+    <div id="footer-placeholder"></div>
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script src="js/script.js"></script>
+<script src="js/footer.js"></script>
+    <!-- Removed Zapier Chatbot -->
+    <!--
+    <zapier-interfaces-chatbot-embed
+        is-popup='true'
+        chatbot-id='cm9382zyd000hkt1w8olhet5h'>
+    </zapier-interfaces-chatbot-embed>
+    -->
+     <script>
+         // Robust CSV Parser
+        function robustParseCSV(csvText) {
+            const rows = [];
+            let currentRow = [];
+            let currentField = '';
+            let inQuotes = false;
+            // Normalize line endings and handle potential UTF-8 BOM
+            csvText = csvText.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+            for (let i = 0; i < csvText.length; i++) {
+                const char = csvText[i];
+                const nextChar = csvText[i + 1];
+
+                if (!inQuotes) {
+                    if (char === ',') {
+                        currentRow.push(currentField);
+                        currentField = '';
+                    } else if (char === '\n') {
+                        currentRow.push(currentField);
+                        rows.push(currentRow);
+                        currentRow = [];
+                        currentField = '';
+                    } else if (char === '\"' && currentField === '') {
+                        // Start of a quoted field
+                        inQuotes = true;
+                    } else {
+                        currentField += char;
+                    }
+                } else { // Inside quotes
+                    if (char === '\"') {
+                        if (nextChar === '\"') {
+                            // Escaped quote ""
+                            currentField += '\"';
+                            i++; // Skip the next quote
+                        } else {
+                            // End of quoted field
+                            inQuotes = false;
+                        }
+                    } else {
+                        // Preserve character, including newline
+                        currentField += char;
+                    }
+                }
+            }
+            // Add the last field and row if they exist
+            if (currentField !== '' || currentRow.length > 0) {
+                 currentRow.push(currentField);
+                 rows.push(currentRow);
+            }
+
+            if (rows.length < 2) return []; // No data rows
+
+            // DEBUG: Log the number of raw rows found after splitting
+            console.log('List page parser: Raw rows array length (including header):', rows.length);
+
+            const headers = rows[0].map(h => h.trim());
+            const data = [];
+            for (let i = 1; i < rows.length; i++) {
+                 // DEBUG: Log rows near the end that the detail page was skipping
+                 if (i >= 167 && i < 186) { // Log lines 168-185 (data indices 167-184)
+                    console.log(`List page parser: Checking row index ${i} (line ${i+1}). Parsed columns: ${rows[i].length}. Content:`, JSON.stringify(rows[i]));
+                 }
+                 
+                 if (rows[i].length === headers.length) {
+                    const entry = {};
+                    for (let j = 0; j < headers.length; j++) {
+                        entry[headers[j]] = rows[i][j]; // Already handled quotes during parsing
+                    }
+                    data.push(entry);
+                } else {
+                    // Make the warning more prominent on the list page too
+                    console.warn(`!!! LIST PAGE PARSER: Skipping CSV row ${i+1} due to column mismatch: expected ${headers.length}, got ${rows[i].length}`);
+                }
+            }
+            return data;
+        }
+
+        // --- Category Color Mapping (Keep this) ---
+        const categoryColors = {
+            'Biology: Life Science': '#e60000', // Science - Red
+            'Biology 2': '#e60000', // Science - Red
+            'Science': '#e60000', // Science - Red
+            'Physical Science': '#e60000', // Science - Red
+            'Physics': '#e60000', // Science - Red
+            'Earth & Space Science': '#6f42c1', // Earth & Space - Purple
+            'Earth Science': '#6f42c1', // Earth & Space - Purple
+            'Engineering Design': '#28a745', // Engineering - Green (changed from yellow)
+            'Engineering & Technology': '#28a745', // Engineering - Green (changed from yellow)
+            'Career Exploration': '#28a745', // Career - Green
+            'History': '#0052cc', // Field Trip - Blue
+            'VR Field Trip': '#0052cc', // Field Trip - Blue
+            'Arts': '#fd7e14', // Arts - Orange
+            // Default/other: grey
+        };
+        const defaultCategoryColor = '#6c757d'; // Default Grey
+
+        // Map Subject values to filter keys (lowercase)
+        const subjectToFilterKey = {
+            'Biology: Life Science': 'science',
+            'Biology 2': 'science',
+            'Science': 'science',
+            'Physical Science': 'science',
+            'Physics': 'science',
+            'Earth & Space Science': 'earth-space',
+            'Earth Science': 'earth-space',
+            'Engineering Design': 'engineering',
+            'Engineering & Technology': 'engineering',
+            'Career Exploration': 'career',
+            'History': 'field-trip',
+            'VR Field Trip': 'field-trip',
+            'Arts': 'arts',
+        };
+        const defaultFilterKey = 'science'; // Default filter key if subject doesn't map
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const listContainer = document.getElementById('curriculum-list');
+            const filterButtonsContainer = document.querySelector('.filter-links');
+
+            try {
+                // Update the fetch path to the new CSV file
+                const response = await fetch('../data/VictoryXR Dataset.csv');
+                if (!response.ok) {
+                     throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const csvText = await response.text();
+                const curriculumData = robustParseCSV(csvText); // Use robust parser
+
+                // DEBUG: Log the actual length of the parsed data array on the LIST page
+                console.log(`List page: Parsed CSV. Actual array length: ${curriculumData ? curriculumData.length : 'null/undefined'}`);
+
+                listContainer.innerHTML = ''; // Clear loading message
+
+                if (!curriculumData || curriculumData.length === 0) {
+                    listContainer.innerHTML = '<p>Could not load or parse curriculum data.</p>';
+                    return;
+                }
+
+                curriculumData.forEach((item, index) => {
+                    item.index = index; // Keep index for linking
+
+                    const applicationName = (item.Application || '').trim();
+                    // Get the Subject directly from the CSV
+                    const subject = (item.Subject || '').trim();
+
+                    // Skip if Application name is missing
+                    if (!applicationName) {
+                        console.warn(`Skipping item at index ${index} due to missing Application Name.`);
+                        return; // Skip this iteration
+                    }
+
+                    const firstExperience = item['Experience 1 Title'] || 'Click for details';
+
+                    // Concatenate descriptions for searching (Keep existing logic)
+                    let allDescriptions = '';
+                    // Iterate through all potential experience descriptions (adjust range if needed)
+                    for (let i = 1; i <= 5; i++) {
+                        const descKey = `Experience ${i} Description`;
+                        if (item[descKey]) {
+                            allDescriptions += item[descKey] + ' ';
+                        }
+                    }
+                    // Also include the main application name and subject in search
+                     allDescriptions += applicationName + ' ' + subject;
+                    const searchableDescription = allDescriptions.trim().toLowerCase();
+
+                    // --- Use Subject for Category and Color ---
+                    const categoryKey = subjectToFilterKey[subject] || defaultFilterKey; // Get filter key (e.g., 'science')
+                    const color = categoryColors[subject] || defaultCategoryColor; // Get color based on Subject
+
+                    const card = document.createElement('a');
+                    card.href = `curriculum-detail.html?app=${encodeURIComponent(applicationName)}`; // Link using Application name
+                    card.className = 'nav-card curriculum-card';
+                    card.style.backgroundColor = color; // Use color based on Subject
+                    card.setAttribute('data-category', categoryKey); // Set filter key based on Subject
+                    card.setAttribute('data-description', searchableDescription);
+
+                    card.style.textDecoration = 'none';
+                    card.style.color = 'white';
+                    card.style.display = 'flex';
+                    card.style.flexDirection = 'column';
+                    card.style.justifyContent = 'flex-start';
+
+                    const title = document.createElement('h2');
+                    title.textContent = applicationName; // Use correct Application name
+                    title.style.marginBottom = '10px';
+
+                    const description = document.createElement('p');
+                    description.textContent = `Includes: ${firstExperience}...`;
+                    description.style.fontSize = '0.9em';
+                    description.style.margin = '0';
+                    description.style.overflow = 'hidden';
+
+                    card.appendChild(title);
+                    card.appendChild(description);
+                    listContainer.appendChild(card);
+                });
+
+                 // --- Filtering Logic --- (Should now work with data-category set from Subject)
+                 const filterButtons = filterButtonsContainer.querySelectorAll('.filter-btn');
+                 const curriculumCards = listContainer.querySelectorAll('.curriculum-card');
+                 const searchBox = document.getElementById('search-box');
+
+                // Filter function likely doesn't need changes, as it uses the data-category attribute
+                function filterAndSearchCards() {
+                    const searchTerm = searchBox.value.toLowerCase();
+                    const activeFilterButton = filterButtonsContainer.querySelector('.filter-btn.active');
+                    const activeFilter = activeFilterButton ? activeFilterButton.getAttribute('data-filter') : 'all'; // e.g., 'all', 'science', 'field-trip'
+
+                    curriculumCards.forEach(card => {
+                        const cardTitle = card.querySelector('h2')?.textContent.toLowerCase() || '';
+                        const cardCategory = card.getAttribute('data-category'); // Gets the filter key (e.g., 'science')
+                        const cardDescription = card.getAttribute('data-description') || '';
+
+                        const titleMatch = cardTitle.includes(searchTerm);
+                        const descriptionMatch = cardDescription.includes(searchTerm);
+                        const categoryMatch = (activeFilter === 'all' || cardCategory === activeFilter);
+
+                        // Show if (title OR description matches) AND category matches
+                        if ((titleMatch || descriptionMatch) && categoryMatch) {
+                            card.style.display = 'flex'; // Show card
+                        } else {
+                            card.style.display = 'none'; // Hide card
+                        }
+                    });
+                }
+
+                 filterButtons.forEach(button => {
+                     button.addEventListener('click', () => {
+                         filterButtons.forEach(btn => btn.classList.remove('active'));
+                         button.classList.add('active');
+                         filterAndSearchCards();
+                     });
+                 });
+
+                 searchBox.addEventListener('input', filterAndSearchCards);
+
+            } catch (error) {
+                console.error('Error loading curriculum list:', error);
+                listContainer.innerHTML = `<p>Error loading curriculum library. Please check the console for details. Error: ${error.message}</p>`;
+            }
+        });
+
+        // Update copyright year automatically
+        const copyrightYearElem = document.getElementById("copyright-year");
+        if (copyrightYearElem) {
+            copyrightYearElem.textContent = new Date().getFullYear();
+        }
+    </script>
+
+    <!-- Re-added Zapier Chatbot Embed -->
+    <script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+    <zapier-interfaces-chatbot-embed is-popup='true' chatbot-id='cm9382zyd000hkt1w8olhet5h'></zapier-interfaces-chatbot-embed>
+
+    <script src="js/header.js"></script>
+</body>
+</html>
