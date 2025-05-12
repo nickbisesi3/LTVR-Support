@@ -1,0 +1,112 @@
+/* General page structure */
+body {
+    display: flex;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6; /* Light grey background for the page */
+    color: #333; /* Default text color */
+    height: 100vh;
+    overflow: hidden; /* Prevent body scroll when sidebar or main content scrolls */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 280px;
+    background-color: #ffffff; /* White background for sidebar */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Allow sidebar to scroll if content overflows */
+    height: 100vh; /* Full viewport height */
+}
+
+.sidebar h2 {
+    font-size: 1.2em;
+    color: #0052cc; /* LTVR Blue */
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.experience-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.experience-item {
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    font-size: 0.95em;
+    display: flex; /* Use flexbox to align name and tag */
+    justify-content: space-between; /* Puts space between name and tag */
+    align-items: center; /* Vertically aligns items */
+}
+
+.experience-item:hover {
+    background-color: #e9ecef; /* Light grey hover for items */
+}
+
+.experience-item.selected {
+    background-color: #0052cc; /* LTVR Blue for selected item */
+    color: white;
+}
+
+.experience-item.selected .tag {
+    background-color: white !important; /* Ensure tag is visible on selected item */
+    color: #0052cc !important; /* Tag text color for selected item */
+}
+
+.add-experience-item {
+    padding: 10px 12px;
+    margin-top: 15px;
+    border-radius: 6px;
+    background-color: #28a745; /* Green background */
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.add-experience-item:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+/* Pill Tag Styles */
+.tag {
+    padding: 3px 10px;
+    border-radius: 12px; /* Pill shape */
+    font-size: 0.75em;
+    font-weight: bold;
+    color: white;
+    margin-left: 10px; /* Space between name and tag */
+    white-space: nowrap; /* Prevent tag text from wrapping */
+}
+
+/* Tag colors based on data-type of parent li.experience-item */
+.experience-item[data-type="360video"] .tag {
+    background-color: #0052cc; /* LTVR Blue */
+}
+
+.experience-item[data-type="streetview"] .tag {
+    background-color: #28a745; /* Green */
+}
+
+.experience-item[data-type="webxr"] .tag {
+    background-color: #fd7e14; /* Orange */
+    color: #fff; /* White text */
+}
+
+.experience-item[data-type="3dmodel"] .tag {
+    background-color: #6f42c1; /* Purple */
+}
+
+.experience-item[data-type="app"] .tag {
+    background-color: #DC1625; /* New Red */
+}

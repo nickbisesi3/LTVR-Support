@@ -1,0 +1,35 @@
+<header>
+  <div class="container-fluid no-print header-flex-container">
+    <a href="dashboard.html" class="logo-link">
+      <img src="assets/logo.png" alt="LearningTime VR Logo" class="logo">
+    </a>
+    <!-- Standard Navigation (hidden on mobile) -->
+    <nav class="header-nav">
+      <!-- <a href="vr-curriculum.html">Content Library</a> -->
+      <!-- <a href="support.html">Support</a> -->
+      <!-- <button id="schedule-header-btn" class="schedule-btn no-print">Schedule Virtual Training</button> -->
+    </nav>
+
+    <!-- Class Session Controls -->
+    <div class="header-session-controls no-print">
+        <button id="pause-modal-trigger" class="session-control-btn pause-session-btn-header">Pause All</button>
+        <a href="dashboard.html" class="session-control-btn end-session-btn-header">End Session</a>
+    </div>
+
+    <!-- Hamburger Button (visible on mobile) -->
+    <button id="hamburger-btn" aria-label="Toggle Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+  </div>
+   <!-- Overlay for Mobile Nav -->
+  <div id="mobile-nav-overlay"></div>
+   <!-- Mobile Navigation (hidden by default) -->
+  <div id="mobile-nav">
+      <!-- <a href="vr-curriculum.html">Content Library</a> -->
+      <!-- <a href="support.html">Support</a> -->
+      <!-- Mobile session controls can be added here if needed later -->
+      <!-- For now, mobile nav will be empty or could contain session controls if we add them here -->
+  </div>
+</header>

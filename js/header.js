@@ -31,8 +31,13 @@ window.headerLoadedPromise = (function() {
     }
 
     let headerFile = getHeaderPath('header-main.html');
-    // Check if the current page (excluding index.html) is considered a support page
-    if (currentPage !== 'index.html' && supportPages.includes(currentPage)) {
+
+    // Check for class_session.html first
+    if (currentPage === 'class_session.html') {
+        headerFile = getHeaderPath('header-class-session.html');
+    }
+    // Check if the current page (excluding index.html and class_session.html) is considered a support page
+    else if (currentPage !== 'index.html' && supportPages.includes(currentPage)) {
         headerFile = getHeaderPath('header-support.html');
     }
     // Explicitly use main header for index.html

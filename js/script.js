@@ -1,6 +1,36 @@
 document.addEventListener('DOMContentLoaded', function() {
     const calendlyUrl = 'https://calendly.com/learningtimevr-demo/30min';
 
+    // --- Function to load HTML partials ---
+    function loadHTML(url, elementId, callback) {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok for ' + url);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    element.innerHTML = data;
+                    if (callback) callback(); // Execute callback function if provided
+                } else {
+                    console.error('Element with ID ' + elementId + ' not found.');
+                }
+            })
+            .catch(error => console.error('Error loading HTML partial:', error));
+    }
+
+    // --- Create a promise that resolves when the header is loaded ---
+    window.headerLoadedPromise = new Promise((resolve, reject) => {
+        loadHTML('partials/header-support.html', 'header-placeholder', resolve); // Resolve promise in callback
+    });
+
+    // --- Load Footer --- 
+    loadHTML('components/footer.html', 'footer-placeholder');
+
+
     // Function to open Calendly popup
     function openCalendly(url) {
         Calendly.initPopupWidget({ url: url });
@@ -9,13 +39,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Event Listeners for Scheduling Buttons ---
 
-    // Header Button
-    const scheduleHeaderBtn = document.getElementById('schedule-header-btn');
-    if (scheduleHeaderBtn) {
-        scheduleHeaderBtn.addEventListener('click', function() {
-            openCalendly(calendlyUrl);
-        });
-    }
+    // Header Button - Moved inside headerLoadedPromise below
+    // const scheduleHeaderBtn = document.getElementById('schedule-header-btn');
+    // if (scheduleHeaderBtn) {
+    //     scheduleHeaderBtn.addEventListener('click', function() {
+    //         openCalendly(calendlyUrl);
+    //     });
+    // }
 
     // Hero Section Button
     const heroScheduleBtn = document.getElementById('hero-schedule-btn');
@@ -70,6 +100,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Wait for Header to Load before setting up Hamburger Menu ---
     window.headerLoadedPromise.then(() => {
         console.log('Header loaded, attempting to set up hamburger menu...'); // DEBUG
+
+        // Add Header Button Listener HERE
+        const scheduleHeaderBtn = document.getElementById('schedule-header-btn');
+        if (scheduleHeaderBtn) {
+            console.log('Found schedule-header-btn, adding listener.'); // DEBUG
+            scheduleHeaderBtn.addEventListener('click', function() {
+                openCalendly(calendlyUrl);
+            });
+        } else {
+            console.error('Could not find schedule-header-btn after header load.');
+        }
 
         // --- Hamburger Menu Logic --- 
         const hamburgerBtn = document.getElementById('hamburger-btn');

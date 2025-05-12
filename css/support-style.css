@@ -54,7 +54,7 @@ header .header-nav > a {
 .schedule-btn {
     padding: 10px 25px; /* Adjusted padding */
     /* background-color: #e53935; */ /* Placeholder red, adjust to match */
-    background-color: #e60000; /* Match learningtimevr.com red */
+    background-color: #DC1625; /* New Red */
     color: white;
     border: none;
     border-radius: 8px; /* Slightly more rounded corners */
@@ -207,8 +207,6 @@ a.start-here {
     /* animation: particle-fade 0.6s ease-out forwards; */ /* Remove animation */
     transition: left 0.3s ease-out, top 0.3s ease-out; /* Add transition for smooth movement */
 }
-
-/* Delete the keyframes rule as it's no longer needed */
 
 a.start-here:hover {
     /* Borrow hover styles from .nav-card:hover */
@@ -587,7 +585,7 @@ zapier-interfaces-chatbot-embed {
     box-shadow: 0 0 15px rgba(0, 123, 255, 0.6), 0 4px 10px rgba(0, 0, 0, 0.15); /* Blue glow + subtle shadow */
     /* background-color: #0041a3; */ /* Darker blue on hover - Replaced by glow */
     text-decoration: none;
-    color: white; /* Keep text white on hover */
+    color: white; /* Keep text white on hover (default) */
 }
 
 .product-card h3 {
@@ -718,10 +716,9 @@ zapier-interfaces-chatbot-embed {
 .logo-grid-scroll-container {
     /* overflow-x: auto; */ /* Enable horizontal scroll - REMOVED */
     /* padding: 20px 0; */ /* Add padding top/bottom - REMOVED */
-    /* Hide scrollbar - optional, depends on desired look */
-    /* -ms-overflow-style: none; */  /* IE and Edge */
-    /* scrollbar-width: none; */  /* Firefox */
-    /* No longer needed as overflow is handled by parent/animation */
+    /* Hide scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
     width: 100%; /* Ensure container takes full width */
     overflow: hidden; /* Hide the parts of the grid that move out */
     padding: 10px 0; /* Add vertical padding for hover scale effect */
@@ -864,6 +861,228 @@ zapier-interfaces-chatbot-embed {
     line-height: 1.6;
     margin-bottom: 0;
     color: rgba(255, 255, 255, 0.9); /* Slightly off-white */
+}
+
+/* === Class Session Page Layout === */
+.class-session-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    margin: 0;
+    background-color: #f4f4f4; /* Light grey background for the page */
+}
+
+.class-session-container {
+    display: flex;
+    flex-grow: 1; /* Allows main container to fill available space */
+    padding: 20px;
+    gap: 20px; /* Space between panels */
+}
+
+.panel {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column; /* Stack content vertically within panels */
+}
+
+.left-panel {
+    flex: 1; /* Adjust flex-basis or grow/shrink as needed */
+    min-width: 220px; /* Example minimum width */
+}
+
+.center-panel {
+    flex: 3; /* Center panel is wider */
+    gap: 20px; /* Space between teacher preview and student views */
+}
+
+.right-panel {
+    flex: 1;
+    min-width: 220px; /* Example minimum width */
+}
+
+.teacher-preview-window {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    flex-grow: 1; /* Allows it to take up significant space in center panel */
+    min-height: 300px; 
+    background-color: #e9ecef; /* Light background for preview area */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.student-views-container {
+    border-top: 1px solid #eee; /* Separator */
+    padding-top: 20px;
+    margin-top: 20px; /* Space from preview window */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; 
+    justify-content: space-around; /* Distribute student cards */
+    min-height: 200px;
+}
+
+.student-view-card {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 10px 15px;
+    width: calc(50% - 10px); /* Two cards per row, accounting for gap */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.student-view-card p {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.student-view-card p:first-child {
+    font-weight: bold;
+    color: #333;
+    margin-top: 0;
+}
+
+/* Panel specific content styling */
+.panel h2 {
+    font-size: 1.6em;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.panel h3 {
+    font-size: 1.3em;
+    color: #444;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.left-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.left-panel li {
+    padding: 10px 5px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.left-panel li:last-child {
+    border-bottom: none;
+}
+
+.left-panel li:hover {
+    background-color: #f7f7f7;
+}
+
+.right-panel button {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.right-panel button:hover {
+    opacity: 0.9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.right-panel button:last-child {
+    margin-bottom: 0;
+}
+
+.right-panel .start-session-btn {
+    background-color: #28a745; /* Green */
+    color: white;
+}
+
+.right-panel .pause-session-btn {
+    background-color: #ffc107; /* Yellow */
+    color: #333;
+}
+
+.right-panel .end-session-btn {
+    background-color: #dc3545; /* Red */
+    color: white;
+}
+/* Adjustments for smaller screens if needed */
+@media (max-width: 768px) {
+    .class-session-container {
+        flex-direction: column;
+    }
+    .left-panel, .center-panel, .right-panel {
+        min-width: 100%;
+        margin-right: 0; /* Remove right margin for stacked layout */
+    }
+    .student-view-card {
+        width: 100%; /* Full width on smaller screens */
+    }
+}
+
+/* === Header Session Controls === */
+.header-session-controls {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Pushes controls to the right of other nav items */
+    gap: 10px; /* Space between buttons */
+}
+
+.session-control-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.session-control-btn:hover {
+    opacity: 0.9;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.start-session-btn-header {
+    background-color: #28a745; /* Green */
+    color: white;
+}
+
+.pause-session-btn-header {
+    background-color: #ffc107; /* Yellow */
+    color: #333;
+}
+
+.end-session-btn-header {
+    background-color: #dc3545; /* Red */
+    color: white;
+}
+
+/* Adjustments for smaller screens if header controls need to be handled differently */
+@media (max-width: 992px) { /* Adjust breakpoint as needed, consider where hamburger menu appears */
+    .header-session-controls {
+        display: none; /* Hide desktop session controls on smaller screens */
+        /* Mobile session controls should be added to #mobile-nav in header-class-session.html if desired */
+    }
 }
 
 /* --- Hamburger Menu Styles --- */

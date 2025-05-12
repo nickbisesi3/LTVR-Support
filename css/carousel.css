@@ -1,0 +1,104 @@
+/* Carousel Styles for Dashboard Experience Cards */
+.carousel-track {
+  display: flex;
+  overflow: visible;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 20px;
+  gap: 0;
+  position: relative;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.experience-card {
+  /* Base styles for all experience cards */
+  width: 250px;
+  height: 160px;
+  margin-right: 20px;
+  margin-top: -20px; /* Consistent with memory and inline styles */
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #4A4A4A; /* Default background if image fails or before load */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  flex: 0 0 auto; /* Ensure cards don't shrink/grow if track is flex container */
+  background-size: cover; /* Ensure background images cover the card */
+  background-position: center; /* Center background images */
+  transform-origin: top center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.carousel-track > .experience-card {
+  scroll-snap-align: start;
+  z-index: 1;
+  transition: transform 0.2s, z-index 0.2s;
+  background-repeat: no-repeat; /* Prevent background images from repeating */
+}
+
+.carousel-track > .experience-card:hover {
+  z-index: 2;
+  transform: scale(1.05);
+  transform-origin: top center; /* Ensuring transform origin is set */
+}
+
+/* Card Text Content Styling (title and description) */
+.card-text-content {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+    /* Retains its space at the bottom of the card, but will be invisible on hover */
+}
+
+.experience-card:hover .card-text-content {
+    opacity: 0.6; /* Changed from 0 to 0.6 */
+} /* Un-commenting this rule to make text disappear on hover */
+
+/* Start Experience Button Styling */
+.carousel-track .start-experience-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white; /* Changed to white */
+    color: black; /* Changed to black */
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em;
+    white-space: nowrap; /* Prevent text wrapping */
+    z-index: 10; /* Ensure it's above card text and gradient overlay */
+    cursor: pointer;
+    display: none; /* Initially hidden */
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out, display 0s linear 0.2s; /* Smooth opacity, immediate display change for hiding */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.carousel-track .experience-card:hover .start-experience-button {
+    display: inline-block; /* Using inline-block to fit content */
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out; /* Smooth opacity for appearing */
+}
+
+/* Ensure the card itself is a positioning context if not already done by inline styles */
+/* .experience-card { */
+/*    position: relative; /* This is likely already set via inline styles on dashboard.html */
+/* } */
+
+/* Styles for featured carousel cards */
+.featured-carousel .experience-card {
+    width: 300px; /* Larger width for featured cards */
+    height: 200px; /* Larger height for featured cards */
+    /* margin-top: -20px; Ensure this is consistent or adjusted if needed */
+}
+
+.featured-carousel .experience-card .card-text-content h3 {
+    font-size: 1.3em; /* Larger title for featured cards */
+}
+
+.featured-carousel .experience-card .card-text-content p {
+    font-size: 1.0em; /* Larger description for featured cards */
+}
