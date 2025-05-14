@@ -1,0 +1,209 @@
+/* Styles for individual student status cards - Updated to original spec */
+
+/* 2. Headset Status Card */
+.headset-status-cell {
+    min-width: 180px; /* Match grid minmax */
+    box-sizing: border-box;
+    border: 1px solid #dee2e6; /* Light gray border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 0; /* Remove padding, handled by internal elements */
+    background-color: #ffffff; /* White background */
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    overflow: hidden; /* Needed for edge-to-edge placeholder */
+    display: flex;
+    flex-direction: column;
+}
+
+.headset-status-cell:hover {
+    transform: translateY(-5px);
+}
+
+/* 3. Headset Info Rows */
+.headset-title-row {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px 0 12px; /* T=8, R=15, B=0, L=12 */
+    background-color: #f8f9fa; /* Light background */
+    width: 100%;
+}
+
+.headset-info-row {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between; /* Ensure items are pushed apart */
+    align-items: center;
+    padding: 0 12px 8px 12px; /* T=0, R=12, B=8, L=12 */
+    background-color: #f8f9fa; /* Light background */
+    width: 100%;
+}
+
+.headset-id {
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1; /* Allow headset ID to take available space */
+    text-align: left; /* Align headset ID to the left */
+}
+
+/* 4. Status Indicators */
+.headset-status {
+    padding: 0; /* Reset padding */
+    display: flex;
+    align-items: center;
+    background-color: transparent !important; /* Ensure no conflicting background */
+    border: none !important; /* Ensure no conflicting border */
+    color: #212529; /* Default text color for status */
+    font-size: 0.85em;
+    border-radius: 0; /* Reset border-radius */
+}
+
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.status-connected .status-dot {
+    background-color: #198754; /* Green for connected */
+}
+
+.status-disconnected {
+    color: #6c757d; /* Gray text for disconnected */
+}
+
+.status-disconnected .status-dot {
+    background-color: #6c757d; /* Gray dot for disconnected */
+}
+
+.headset-battery {
+    font-size: 0.8em;
+    color: #6c757d;
+    margin-bottom: 0; /* Remove default margin if any */
+    text-align: center;
+}
+
+.headset-battery span { /* For the percentage number */
+    font-weight: 500;
+}
+
+/* 5. View Screen Button */
+.view-screen-btn {
+    padding: 6px 12px;
+    font-size: 0.8em;
+    font-weight: 400; /* Set to Poppins Regular */
+    cursor: pointer;
+    background: none; /* Original spec */
+    border: none; /* Original spec */
+    color: #6c757d; /* Changed from black to medium grey */
+    line-height: 1;
+    margin-bottom: 0; /* Original spec */
+    background-color: white; /* Original spec */
+    border: 1px solid #dee2e6; /* Original spec */
+    border-radius: 6px;
+    white-space: nowrap;
+    transition: background-color 0.2s, color 0.2s;
+    flex-shrink: 0; /* Prevent shrinking if headset ID is long */
+}
+
+.view-screen-btn:disabled {
+    cursor: default;
+    background-color: #f8f9fa !important;
+    border-color: #dee2e6 !important;
+    color: #6c757d !important;
+    opacity: 0.75;
+}
+
+.view-screen-btn:hover:not(:disabled) {
+    background-color: #f8f9fa;
+    border-color: #adb5bd;
+    color: black;
+}
+
+/* 6. Student POV Placeholder */
+.student-pov-placeholder {
+    display: flex; /* Always visible, used to center content */
+    flex-direction: column; /* Default: stack items like label + content */
+    align-items: center;
+    justify-content: center; /* Center content by default (for collapsed state) */
+    aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+    background-color: #e9ecef; /* Default light background for collapsed state */
+    color: #495057; /* Default text color for light background */
+    padding: 0; /* Remove padding, inner wrappers will handle if needed */
+    border-top-left-radius: 8px; /* Match card */
+    border-top-right-radius: 8px; /* Match card */
+    width: 100%;
+}
+
+.headset-status-cell.expanded .student-pov-placeholder {
+    background-color: #343a40; /* Dark background for expanded state */
+    color: #ffffff; /* Light text for dark background */
+    justify-content: flex-start; /* Align content to top for expanded */
+    padding: 0; /* Keep padding as 0, content inside will manage */
+}
+
+/* 7. Hide Screen Button (for expanded view) */
+.hide-screen-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    line-height: 24px; /* Vertically center 'X' if using text */
+    text-align: center;
+    cursor: pointer;
+    display: none; /* Hidden by default */
+    z-index: 10;
+}
+
+.headset-status-cell.expanded .hide-screen-btn {
+    display: inline-flex; /* Use flex to center content if it's an icon/svg */
+    align-items: center;
+    justify-content: center;
+}
+
+.hide-screen-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Placeholder for content inside student-pov-placeholder (from previous iteration) */
+/* These can be refined or removed if not used by current HTML structure */
+.placeholder-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.disconnected-text-placeholder {
+    font-size: 1.1em;
+    font-weight: 500;
+    padding: 10px;
+}
+
+.actual-pov-content {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Or 'contain' depending on desired video/image scaling */
+    display: none; /* Hidden by default, shown when content is loaded */
+}
+
+.headset-status-cell.expanded .student-pov-placeholder .placeholder-content-wrapper {
+    display: none; /* Hide placeholder text when expanded and showing actual content */
+}
+
+.headset-status-cell.expanded .student-pov-placeholder .actual-pov-content {
+    display: block; /* Show actual content when expanded */
+}

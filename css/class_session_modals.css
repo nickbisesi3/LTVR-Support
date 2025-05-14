@@ -1,0 +1,204 @@
+/* Styles for modals used on the class session page */
+
+/*---------------------------------------
+  MODAL STYLES (General and Specific)
+-----------------------------------------*/
+
+/* General Modal Styling (applies to all modals unless overridden) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity for backdrop */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 10% auto; /* 10% from the top and centered, allows more space for taller modals */
+    padding: 30px;
+    border: 1px solid #adb5bd;
+    border-radius: 8px;
+    width: 80%; /* Default width */
+    max-width: 500px; /* Max width for standard modals */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.close-button {
+    color: #aaa;
+    float: right; /* Old school, but common for close buttons */
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute; /* Position relative to modal-content */
+    top: 10px;
+    right: 20px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Pause Session Modal Specifics */
+#pause-modal .modal-content {
+    max-width: 400px; /* Smaller width for simple confirmation */
+}
+
+#pause-modal h2 {
+    margin-top: 0;
+    color: #343a40;
+}
+
+#pause-modal p {
+    margin-bottom: 20px;
+    color: #495057;
+}
+
+#pause-modal .modal-actions {
+    text-align: right;
+}
+
+#pause-modal .modal-actions button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+#pause-modal .modal-actions .confirm-pause-btn {
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+#pause-modal .modal-actions .confirm-pause-btn:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+#pause-modal .modal-actions .cancel-btn {
+    background-color: #6c757d;
+    color: white;
+    border-color: #6c757d;
+}
+
+#pause-modal .modal-actions .cancel-btn:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+
+/* Add New Experience Modal (Full Page Style) */
+#add-experience-modal .full-modal-content {
+    margin: 2% auto; /* Smaller top margin for taller modal */
+    width: 90%;
+    max-width: 800px; /* Wider for form content */
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+#add-experience-modal .full-modal-close-button {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+}
+
+#add-experience-modal .full-modal-close-button:hover {
+    color: #555;
+}
+
+#add-experience-modal h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #343a40;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 15px;
+}
+
+/* Form Element Styling within Modals */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #495057;
+}
+
+.input-group input[type="text"],
+.input-group input[type="url"],
+.input-group textarea,
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.input-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.form-actions {
+    margin-top: 30px;
+    text-align: right;
+}
+
+.form-actions button {
+    padding: 12px 25px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-size: 1em;
+    margin-left: 10px;
+}
+
+.form-actions button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.form-actions button[type="submit"]:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.form-actions .cancel-btn {
+    background-color: #6c757d;
+    color: white;
+    border-color: #6c757d;
+}
+
+.form-actions .cancel-btn:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}

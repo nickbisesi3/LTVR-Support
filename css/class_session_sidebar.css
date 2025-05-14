@@ -1,0 +1,224 @@
+/* Styles for the class session sidebar (left panel) */
+
+/*---------------------------------------
+  LEFT PANEL BASE STRUCTURE (User Spec)
+-----------------------------------------*/
+.left-panel {
+    flex: 0 0 280px; /* Fixed width */
+    border-right: 1px solid #dee2e6;
+    background-color: #ffffff; /* Changed to white */
+    border-radius: 8px; /* Added for rounded corners */
+    display: flex;
+    flex-direction: column;
+    position: sticky; /* Keeps sidebar in view during scroll */
+    top: 10px; /* Distance from the top of the viewport - from user spec */
+    padding: 20px;
+    padding-bottom: 210px; /* Add space at bottom for fixed connection info */
+}
+
+/* New div for scrollable content */
+.sidebar-scrollable-content {
+    flex-grow: 1; /* Make this div take up available space */
+    /* Removed overflow: overflow-y: auto; */ /* Parent div now handles scrolling */
+    /* Add some padding to prevent scrollbar overlap if needed */
+    padding-right: 5px; 
+    margin-right: -5px;
+}
+
+/*---------------------------------------
+  SIDEBAR SPECIFIC STYLES
+-----------------------------------------*/
+
+/* Title specific to the sidebar if different from general page titles */
+.left-panel #class-name-title {
+    font-size: 1.4em; /* Example: slightly smaller than main section titles */
+    color: #343a40;
+    margin-top: 0; /* Remove default top margin */
+    margin-bottom: 20px; /* Space below title */
+    padding-bottom: 15px; /* Space before list starts */
+    border-bottom: 1px solid #e0e0e0; /* Separator line */
+}
+
+/* EXPERIENCE LIST STYLING */
+.experience-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px; /* Added space below list before button */
+    /* Ensure no internal scroll here: */
+    /* overflow-y: auto; */ 
+}
+
+.experience-item {
+    cursor: pointer;
+    padding: 12px 15px; /* Increased padding */
+    border-radius: 6px; /* Slightly larger radius */
+    margin-bottom: 5px; /* Reduced margin */
+    border-left: 3px solid transparent; /* Placeholder for selected indicator */
+    transition: background-color 0.2s ease, border-left-color 0.2s ease;
+    font-size: 0.95em; /* Adjust font size */
+    color: #333; /* Darker text */
+    display: flex; /* Use flexbox to align name and tag */
+    justify-content: space-between; /* Puts space between name and tag */
+    align-items: center; /* Vertically aligns items */
+}
+
+.experience-item:hover {
+    background-color: #e9ecef; /* Lighter gray hover */
+}
+
+.experience-item.selected {
+    background-color: #cfe2ff; /* Light blue background for selected */
+    font-weight: 600; /* Semi-bold */
+    color: #052c65; /* Darker blue text for selected */
+    border-left: 3px solid #0d6efd; /* Blue indicator border */
+}
+
+.experience-item.selected .tag {
+    background-color: #052c65 !important; /* Match selected text color */
+    color: #cfe2ff !important; /* Match selected background color */
+}
+
+/* 'Add New Experience' Button Styling */
+.add-experience-item {
+    cursor: pointer;
+    padding: 12px 15px;
+    border-radius: 6px;
+    background-color: #e9ecef; /* Light grey background */
+    color: #000000; /* Changed from blue to black */
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.2s ease;
+    margin-bottom: 15px; /* Added space below button */
+}
+
+.add-experience-item:hover {
+    background-color: #dce0e3; /* Darker hover */
+}
+
+/* PILL TAG STYLES */
+.tag {
+    padding: 3px 10px;
+    border-radius: 12px; /* Pill shape */
+    font-size: 0.75em;
+    font-weight: bold;
+    color: white;
+    margin-left: 10px; /* Space between name and tag */
+    white-space: nowrap; /* Prevent tag text from wrapping */
+}
+
+/* Tag colors based on data-type of parent li.experience-item */
+.experience-item[data-type="360video"] .tag {
+    background-color: #0052cc; /* LTVR Blue */
+}
+
+.experience-item[data-type="streetview"] .tag {
+    background-color: #28a745; /* Green */
+}
+
+.experience-item[data-type="webxr"] .tag {
+    background-color: #fd7e14; /* Orange */
+    color: #fff; /* White text */
+}
+
+.experience-item[data-type="3dmodel"] .tag {
+    background-color: #6f42c1; /* Purple */
+}
+
+.experience-item[data-type="app"] .tag {
+    background-color: #DC1625; /* New Red */
+}
+
+/* BOTTOM CONNECTION INFO IN LEFT PANEL */
+.left-panel-connection-info {
+    position: fixed; /* Position relative to viewport */
+    bottom: 20px; /* Align with container bottom padding */
+    left: 20px; /* Align with container left padding */
+    width: 280px; /* Match sidebar width */
+    z-index: 10; /* Ensure it's above scrolled content, below modals */
+    
+    background-color: #ffffff; /* White background */
+    border-left: 1px solid #dee2e6; /* Add left border to match sidebar visual */
+    border-right: 1px solid #dee2e6; /* Add right border to match sidebar visual */
+    border-bottom: 1px solid #dee2e6; /* Optional: Add bottom border for consistency */
+    border-radius: 0 0 8px 8px; /* Match bottom corners of sidebar */
+    
+    /* Internal padding */
+    padding: 15px 20px; 
+    text-align: center;
+}
+
+.left-panel-connection-info .qr-code-placeholder {
+    width: 100px; /* Smaller QR */
+    height: 100px;
+    background-color: #ddd;
+    border: 1px solid #bbb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    margin: 0 auto 10px auto; /* Center horizontally */
+    font-size: 0.8em;
+}
+
+.left-panel-connection-info .room-code-display {
+    font-size: 1.5em; /* Slightly smaller room code for sidebar */
+    font-weight: bold;
+    color: #333;
+    letter-spacing: 1px;
+    background-color: #e9ecef; /* Lighter background for room code */
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: inline-block; /* To fit content */
+    margin-bottom: 8px;
+}
+
+.left-panel-connection-info .connection-info-text {
+    font-size: 0.8em;
+    color: #555;
+    margin: 0;
+}
+
+/*---------------------------------------
+  RESPONSIVE BEHAVIOR FOR LEFT PANEL (User Spec)
+-----------------------------------------*/
+@media (max-width: 768px) {
+    .left-panel {
+        min-width: 100%;
+        margin-right: 0;
+        height: auto; /* Allow height to adjust to content on mobile */
+        position: static; /* Disable sticky positioning on mobile for natural flow */
+        border-right: none; /* Remove border as it's full width */
+        border-bottom: 1px solid #dee2e6; /* Add bottom border if stacked above center panel */
+        padding: 15px; /* Adjust padding for mobile */
+    }
+
+    .left-panel #class-name-title {
+        font-size: 1.2em; /* Adjust title size for mobile */
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+
+    .add-experience-item {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+
+    .left-panel-connection-info {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .left-panel-connection-info .qr-code-placeholder {
+        width: 80px;
+        height: 80px;
+    }
+
+    .left-panel-connection-info .room-code-display {
+        font-size: 1.3em;
+        padding: 6px 12px;
+    }
+}

@@ -1,0 +1,175 @@
+/* Styles for core class session page layout */
+
+/*---------------------------------------
+  MAIN PAGE LAYOUT & PANEL STRUCTURE
+-----------------------------------------*/
+body.class-session-body {
+    display: flex; 
+    flex-direction: column; 
+    height: 100vh; 
+    margin: 0; 
+    background-color: #f4f4f4; 
+}
+
+/* This container wraps the left and center panels and should be their flex parent. */
+.class-session-container {
+    display: flex; 
+    flex-direction: row; 
+    flex-grow: 1; 
+    padding: 20px; 
+    gap: 20px; 
+}
+
+/* Panel specific h2 styling */
+.panel h2 {
+    font-size: 1.6em;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    font-weight: 600; /* Ensuring it aligns with base h2 weight */
+    line-height: 1.2; /* Ensuring it aligns with base h2 line-height */
+}
+
+.panel { /* Common styling for both panels (though not explicitly used by .left-panel or .center-panel by this name) */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+/* Center Panel: Main Content Area (Experience Preview & Controls) - Basic Structure */
+.center-panel {
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    padding: 20px; 
+    background-color: #ffffff; 
+    border-radius: 8px; 
+}
+
+/* Spacing for Teacher Preview Window within the Center Panel */
+.teacher-preview-window {
+   margin-bottom: 30px; 
+}
+
+/* Typography Adjustments within the Center Panel */
+.center-panel h3 {
+    margin-top: 0; 
+    margin-bottom: 15px;
+}
+
+/*---------------------------------------
+  STUDENT STATUS HEADER & GRID LAYOUT
+-----------------------------------------*/
+/* Student Status Header and Grid Layout - Updated to original spec */
+.status-header-flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0px;
+    border-bottom: none !important; 
+    padding-bottom: 10px; 
+    margin-bottom: 15px; 
+}
+
+.page-section-title {
+    font-size: 1.6em; 
+    font-weight: 500; 
+    line-height: 1.2;
+    color: #343a40; 
+    margin-bottom: 0; 
+    border: none !important; 
+    text-decoration: none !important; 
+    box-shadow: none !important; 
+}
+
+.student-status-controls { /* Container for buttons like 'View All Screens' */
+    display: flex;
+    align-items: center; 
+}
+
+.view-all-brand-btn {
+    padding: 8px 16px;
+    border: none;
+    background-color: #035BD7; 
+    color: #ffffff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+.view-all-brand-btn:hover {
+    background-color: #0248b0; 
+}
+
+.student-status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+    gap: 15px; 
+    padding: 0 10px 10px 10px; 
+    background-color: transparent; 
+    border-radius: 8px;
+}
+
+/*---------------------------------------
+  LOADING INDICATOR
+-----------------------------------------*/
+#loading-indicator {
+    display: none; 
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid #f3f3f3; 
+    border-top: 5px solid #3498db; 
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    z-index: 1000; 
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); } 
+}
+
+/*---------------------------------------
+  RESPONSIVE BEHAVIOR
+-----------------------------------------*/
+@media (max-width: 768px) {
+    .class-session-container {
+        flex-direction: column;
+        padding: 10px; /* Adjusted padding for smaller screens */
+        gap: 10px; /* Adjusted gap for smaller screens */
+    }
+
+    /* 
+      .left-panel responsive styles moved to class_session_sidebar.css 
+      .right-panel responsive styles can be added if/when a right panel is implemented
+    */
+    .center-panel { 
+        min-width: 100%; /* Ensure center panel also takes full width */
+        margin-right: 0;
+        padding: 15px; /* Adjusted padding for center panel on smaller screens */
+    }
+
+    .page-section-title {
+        font-size: 1.3em; 
+    }
+
+    .status-header-flex-container {
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 10px; 
+    }
+
+    .view-all-brand-btn {
+        padding: 8px 12px; 
+        font-size: 0.85em;
+    }
+}

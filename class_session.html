@@ -3,705 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Session - Learning Time VR</title>
-    <link rel="stylesheet" href="css/support-style.css">
+    <title>Class Session - LTVR Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/class_session_layout.css">
+    <link rel="stylesheet" href="css/class_session_sidebar.css">
+    <link rel="stylesheet" href="css/class_session_student_card.css">
+    <link rel="stylesheet" href="css/class_session_previews.css">
+    <link rel="stylesheet" href="css/class_session_modals.css">
+    <script src="js/header.js"></script> <!-- Load header script -->
+    
     <link rel="icon" type="image/png" href="assets/Favicon.png">
-    <style>
-        /*---------------------------------------
-          MAIN PAGE LAYOUT & PANEL STRUCTURE
-        -----------------------------------------*/
-
-        /* Base styles for the two-panel layout */
-        body { /* Flex container for left and center panels */
-            display: flex;
-            margin: 0; /* Remove default body margin for full-width layout */
-            min-height: 100vh; /* Ensure body takes at least full viewport height */
-        }
-
-        .panel { /* Common styling for both panels (though not explicitly used by .left-panel or .center-panel by this name) */
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        /* Left Panel: Sidebar for Experience Navigation */
-        .left-panel {
-            flex: 0 0 280px; /* Fixed width, does not grow or shrink */
-            border-right: 1px solid #dee2e6; /* Visual separator from center panel */
-            overflow-y: auto; /* Enables scrolling if content exceeds panel height */
-            background-color: #f8f9fa; /* Light background for distinction */
-            display: flex; 
-            flex-direction: column; /* Stack sidebar items vertically */
-            position: sticky; /* Keeps the sidebar in view during vertical scroll of center panel */
-            top: 10px; /* Distance from the top of the viewport */
-            height: calc(100vh - 20px); /* Full viewport height minus top/bottom margins */
-            /* Note: The inline 'min-height: 100vh' on the HTML element (if present) MUST be removed or this 'height' won't take full effect as intended with sticky positioning. */
-        }
-
-        /* Center Panel: Main Content Area (Experience Preview & Controls) */
-        .center-panel {
-            flex: 1; /* Takes up all remaining horizontal space */
-            display: flex;
-            flex-direction: column; /* Stacks title, preview, and other content vertically */
-            overflow-y: auto; /* CRITICAL: Enables scrolling for content that exceeds viewport height */
-            padding: 20px; /* Inner spacing for content */
-        }
-
-        /* Spacing for Teacher Preview Window within the Center Panel */
-        .teacher-preview-window {
-           margin-bottom: 30px; /* Space below the preview area before any subsequent content */
-        }
-
-        /* Typography Adjustments within the Center Panel */
-        .center-panel h3 {
-            margin-top: 0; /* Remove extra top margin if it's the first element */
-            margin-bottom: 15px;
-        }
-
-        /* EXPERIENCE LIST STYLING */
-        .experience-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .experience-item {
-            cursor: pointer;
-            padding: 12px 15px; /* Increased padding */
-            border-radius: 6px; /* Slightly larger radius */
-            margin-bottom: 5px; /* Reduced margin */
-            border-left: 3px solid transparent; /* Placeholder for selected indicator */
-            transition: background-color 0.2s ease, border-left-color 0.2s ease;
-            font-size: 0.95em; /* Adjust font size */
-            color: #333; /* Darker text */
-            display: flex; /* Use flexbox to align name and tag */
-            justify-content: space-between; /* Puts space between name and tag */
-            align-items: center; /* Vertically aligns items */
-        }
-        .experience-item:hover {
-            background-color: #e9ecef; /* Lighter gray hover */
-        }
-        .experience-item.selected {
-            background-color: #cfe2ff; /* Light blue background for selected */
-            font-weight: 600; /* Semi-bold */
-            color: #052c65; /* Darker blue text for selected */
-            border-left: 3px solid #0d6efd; /* Blue indicator border */
-        }
-        .experience-item.selected .tag {
-            background-color: #052c65 !important; /* Match selected text color */
-            color: #cfe2ff !important; /* Match selected background color */
-        }
-
-        /* PILL TAG STYLES */
-        .tag {
-            padding: 3px 10px;
-            border-radius: 12px; /* Pill shape */
-            font-size: 0.75em;
-            font-weight: bold;
-            color: white;
-            margin-left: 10px; /* Space between name and tag */
-            white-space: nowrap; /* Prevent tag text from wrapping */
-        }
-
-        /* Tag colors based on data-type of parent li.experience-item */
-        .experience-item[data-type="360video"] .tag {
-            background-color: #0052cc; /* LTVR Blue */
-        }
-
-        .experience-item[data-type="streetview"] .tag {
-            background-color: #28a745; /* Green */
-        }
-
-        .experience-item[data-type="webxr"] .tag {
-            background-color: #fd7e14; /* Orange */
-            color: #fff; /* White text */
-        }
-
-        .experience-item[data-type="3dmodel"] .tag {
-            background-color: #6f42c1; /* Purple */
-        }
-
-        .experience-item[data-type="app"] .tag {
-            background-color: #DC1625; /* New Red */
-        }
-
-        /* PREVIEW CONTENT STYLING */
-        .preview-content {
-            border: 1px dashed #aaa;
-            padding: 15px;
-            margin-top: 10px;
-        }
-        .video-player-placeholder, 
-        .streetview-placeholder, 
-        .model-viewer-placeholder {
-            background-color: #eee;
-            min-height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            margin-bottom: 10px;
-        }
-        /* Style for the embedded iframe */
-        #preview-360video iframe {
-            width: 100%; /* Make iframe responsive */
-            aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
-            border: none; /* Remove default border */
-        }
-        #preview-streetview iframe {
-            width: 100%;
-            aspect-ratio: 16 / 9; /* Or adjust if 4/3 is better for StreetView */
-            border: none;
-        }
-        /* Hide all preview content by default */
-        .preview-content {
-             display: none; 
-        }
-        /* Show the default message initially */
-        #preview-default {
-            display: flex; /* Use flexbox for layout */
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .qr-code-placeholder {
-            width: 150px;
-            height: 150px;
-            background-color: #ddd;
-            border: 1px solid #bbb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #888;
-            margin-bottom: 15px;
-        }
-        .room-code-display {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #333;
-            letter-spacing: 2px;
-            background-color: #f8f8f8;
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-        .left-panel-connection-info {
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-            text-align: center;
-            margin-top: auto; /* Pushes to the bottom of the flex parent (.left-panel) */
-            background-color: #f8f9fa; /* Match sidebar bg to cover content scrolling behind */
-            /* Make background full-width respecting parent's L/R padding (20px each) */
-            margin-left: -20px;
-            margin-right: -20px;
-            padding-left: 20px; /* Re-apply for content alignment */
-            padding-right: 20px; /* Re-apply for content alignment */
-            padding-bottom: 15px; /* Internal content padding at bottom */
-            z-index: 10; 
-        }
-        .left-panel-connection-info .qr-code-placeholder {
-            width: 100px; /* Smaller QR */
-            height: 100px;
-            margin: 0 auto 10px auto; /* Center horizontally */
-        }
-        .left-panel-connection-info .room-code-display {
-            font-size: 1.2em; /* Smaller room code */
-            padding: 5px 10px;
-            display: inline-block; /* Allow centering */
-            margin-bottom: 10px;
-        }
-
-        /* ADD EXPERIENCE ITEM STYLING */
-        .add-experience-item {
-            cursor: pointer;
-            padding: 10px 15px;
-            margin-top: 15px; /* Space above */
-            border-radius: 6px;
-            background-color: #e0e0e0;
-            text-align: center;
-            font-weight: 500;
-            color: #444;
-            border: 1px dashed #aaa;
-            transition: background-color 0.2s ease;
-        }
-        .add-experience-item:hover {
-            background-color: #d5d5d5;
-        }
-
-        /* MODAL STYLING */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-            max-width: 500px; /* Max width */
-            border-radius: 8px;
-            position: relative;
-        }
-        .close-button {
-            color: #aaa;
-            position: absolute; /* Position relative to modal-content */
-            top: 10px;
-            right: 20px;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* FULL PAGE MODAL STYLING */
-        #add-experience-modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 1050; /* Higher than other modal */
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(255, 255, 255, 0.95); /* White overlay */
-        }
-        .full-modal-content {
-            padding: 40px;
-            position: relative; /* For close button positioning */
-        }
-        .full-modal-close-button {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #555;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .full-modal-close-button:hover {
-            color: #000;
-        }
-
-        /* STUDENT STATUS GRID STYLING */
-        .status-header-flex-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline; /* Align text baselines of title and button */
-            margin-bottom: 0px; /* No space below header */
-            border-bottom: none !important; /* Ensure no separator line */
-        }
-
-        .page-section-title {
-            font-size: 1.6em; /* Slightly smaller title font */
-            font-weight: 500; /* Less bold */
-            line-height: 1.2; /* Reduce extra space within the h2 box */
-            color: #343a40; /* Darker text for title */
-            margin-bottom: 0; /* Remove default h2 margin */
-            border: none !important; /* Ensure no borders at all */
-            text-decoration: none !important; /* Ensure no underline */
-            box-shadow: none !important; /* Ensure no shadow that could look like a line */
-        }
-
-        .student-status-controls {
-            text-align: right; /* Position button to the right */
-        }
-
-        .view-all-brand-btn {
-            padding: 8px 16px;
-            border: none;
-            background-color: #035BD7; /* Brand Blue */
-            color: #ffffff;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.9em;
-            transition: background-color 0.2s;
-            white-space: nowrap;
-        }
-
-        .view-all-brand-btn:hover {
-            background-color: #0248b0; /* Darker Brand Blue */
-        }
-
-        .student-status-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Reduced min width */
-            gap: 15px; /* Equal 15px gap for rows and columns */
-            padding: 0 10px 10px 10px; /* Top padding removed, RBL preserved */
-            background-color: transparent; /* Remove grid background to eliminate top line */
-            border-radius: 8px;
-            /* border: 1px solid #dee2e6; Removed border */
-        }
-        .headset-status-cell {
-            min-width: 180px; /* Match grid minmax */
-            box-sizing: border-box;
-            border: 1px solid #dee2e6; /* Light gray border */
-            border-radius: 8px; /* Rounded corners */
-            padding: 0; /* Remove padding, handled by internal elements or placeholder */
-            background-color: #ffffff; /* White background */
-            text-align: center;
-            transition: transform 0.2s ease-in-out;
-            overflow: hidden; /* Needed for edge-to-edge placeholder */
-            display: flex;
-            flex-direction: column;
-        }
-        .headset-status-cell:hover {
-            transform: translateY(-5px); /* Slight lift on hover */
-        }
-
-        /* HEADSET INFO ROW STYLING */
-        .headset-info-row {
-            box-sizing: border-box;
-            display: flex;
-            justify-content: space-between; /* Ensure items are pushed apart */
-            align-items: center;
-            padding: 0 12px 8px 12px; /* T=0, R=12, B=8, L=12 */
-            background-color: #f8f9fa; /* Light background */
-            width: 100%;
-        }
-        .headset-status {
-            padding: 0;
-            display: flex;
-            align-items: center;
-            background-color: transparent !important; /* Override previous colors */
-            border: none !important; /* Override previous border */
-            color: #212529; /* Standard text color */
-            font-size: 0.85em;
-            border-radius: 0;
-        }
-        .status-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 6px;
-        }
-        .status-connected .status-dot {
-             background-color: #198754; /* Bootstrap Success Green */
-         }
-        .status-disconnected {
-            color: #6c757d; /* Gray text for disconnected */
-        }
-        .status-disconnected .status-dot {
-            background-color: #6c757d; /* Bootstrap Secondary Gray */
-        }
-        .headset-battery {
-            font-size: 0.8em;
-            color: #6c757d; /* Subtle gray */
-            margin-bottom: 0; /* Remove bottom margin */
-            text-align: center;
-        }
-        .headset-battery span {
-            font-weight: 500; /* Slightly bolder percentage */
-        }
-        .view-screen-btn {
-            padding: 6px 12px; /* Standard padding */
-            font-size: 0.8em;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: black;
-            line-height: 1; /* Prevent extra vertical space */
-            margin-bottom: 0;
-            background-color: white; /* Branding: White background */
-            color: black; /* Branding: Black text */
-            border: 1px solid #dee2e6; /* Subtle border */
-            border-radius: 6px; /* Branding: Rounded corners */
-            white-space: nowrap;
-            padding: 6px 12px; /* Standard padding */
-            transition: background-color 0.2s, color 0.2s;
-            flex-shrink: 0; /* Prevent button from shrinking */
-        }
-        .view-screen-btn:disabled {
-            cursor: default;
-            background-color: #f8f9fa !important; /* Slightly off-white disabled */
-            border-color: #dee2e6 !important;
-            color: #6c757d !important; /* Gray disabled text */
-            opacity: 0.75;
-        }
-        .view-screen-btn:hover:not(:disabled) {
-            background-color: #f8f9fa; /* Light hover */
-            border-color: #adb5bd;
-            color: black; /* Keep text black */
-        }
-        /* When the card is expanded */
-        .headset-status-cell.expanded .student-pov-placeholder {
-            display: flex; /* Show the placeholder (using flex) */
-        }
-        .headset-status-cell.expanded .view-screen-btn {
-           display: none; /* Hide view button when expanded */
-       }
-       /* Hide Screen Button (inside placeholder) */
-       .hide-screen-btn {
-           position: absolute;
-           top: 8px;
-           right: 8px;
-           background-color: rgba(0, 0, 0, 0.5);
-           color: white;
-           border: none;
-           border-radius: 50%;
-           width: 24px;
-           height: 24px;
-           font-size: 14px;
-           line-height: 24px; /* Center 'X' */
-           text-align: center;
-           cursor: pointer;
-           display: none; /* Hidden by default */
-           z-index: 10;
-       }
-       .headset-status-cell.expanded .hide-screen-btn {
-           display: inline-flex; /* Show when expanded, use flex for centering content */
-           align-items: center;
-           justify-content: center;
-       }
-       .hide-screen-btn:hover {
-           background-color: rgba(0, 0, 0, 0.7);
-       }
-
-        /* STUDENT POV PLACEHOLDER STYLING */
-        .student-pov-placeholder {
-            display: flex; /* Always visible, used to center content */
-            flex-direction: column; /* Default: stack items like label + content */
-            align-items: center;
-            justify-content: center; /* Center content by default (for collapsed state) */
-            aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
-            background-color: #e9ecef; /* Default light background for collapsed state */
-            color: #495057; /* Default text color for light background */
-            padding: 0; /* Remove padding, inner wrappers will handle if needed */
-            border-top-left-radius: 8px; /* Match card */
-            border-top-right-radius: 8px; /* Match card */
-            width: 100%;
-        }
-
-        /* Default visibility for items inside placeholder */
-        .student-pov-placeholder .pov-text-label,
-        .student-pov-placeholder .actual-pov-content {
-            display: none; /* Hidden by default */
-        }
-
-        /* Styles for .student-pov-placeholder when its parent .headset-status-cell is expanded */
-        .headset-status-cell.expanded .student-pov-placeholder {
-            background-color: #343a40; /* Dark background */
-            color: #ffffff; /* White text */
-            justify-content: flex-start; /* Align items (label, content) to the top */
-            padding: 0; /* Make black background flush */
-        }
-
-        .headset-status-cell.expanded .pov-text-label {
-            display: block; /* Show when expanded */
-            width: 100%;
-            text-align: center;
-            font-weight: 500;
-            margin-bottom: 8px;
-            font-size: 1em;
-        }
-
-        .headset-status-cell.expanded .actual-pov-content {
-            display: flex; /* Show when expanded */
-            flex-grow: 1; /* Takes remaining space */
-            width: 100%;
-            background-color: #000; /* Black background for actual screen area */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden; /* If content is larger */
-        }
-
-        /* Hide placeholder wrapper when cell is expanded */
-        .headset-status-cell.expanded .placeholder-content-wrapper {
-            display: none !important;
-        }
-
-        /* Wrapper for content inside collapsed placeholder (button or text) */
-        .student-pov-placeholder .placeholder-content-wrapper {
-            display: flex;
-            flex-direction: column; 
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            padding: 15px; 
-            box-sizing: border-box;
-        }
-
-        /* Styling for the 'View Screen' button when it's inside the placeholder */
-        .view-screen-btn-placeholder {
-            padding: 10px 20px; /* Larger padding */
-            border: 1px solid #6c757d; /* Grey border */
-            background-color: #ffffff; /* White background */
-            color: #6c757d; /* Grey text */
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.95em;
-            transition: background-color 0.2s, opacity 0.2s;
-            white-space: nowrap;
-        }
-
-        .view-screen-btn-placeholder:hover {
-            background-color: #f8f9fa; /* Very light grey on hover */
-        }
-
-        /* Styling for 'Disconnected' text in placeholder */
-        .placeholder-content-wrapper .status-text {
-            font-size: 0.9em; /* Match button text size */
-            font-weight: 500;
-            color: #6c757d; /* Muted text color */
-        }
-
-        /* Utility class to hide elements, often managed by JS */
-        .hidden-by-js {
-            display: none !important;
-        }
-
-        .hide-screen-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            font-size: 14px;
-            line-height: 24px; /* Center 'X' */
-            text-align: center;
-            cursor: pointer;
-            display: none; /* Hidden by default */
-            z-index: 10;
-        }
-        .headset-status-cell.expanded .hide-screen-btn {
-            display: inline-flex; /* Show when expanded, use flex for centering content */
-            align-items: center;
-            justify-content: center;
-        }
-        .hide-screen-btn:hover {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-
-        /* Hide View Screen button for disconnected headsets */
-        .headset-status-cell:has(.status-disconnected) .view-screen-btn {
-            display: none;
-        }
-
-        /* LOADING INDICATOR */
-        #loading-indicator {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .headset-id {
-            font-weight: bold; /* Keep bold */
-            white-space: nowrap; /* Prevent wrapping */
-            overflow: hidden; /* Hide overflow */
-            text-overflow: ellipsis; /* Show ... for overflow */
-            flex-grow: 1; /* Allow ID to take available space */
-            text-align: left; /* Align text within its space */
-        }
-
-        .headset-title-row {
-            box-sizing: border-box;
-            display: flex;
-            justify-content: space-between; /* Ensure items are pushed apart */
-            align-items: center;
-            padding: 8px 15px 0 12px; /* T=8, R=15, B=0, L=12 */
-            background-color: #f8f9fa; /* Light background */
-            width: 100%;
-        }
-        .headset-info-row {
-            box-sizing: border-box;
-            display: flex;
-            justify-content: space-between; /* Align status left, battery right */
-            align-items: center;
-            padding: 0 12px 8px 12px; /* T=0, R=12, B=8, L=12 */
-            background-color: #f8f9fa; /* Light background */
-            width: 100%;
-        }
-
-        /* Flex container for header items */
-        .header-flex-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%; /* Ensure it spans the full width if its parent doesn't */
-            padding-left: 20px;
-            padding-right: 20px;
-            box-sizing: border-box; /* Ensure padding is included in the 100% width */
-        }
-
-        /* Styling for session control buttons in header */
-        .session-control-btn {
-            padding: 8px 15px; /* Base padding for consistent size */
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9em;
-            margin-left: 10px; /* Space between buttons */
-            cursor: pointer;
-            border: 1px solid transparent; /* Ensure border style is solid */
-            box-sizing: border-box; /* Crucial for consistent sizing */
-            display: inline-block; /* Ensures consistent block-level behavior for padding/sizing */
-            line-height: 1.4; /* Using a specific unitless value for consistency */
-            font-family: inherit; /* Ensure consistent font usage */
-            vertical-align: middle; /* Better alignment for inline-block elements */
-        }
-
-        /* Remove default browser styling from buttons to match anchors better */
-        button.session-control-btn {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
-        .pause-session-btn-header {
-            background-color: #6c757d; /* Grey background */
-            color: #ffffff; /* White text */
-            border-color: #6c757d;
-        }
-
-        .pause-session-btn-header:hover {
-            background-color: #5a6268; /* Darker grey on hover */
-            border-color: #545b62;
-        }
-
-        .end-session-btn-header {
-            background-color: #DC1625; /* New Red */
-            color: #ffffff;
-            border-color: #DC1625; /* New Red */
-        }
-
-        .end-session-btn-header:hover {
-            background-color: #C61421; /* Darker New Red for hover */
-            border-color: #B8131F; /* Darker New Red for hover border */
-        }
-    </style>
-    <script>
-        // Placeholder for header loading script
-    </script>
 </head>
 <body class="class-session-body">
     <!-- Header Placeholder -->
     <div id="header-placeholder"></div>
 
     <main class="class-session-container">
-        <div class="panel left-panel" style="background-color: #f8f9fa; padding: 20px; border-right: 1px solid #dee2e6; display: flex; flex-direction: column;">
+        <div class="panel left-panel">
             <h2 id="class-name-title">Biology 101</h2> <!-- Changed title to class name -->
             <!-- Structured list of experiences with data types -->
             <ul class="experience-list">
@@ -721,14 +39,17 @@
                 <li class="experience-item" data-type="webxr" data-id="exp3">
                     Assessment <span class="tag">WebXR</span>
                 </li>
-                <li id="add-experience-trigger" class="add-experience-item">+ Add New Experience</li>
             </ul>
-            <!-- QR Code and Room Code in Left Panel -->
+            <!-- Add New Experience Button moved here -->
+            <div id="add-experience-trigger" class="add-experience-item">+ Add New Experience</div>
+            
+            <!-- QR Code and Room Code moved here -->
             <div class="left-panel-connection-info">
                 <div class="qr-code-placeholder">QR Code</div>
                 <div class="room-code-display">CODE123</div>
-                <p style="font-size: 0.8em; color: #666;">Students can join using this info.</p>
+                <p class="connection-info-text">Students can join using this info.</p>
             </div>
+            
         </div>
 
         <div class="panel center-panel">
@@ -738,49 +59,49 @@
                 <div id="preview-default" class="preview-content">
                     <div class="qr-code-placeholder">QR Code Area</div>
                     <div class="room-code-display">CODE123</div>
-                    <p style="margin-top: 15px; color: #666;">Have students scan the QR code or enter the room code.</p>
+                    <p class="preview-default-instruction">Have students scan the QR code or enter the room code.</p>
                 </div>
                 <!-- 360 Video Preview -->
                 <div id="preview-360video" class="preview-content">
-                    <h3>360 Video Preview</h3>
                     <!-- YouTube Embed -->
-                    <iframe 
-                        src="https://www.youtube.com/embed/o3a1fkLsNS4" 
-                        title="YouTube video player - 360° Volcano Fly Through"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen></iframe>
-                    <p style="font-size: 0.8em; margin-top: 5px;">Note: This is a standard YouTube preview. True 360 interaction may require specific VR player integration.</p>
+                    <div class="iframe-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/o3a1fkLsNS4" 
+                            title="YouTube video player - 360° Volcano Fly Through"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen></iframe>
+                    </div>
+                    <p class="preview-note">Note: This is a standard YouTube preview. True 360 interaction may require specific VR player integration.</p>
                 </div>
                 <!-- Street View Preview -->
                 <div id="preview-streetview" class="preview-content">
-                    <h3>Street View Preview</h3>
                     <!-- Google Street View Embed -->
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.794773377304!2d12.49004221570739!3d41.89021017922119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m3!3e6!4m0!4m0!5e0!3m2!1sen!2sus!4v1715537171079!5m2!1sen!2sus"
-                         allowfullscreen="" 
-                         loading="lazy" 
-                         referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    <p style="font-size: 0.8em; margin-top: 5px;">Use mouse/touch to look around in the preview.</p>
+                    <div class="iframe-wrapper">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.794773377304!2d12.49004221570739!3d41.89021017922119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m3!3e6!4m0!4m0!5e0!3m2!1sen!2sus!4v1715537171079!5m2!1sen!2sus"
+                             allowfullscreen="" 
+                             loading="lazy" 
+                             referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <p class="preview-note">Use mouse/touch to look around in the preview.</p>
                 </div>
                 <!-- WebXR Preview -->
                 <div id="preview-webxr" class="preview-content">
-                    <h3>WebXR Experience Preview</h3>
-                    <p>WebXR experiences launch directly in compatible headsets/browsers.</p>
-                    <button>Launch Preview (if possible)</button>
-                    <!-- Logic for WebXR launch/status -->
+                    <div class="preview-placeholder-16-9">
+                        <div class="placeholder-content">WebXR Preview Area</div>
+                    </div>
                 </div>
                 <!-- 3D Model Preview -->
                 <div id="preview-3dmodel" class="preview-content">
-                    <h3>3D Model Preview</h3>
-                    <div class="model-viewer-placeholder">Interactive 3D Model Area</div>
-                    <button>Rotate Left</button> <button>Rotate Right</button> <button>Add Annotation</button>
-                    <!-- Add 3D model viewer (e.g., Three.js, BabylonJS, model-viewer) -->
-                    <!-- Interaction should update this view and sync -->
+                    <div class="preview-placeholder-16-9">
+                        <div class="placeholder-content">3D Model Preview Area</div>
+                    </div>
                 </div>
                 <!-- App Preview -->
                 <div id="preview-app" class="preview-content">
-                    <h3>App Preview</h3>
-                    <p>App experiences will be shown here.</p>
+                    <div class="preview-placeholder-16-9">
+                        <div class="placeholder-content">App Preview Area</div>
+                    </div>
                 </div>
             </div>
             <!-- Student Status Section -->
@@ -806,7 +127,6 @@
                     </div>
                     <div class="headset-title-row">
                         <div class="headset-id">Headset 1</div>
-                        <button class="view-screen-btn hidden-by-js">View Screen</button> <!-- Original button, now hidden by default via JS control -->
                     </div>
                     <div class="headset-info-row">
                         <div class="headset-status status-connected"><span class="status-dot"></span>Connected</div>
@@ -823,7 +143,6 @@
                     </div>
                     <div class="headset-title-row">
                         <div class="headset-id">Headset 2</div>
-                        <button class="view-screen-btn hidden-by-js">View Screen</button>
                     </div>
                     <div class="headset-info-row">
                         <div class="headset-status status-connected"><span class="status-dot"></span>Connected</div>
@@ -840,7 +159,6 @@
                     </div>
                     <div class="headset-title-row">
                         <div class="headset-id">Headset 3</div>
-                        <button class="view-screen-btn hidden-by-js" disabled>View Screen</button>
                     </div>
                     <div class="headset-info-row">
                         <div class="headset-status status-disconnected"><span class="status-dot"></span>Disconnected</div>
@@ -857,7 +175,6 @@
                     </div>
                     <div class="headset-title-row">
                         <div class="headset-id">Headset 4</div>
-                        <button class="view-screen-btn hidden-by-js">View Screen</button>
                     </div>
                     <div class="headset-info-row">
                         <div class="headset-status status-connected"><span class="status-dot"></span>Connected</div>
@@ -874,7 +191,6 @@
                     </div>
                     <div class="headset-title-row">
                         <div class="headset-id">Headset 5</div>
-                        <button class="view-screen-btn hidden-by-js">View Screen</button>
                     </div>
                     <div class="headset-info-row">
                         <div class="headset-status status-connected"><span class="status-dot"></span>Connected</div>
@@ -882,301 +198,10 @@
                     </div>
                 </div>
                 <!-- Repeat for headsets 6-25 (using placeholders) -->
-                <script>
-                   // Simple script to populate the rest of the grid placeholders
-                   const grid = document.querySelector('.student-status-grid');
-                   if (grid) {
-                       for (let i = 6; i <= 25; i++) {
-                           const isConnected = Math.random() > 0.2; // Randomly connected/disconnected
-                           const statusClass = isConnected ? 'status-connected' : 'status-disconnected';
-                           const statusText = isConnected ? 'Connected' : 'Disconnected';
-                           const batteryLevel = isConnected ? Math.floor(Math.random() * 51) + 50 : '--'; // 50-100% if connected
-                           const buttonDisabled = isConnected ? '' : 'disabled';
-
-                           let placeholderInnerContent = '';
-                           if (isConnected) {
-                               placeholderInnerContent = `<button class="view-screen-btn view-screen-btn-placeholder" data-headset-id="headset${i}">View Screen</button>`;
-                           } else {
-                               placeholderInnerContent = `<div class="status-text">Disconnected</div>`;
-                           }
-
-                           const cell = document.createElement('div');
-                           cell.className = 'headset-status-cell';
-                           cell.dataset.headsetId = `headset${i}`; // Add data attribute for easier selection
-                           cell.innerHTML = `
-                               <div class="student-pov-placeholder">
-                                   <!-- Content for expanded view (initially hidden by CSS unless .expanded-pov is present) -->
-                                   <div class="actual-pov-content">
-                                       <!-- Actual POV stream/image would go here when expanded -->
-                                   </div>
-                                   <button class="hide-screen-btn" ${buttonDisabled}>&times;</button>
-
-                                   <!-- Content for collapsed view -->
-                                   <div class="placeholder-content-wrapper">
-                                       ${placeholderInnerContent}
-                                   </div>
-                               </div>
-                               <div class="headset-title-row">
-                                   <div class="headset-id">Headset ${i}</div>
-                                   <button class="view-screen-btn hidden-by-js" ${buttonDisabled}>View Screen</button> 
-                               </div>
-                               <div class="headset-info-row">
-                                   <div class="headset-status ${statusClass}"><span class="status-dot"></span>${statusText}</div>
-                                   <div class="headset-battery">🔋 <span>${batteryLevel}</span>%</div>
-                               </div>
-                           `;
-                           grid.appendChild(cell);
-                       }
-                   }
-                </script>
             </div>
+
         </div>
-
     </main>
-
-    <!-- Footer Placeholder or script -->
-    <!-- <div id="footer-placeholder"></div> -->
-
-    <!-- Link to your main JavaScript file if interactions are needed -->
-    <!-- <script src="js/main.js"></script> --> 
-    <script src="js/header.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Wait for the header to be fully loaded before attaching modal listeners
-            window.headerLoadedPromise.then(() => {
-                const modal = document.getElementById('pause-modal');
-                const triggerButton = document.getElementById('pause-modal-trigger');
-                const closeButton = document.querySelector('.close-button');
-
-                if (modal && triggerButton && closeButton) {
-                    // Open modal
-                    triggerButton.addEventListener('click', () => {
-                        modal.style.display = 'block';
-                    });
-
-                    // Close modal via button
-                    closeButton.addEventListener('click', () => {
-                        modal.style.display = 'none';
-                    });
-
-                    // Close modal by clicking outside
-                    window.addEventListener('click', (event) => {
-                        if (event.target == modal) {
-                            modal.style.display = 'none';
-                        }
-                    });
-                }
-            }).catch(error => {
-                console.error("Failed to initialize modal due to header loading error:", error);
-            });
-
-            const experienceList = document.querySelector('.experience-list');
-            const previewPanels = document.querySelectorAll('.preview-content');
-            const defaultPreview = document.getElementById('preview-default');
-            const previewTitle = document.getElementById('experience-preview-title');
-
-            // Initially select the 'Start Here' item
-            const startHereItem = experienceList.querySelector('[data-type="default"]');
-            if (startHereItem) {
-                startHereItem.classList.add('selected');
-            }
-
-            // --- Add Experience Modal Logic ---
-            const addExperienceModal = document.getElementById('add-experience-modal');
-            const addExperienceTrigger = document.getElementById('add-experience-trigger');
-            const addExperienceCloseButton = document.querySelector('.full-modal-close-button');
-
-            if (addExperienceTrigger && addExperienceModal && addExperienceCloseButton) {
-                addExperienceTrigger.addEventListener('click', () => {
-                    addExperienceModal.style.display = 'block';
-                });
-                addExperienceCloseButton.addEventListener('click', () => {
-                    addExperienceModal.style.display = 'none';
-                });
-                // Optional: Close full screen modal by clicking background (less common)
-                // window.addEventListener('click', (event) => {
-                //     if (event.target == addExperienceModal) {
-                //         addExperienceModal.style.display = 'none';
-                //     }
-                // });
-            }
-            // ---------------------------------
-
-            if (experienceList) {
-                experienceList.addEventListener('click', function(event) {
-                    if (event.target && event.target.classList.contains('experience-item')) {
-                        // Prevent normal processing if 'Add New' was clicked (it has its own handler)
-                        if (event.target.id === 'add-experience-trigger') {
-                            return; 
-                        }
-
-                        const selectedItem = event.target;
-                        const experienceType = selectedItem.dataset.type;
-                        const targetPreviewId = `preview-${experienceType}`;
-
-                        // Update the preview title
-                        if (previewTitle) {
-                            if (experienceType === 'default') {
-                                previewTitle.textContent = 'Session Details'; // Title for default view
-                            } else {
-                                previewTitle.textContent = selectedItem.textContent; // Use list item text as title
-                            }
-                        }
-
-                        // Deselect all items first
-                        document.querySelectorAll('.experience-item').forEach(item => {
-                            item.classList.remove('selected');
-                        });
-                        // Select the clicked item
-                        selectedItem.classList.add('selected');
-
-                        // Hide all preview panels (including the default one)
-                        previewPanels.forEach(panel => {
-                            panel.style.display = 'none';
-                        });
-
-                        if (experienceType === 'default') {
-                            // Show the default QR/Room code panel
-                            defaultPreview.style.display = 'flex';
-                        } else {
-                            // Show the specific experience preview panel
-                            const targetPreview = document.getElementById(targetPreviewId);
-                            if (targetPreview) {
-                                targetPreview.style.display = 'block';
-                            } else {
-                                // Fallback to default if specific panel not found (shouldn't happen)
-                                defaultPreview.style.display = 'flex';
-                                if(previewTitle) previewTitle.textContent = 'Session Details'; // Reset title on fallback
-                                console.warn(`Preview panel with ID ${targetPreviewId} not found.`);
-                            }
-                        }
-                    }
-                });
-            }
-        });
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const studentGrid = document.querySelector('.student-status-grid');
-            const viewAllBtn = document.getElementById('view-all-screens-btn');
-
-            if (studentGrid) {
-                // Handle clicks on individual 'View Screen' buttons
-                studentGrid.addEventListener('click', (event) => {
-                    if ((event.target.classList.contains('view-screen-btn') || event.target.classList.contains('view-screen-btn-placeholder')) && !event.target.disabled) {
-                        const cell = event.target.closest('.headset-status-cell');
-                        // Only expand if the cell is NOT disconnected
-                        if (cell && !cell.querySelector('.status-disconnected')) {
-                            cell.classList.add('expanded'); 
-                            updateViewAllButtonState(); // Check if all are now shown/hidden
-                        }
-                    }
-                    // Handle Hide Screen button clicks
-                    if (event.target.classList.contains('hide-screen-btn') && !event.target.disabled) {
-                        const cell = event.target.closest('.headset-status-cell');
-                        if (cell) {
-                            cell.classList.remove('expanded'); 
-                            updateViewAllButtonState();
-                        }
-                    }
-                });
-            }
-
-            if (viewAllBtn) {
-                // Handle clicks on the 'View All Screens' button
-                viewAllBtn.addEventListener('click', () => {
-                    const allCells = studentGrid.querySelectorAll('.headset-status-cell');
-                    const connectedCells = studentGrid.querySelectorAll('.headset-status-cell:has(.status-connected)');
-                    const currentlyShowingAll = viewAllBtn.textContent === 'Hide All Screens';
-
-                    connectedCells.forEach(cell => {
-                        const btn = cell.querySelector('.view-screen-btn');
-                        const isConnected = cell.querySelector('.status-connected');
-
-                        if (isConnected) { // Only toggle connected cells
-                            if (currentlyShowingAll) {
-                                // Hide all expanded views
-                                cell.classList.remove('expanded');
-                                // Button visibility handled by CSS
-                            } else {
-                                // Show all connected views
-                                cell.classList.add('expanded');
-                                // Button visibility handled by CSS
-                            }
-                        }
-                    });
-                    updateViewAllButtonState();
-                });
-            }
-
-            function updateViewAllButtonState() {
-                if (!studentGrid || !viewAllBtn) return;
-                const connectedCells = studentGrid.querySelectorAll('.headset-status-cell:has(.status-connected)');
-                const expandedConnectedCells = studentGrid.querySelectorAll('.headset-status-cell.expanded:has(.status-connected)');
-                
-                if (connectedCells.length > 0 && expandedConnectedCells.length === connectedCells.length) {
-                    viewAllBtn.textContent = 'Hide All Screens';
-                } else {
-                    viewAllBtn.textContent = 'View All Screens';
-                }
-            }
-            updateViewAllButtonState(); // Initial check
-        });
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const experiencePreviewTitle = document.getElementById('experience-preview-title');
-            const experienceItems = document.querySelectorAll('.experience-list .experience-item');
-            let currentSelectedItem = document.querySelector('.experience-list .experience-item.selected');
-
-            // Set initial title if a selected item exists and it's not 'Start Here' (already set)
-            if (currentSelectedItem && currentSelectedItem.dataset.id !== 'start') {
-                let titleText = currentSelectedItem.firstChild.textContent.trim();
-                experiencePreviewTitle.textContent = titleText;
-            } else if (!currentSelectedItem) {
-                // If no item is pre-selected, default to the first item if it exists
-                const firstItem = document.querySelector('.experience-list .experience-item[data-id="start"]');
-                if (firstItem) {
-                    firstItem.classList.add('selected');
-                    currentSelectedItem = firstItem;
-                    // Title is already 'Start Here' by default in HTML
-                }
-            }
-
-            experienceItems.forEach(item => {
-                item.addEventListener('click', function () {
-                    if (currentSelectedItem) {
-                        currentSelectedItem.classList.remove('selected');
-                    }
-                    this.classList.add('selected');
-                    currentSelectedItem = this;
-
-                    // Extract text content for the title, excluding the span.tag content
-                    let titleText = '';
-                    for (let i = 0; i < this.childNodes.length; i++) {
-                        if (this.childNodes[i].nodeType === Node.TEXT_NODE) {
-                            titleText += this.childNodes[i].textContent.trim();
-                        } else if (this.childNodes[i].nodeType === Node.ELEMENT_NODE && this.childNodes[i].tagName.toLowerCase() !== 'span') {
-                            // In case there are other elements we want to include, though unlikely for current structure
-                            titleText += this.childNodes[i].textContent.trim();
-                        }
-                    }
-                    titleText = titleText.trim(); // Final trim
-                    
-                    if(titleText === "") { // Fallback for items that might be structured differently, e.g., just text
-                        titleText = this.textContent.replace(/\s*<span.*<\/span>\s*/, '').trim();
-                    }
-
-                    experiencePreviewTitle.textContent = titleText || 'Experience'; // Default to 'Experience' if empty
-                    
-                    // Potentially load iframe or content based on data-id or other attributes here
-                    // For example: loadExperience(this.dataset.id);
-                });
-            });
-        });
-    </script>
 
     <!-- Pause Modal Structure -->
     <div id="pause-modal" class="modal">
@@ -1197,5 +222,6 @@
             <!-- Add form elements, search, etc. here -->
         </div>
     </div>
+    <script src="js/class_session.js" defer></script>
 </body>
 </html>

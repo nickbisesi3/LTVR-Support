@@ -6,7 +6,7 @@
     <title>LearningTime VR - Content Library</title>
     <link rel="stylesheet" href="css/support-style.css">
     <link rel="icon" type="image/png" href="assets/Favicon.png">
-    <script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+    
 </head>
 <body>
     <!-- Header will be dynamically injected by header.js -->
@@ -26,7 +26,7 @@
             <div class="quick-links filter-links" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
                 <button class="quick-link filter-btn active" data-filter="all" style="background-color: #6c757d; border: none; box-shadow: none;">All</button>
                 <button class="quick-link filter-btn" data-filter="field-trip" style="background-color: #0052cc; border: none; box-shadow: none;">Field Trips</button>
-                <button class="quick-link filter-btn" data-filter="science" style="background-color: #e60000; border: none; box-shadow: none;">Science</button>
+                <button class="quick-link filter-btn" data-filter="science" style="background-color: #DC1625; border: none; box-shadow: none;">Science</button>
                 <button class="quick-link filter-btn" data-filter="earth-space" style="background-color: #6f42c1; border: none; box-shadow: none;">Earth & Space</button>
                 <button class="quick-link filter-btn" data-filter="engineering" style="background-color: #28a745; border: none; box-shadow: none;">Engineering</button>
                 <button class="quick-link filter-btn" data-filter="career" style="background-color: #28a745; border: none; box-shadow: none;">Career</button>
@@ -47,13 +47,7 @@
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
     <script src="js/script.js"></script>
 <script src="js/footer.js"></script>
-    <!-- Removed Zapier Chatbot -->
-    <!--
-    <zapier-interfaces-chatbot-embed
-        is-popup='true'
-        chatbot-id='cm9382zyd000hkt1w8olhet5h'>
-    </zapier-interfaces-chatbot-embed>
-    -->
+    <!-- Zapier Chatbot fully removed -->
      <script>
          // Robust CSV Parser
         function robustParseCSV(csvText) {
@@ -134,11 +128,11 @@
 
         // --- Category Color Mapping (Keep this) ---
         const categoryColors = {
-            'Biology: Life Science': '#e60000', // Science - Red
-            'Biology 2': '#e60000', // Science - Red
-            'Science': '#e60000', // Science - Red
-            'Physical Science': '#e60000', // Science - Red
-            'Physics': '#e60000', // Science - Red
+            'Biology: Life Science': '#DC1625', // Science - Red
+            'Biology 2': '#DC1625', // Science - Red
+            'Science': '#DC1625', // Science - Red
+            'Physical Science': '#DC1625', // Science - Red
+            'Physics': '#DC1625', // Science - Red
             'Earth & Space Science': '#6f42c1', // Earth & Space - Purple
             'Earth Science': '#6f42c1', // Earth & Space - Purple
             'Engineering Design': '#28a745', // Engineering - Green (changed from yellow)
@@ -303,10 +297,6 @@
             copyrightYearElem.textContent = new Date().getFullYear();
         }
     </script>
-
-    <!-- Re-added Zapier Chatbot Embed -->
-    <script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
-    <zapier-interfaces-chatbot-embed is-popup='true' chatbot-id='cm9382zyd000hkt1w8olhet5h'></zapier-interfaces-chatbot-embed>
 
     <script src="js/header.js"></script>
 </body>

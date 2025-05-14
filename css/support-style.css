@@ -330,7 +330,7 @@ a.start-here:hover {
 
 .quick-link {
     /* background: linear-gradient(to right, #00c6ff, #0072ff); */ /* Example gradient */
-    background-color: #e60000; /* Solid Red */
+    background-color: #DC1625; /* Solid Red Updated */
     color: white;
     padding: 18px 15px; /* Adjust padding */
     border-radius: 8px;
@@ -345,7 +345,7 @@ a.start-here:hover {
 .quick-link:hover {
     transform: translateY(-4px) scale(1.03); 
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    background-color: #cc0000; /* Darker red hover */
+    background-color: #be1320; /* Darker New Red for hover */
 }
 
 /* Get Help Section */
@@ -572,7 +572,7 @@ zapier-interfaces-chatbot-embed {
     border-radius: 8px;
     text-decoration: none;
     display: block; /* Make the link a block */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
     /* box-shadow: 0 2px 5px rgba(0,0,0,0.1); */ /* Removed default shadow */
     /* border-left: 5px solid #0052cc; */ /* Blue accent border - Removed */
     position: relative; /* Needed for potential pseudo-elements if added later */
@@ -687,7 +687,7 @@ zapier-interfaces-chatbot-embed {
 .learn-more-btn {
     display: inline-block;
     padding: 12px 30px;
-    background-color: #e60000; /* Brand red */
+    background-color: #DC1625; /* Brand red Updated */
     color: white;
     border: none;
     border-radius: 8px;
@@ -699,9 +699,7 @@ zapier-interfaces-chatbot-embed {
 }
 
 .learn-more-btn:hover {
-    background-color: #cc0000; /* Darker red */
-    color: white;
-    text-decoration: none;
+    background-color: #be1320; /* Darker New Red for hover */
     transform: translateY(-2px);
 }
 
@@ -797,11 +795,6 @@ zapier-interfaces-chatbot-embed {
     }
 }
 
-/* Ensure animation doesn't stop at the end */
-.content-topic-cards:hover {
-    /* animation-play-state: paused; */ /* Pause scroll on hover - REMOVED */
-}
-
 .content-topic-cards {
     display: flex;
     width: 200%; /* Double width for duplicated items */
@@ -826,7 +819,7 @@ zapier-interfaces-chatbot-embed {
 
 /* Assign colors based on data attribute - using brand colors */
 .content-topic-card[data-category="field-trip"]  { background-color: #0052cc; } /* Brand Blue */
-.content-topic-card[data-category="science"]    { background-color: #e60000; } /* Brand Red */
+.content-topic-card[data-category="science"]    { background-color: #DC1625; } /* Updated Brand Red */
 .content-topic-card[data-category="earth-space"]{ background-color: #6f42c1; } /* Purple */
 .content-topic-card[data-category="engineering"]{ background-color: #28a745; } /* Green */
 .content-topic-card[data-category="career"]     { background-color: #0052cc; } /* Brand Blue */
@@ -841,7 +834,7 @@ zapier-interfaces-chatbot-embed {
 
 /* Update hover colors to darker shades of brand colors */
 .content-topic-card[data-category="field-trip"]:hover  { background-color: #0041a3; } /* Darker Blue */
-.content-topic-card[data-category="science"]:hover    { background-color: #cc0000; } /* Darker Red */
+.content-topic-card[data-category="science"]:hover    { background-color: #be1320; } /* Updated Darker Red */
 .content-topic-card[data-category="earth-space"]:hover{ background-color: #5a1e96; } /* Darker Purple */
 .content-topic-card[data-category="engineering"]:hover{ background-color: #218838; } /* Darker Green */
 .content-topic-card[data-category="career"]:hover     { background-color: #0041a3; } /* Darker Blue */
@@ -1284,68 +1277,54 @@ body.mobile-nav-active #mobile-nav-overlay {
     /* grid-template-columns: 1fr 1.1fr; */ /* Previous Adjustment: Text | Image (Image slightly smaller) */
     grid-template-columns: 1fr 1fr; /* Equal Parts: Text | Image */
     gap: 50px; /* Match product section gap */
-    align-items: center;
-}
-
-.unforgettable-experience .text-content {
-    /* Remove flex/width properties, grid handles it */
-    /* flex: 1; */
-    /* min-width: 300px; */
-    /* max-width: 500px; */
 }
 
 .unforgettable-experience h2 {
-    /* font-size: 2.5em; */ /* Adjust size - larger than product, smaller than hero */
-    font-size: 2.2em; /* Match 'Trusted by Educators' title size */
-    font-weight: 600; /* Match default h2 weight */
-    margin-bottom: 15px; /* Match product h2 margin */
+    font-size: 2.2em; /* Match previous section */
+    font-weight: 600;
+    margin-bottom: 15px;
     line-height: 1.3;
-    /* color: #0052cc; */ /* Match product section h2 color (Brand Blue) */
-    color: #111; /* Change back to dark color */
+    color: #111; /* Keep heading black */
 }
 
 .unforgettable-experience p {
-    font-size: 1.1em; /* Keep slightly larger */
-    line-height: 1.7; /* Match product p line height */
-    color: #555; /* Match product p color */
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #555;
     margin-bottom: 0;
 }
 
 .unforgettable-experience .image-content {
     /* Remove flex/width properties, grid handles it */
-    /* flex: 1; */
-    /* min-width: 300px; */
-    /* max-width: 600px; */
 }
 
 .unforgettable-experience img {
     width: 100%;
     height: auto;
     border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1); /* Slightly softer shadow */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     display: block;
 }
 
 /* Responsive adjustments for Unforgettable Experience */
 @media (max-width: 768px) {
     .unforgettable-experience .container {
-        /* Grid automatically handles stacking with auto-fit */
-        grid-template-columns: 1fr; /* Force single column */
-        gap: 30px; /* Reduce gap on mobile */
-        text-align: center; /* Center text */
+        grid-template-columns: 1fr; /* Single column */
+        gap: 30px;
+        text-align: center;
     }
-     .unforgettable-experience .image-content {
-        /* order: 1; */ /* Let grid handle order or uncomment if needed */
-        max-width: 90%; /* Limit width */
-        margin: 0 auto; /* Center image container */
+    .unforgettable-experience .image-content {
+         order: 1; /* Ensure image is first on mobile */
+         max-width: 90%;
+         margin: 0 auto;
     }
-     .unforgettable-experience .text-content {
-        /* order: 2; */ /* Let grid handle order or uncomment if needed */
-        max-width: 90%; /* Limit width */
-        margin: 0 auto; /* Center text container */
+    .unforgettable-experience .text-content {
+         order: 2; /* Ensure text is second on mobile */
+         max-width: 90%;
+         margin: 0 auto;
     }
-     .unforgettable-experience h2 {
-        font-size: 2em; /* Reduce heading size */
+    .unforgettable-experience h2 {
+        font-size: 2em;
     }
 } 
 
@@ -1384,10 +1363,6 @@ body.mobile-nav-active #mobile-nav-overlay {
     margin-bottom: 0;
 }
 
-.support-onboarding-section .image-content {
-    /* No specific flex/width needed, grid handles it */
-}
-
 .support-onboarding-section img {
     width: 100%;
     height: auto;
@@ -1403,7 +1378,7 @@ body.mobile-nav-active #mobile-nav-overlay {
         gap: 30px;
         text-align: center;
     }
-    .support-onboarding-section .image-content {
+    .support-onboarding-section img {
          order: 1; /* Ensure image is first on mobile */
          max-width: 90%;
          margin: 0 auto;
@@ -1417,3 +1392,24 @@ body.mobile-nav-active #mobile-nav-overlay {
         font-size: 2em;
     }
 } 
+
+/* Style for the 'View Full Library' button within the content library section */
+.content-library-section .learn-more-btn {
+    display: inline-block;
+    background-color: #DC1625; /* Updated Brand Red */
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1em;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.content-library-section .learn-more-btn:hover {
+    background-color: #be1320; /* Updated Darker Red */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}

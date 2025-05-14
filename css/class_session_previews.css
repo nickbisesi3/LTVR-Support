@@ -1,0 +1,164 @@
+/* Styles for teacher preview content in center panel */
+
+/*---------------------------------------
+  PREVIEW CONTENT STYLING
+-----------------------------------------*/
+.preview-content {
+    border: 1px dashed #ced4da; /* Lighter dashed border */
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Light background for preview areas */
+    min-height: 300px; /* Ensure a decent minimum height */
+    display: none; /* Hide all preview content by default */
+    flex-direction: column; /* Default for content that might stack */
+    align-items: center; /* Center content like placeholders */
+    justify-content: center; /* Center content */
+    box-sizing: border-box; /* ADDED */
+}
+
+/* Show the default message initially */
+#preview-default {
+    display: flex; /* Overrides .preview-content's display:none for this specific ID */
+    /* flex-direction, align-items, justify-content inherited from .preview-content */
+    text-align: center;
+}
+
+/* QR Code and Room Code for the #preview-default in center panel */
+#preview-default .qr-code-placeholder {
+    width: 150px;
+    height: 150px;
+    background-color: #e9ecef; /* Slightly darker than preview-content bg */
+    border: 1px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    margin-bottom: 20px; /* Increased margin */
+    font-size: 0.9em;
+    border-radius: 4px;
+}
+
+#preview-default .room-code-display {
+    font-size: 2em; /* Larger room code for center panel */
+    font-weight: bold;
+    color: #343a40;
+    letter-spacing: 2px;
+    background-color: #e9ecef;
+    padding: 12px 25px;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+#preview-default p {
+    font-size: 1em;
+    color: #495057;
+    max-width: 400px; /* Limit width of instructional text */
+}
+
+/* Apply height limit and scroll to specific active previews */
+#preview-360video,
+#preview-streetview,
+#preview-3dmodel, /* Assuming this ID exists */
+#preview-app, /* Assuming this ID exists */
+#preview-webxr {
+    max-height: 60vh; /* Limit height to 60% of viewport height */
+    min-height: auto; /* Override default min-height */
+    align-items: stretch; /* Let content stretch */
+    justify-content: flex-start;
+    overflow: hidden; /* Prevent content overflow */
+}
+
+/* Wrapper for iframes to control aspect ratio and sizing */
+.iframe-wrapper {
+    position: relative; /* Needed for absolute positioning of iframe inside */
+    width: 100%;
+    max-width: 100%; /* Ensure it doesn't exceed parent width */
+    /* Removed: max-height: 100%; */ /* Let parent's max-height + stretch control */
+    aspect-ratio: 16 / 9; /* Define the shape */
+    margin: 0 auto; /* Center if width becomes constrained */
+    overflow: hidden; /* Hide anything overflowing the wrapper */
+    border-radius: 4px; /* Match iframe radius */
+}
+
+/* Style for the embedded iframes */
+#preview-360video iframe,
+#preview-streetview iframe {
+    position: absolute; /* Position relative to wrapper */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Fill the wrapper */
+    display: block; /* Ensure block behavior */
+    border: none;
+}
+
+/* Notes inside iframe previews */
+#preview-360video .preview-note,
+#preview-streetview .preview-note {
+    flex-shrink: 0; /* Prevent note from shrinking */
+    margin-top: 10px; /* Add some space above the note */
+    text-align: center; /* Center the note text */
+    width: 100%; /* Take full width (due to align-items: stretch) */
+    padding: 0 10px; /* Add horizontal padding */
+    box-sizing: border-box; /* Include padding in width */
+    font-size: 0.9em;
+    color: #6c757d; /* Muted color */
+}
+
+/* Placeholder for non-iframe previews (3D Model, WebXR, App) */
+.preview-placeholder-16-9 {
+    position: relative; /* For absolute positioning of inner content */
+    width: 100%; /* Take full width of parent */
+    max-width: 100%; /* Ensure it doesn't exceed parent width */
+    aspect-ratio: 16 / 9; /* Enforce 16:9 aspect ratio */
+    background-color: #e9ecef; /* Light gray background */
+    border: 1px dashed #ced4da; /* Dashed border */
+    border-radius: 4px; /* Rounded corners */
+    overflow: hidden; /* Clip if necessary, though scaling is preferred */
+    box-sizing: border-box; /* Include border in size */
+}
+
+.placeholder-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #6c757d; /* Muted text color */
+    font-size: 1em;
+    font-style: italic;
+    padding: 10px; /* Add some padding inside the placeholder */
+    box-sizing: border-box;
+}
+
+/* Specific Preview Placeholders */
+.video-player-placeholder, 
+.streetview-placeholder, 
+.model-viewer-placeholder {
+    background-color: #e9ecef;
+    min-height: 200px; /* Adjusted min-height */
+    width: 100%;
+    max-width: 600px; /* Max width for these placeholders */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    margin-bottom: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    font-size: 1.1em;
+}
+
+/* If there's a specific container for the iframe, e.g., a div with class .iframe-container */
+.iframe-container {
+    width: 100%;
+    max-width: 800px; /* Example max-width */
+    margin: 0 auto; /* Center the iframe container if it's narrower than preview-content */
+}

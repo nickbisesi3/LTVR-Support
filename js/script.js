@@ -1,8 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('[Debug] DOMContentLoaded: Event fired. Checking for footer-placeholder immediately.');
+    const initialFooterPlaceholderCheck = document.getElementById('footer-placeholder');
+    if (initialFooterPlaceholderCheck) {
+        console.log('[Debug] DOMContentLoaded: SUCCESS - Found footer-placeholder immediately.');
+    } else {
+        console.error('[Debug] DOMContentLoaded: CRITICAL FAILURE - footer-placeholder was NOT FOUND immediately on DOMContentLoaded.');
+        // Logging body.innerHTML here might be too early if body itself isn't fully ready, 
+        // but let's try to get some insight if the element is missing this early.
+        if (document.body) {
+            console.log('[Debug] DOMContentLoaded (footer-placeholder not found): document.body.innerHTML was:', document.body.innerHTML);
+        } else {
+            console.log('[Debug] DOMContentLoaded (footer-placeholder not found): document.body was null.');
+        }
+    }
+
     const calendlyUrl = 'https://calendly.com/learningtimevr-demo/30min';
 
     // --- Function to load HTML partials ---
     function loadHTML(url, elementId, callback) {
+        console.log(`[Debug] loadHTML: Called with url='${url}', elementId='${elementId}'`); // Log parameters
         fetch(url)
             .then(response => {
                 if (!response.ok) {
@@ -11,25 +27,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.text();
             })
             .then(data => {
+                console.log(`[Debug] loadHTML for '${elementId}': Fetched data. Attempting to find element by ID.`); // Log before finding element
                 const element = document.getElementById(elementId);
                 if (element) {
                     element.innerHTML = data;
                     if (callback) callback(); // Execute callback function if provided
                 } else {
-                    console.error('Element with ID ' + elementId + ' not found.');
+                    console.error(`[Debug] loadHTML for '${elementId}': CRITICAL - Element with ID '${elementId}' was NOT FOUND by document.getElementById.`);
                 }
             })
             .catch(error => console.error('Error loading HTML partial:', error));
     }
-
-    // --- Create a promise that resolves when the header is loaded ---
-    window.headerLoadedPromise = new Promise((resolve, reject) => {
-        loadHTML('partials/header-support.html', 'header-placeholder', resolve); // Resolve promise in callback
-    });
-
-    // --- Load Footer --- 
-    loadHTML('components/footer.html', 'footer-placeholder');
-
 
     // Function to open Calendly popup
     function openCalendly(url) {
@@ -97,77 +105,105 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- Wait for Header to Load before setting up Hamburger Menu ---
+    // --- Wait for Header to Load before setting up Hamburger Menu --- 
     window.headerLoadedPromise.then(() => {
-        console.log('Header loaded, attempting to set up hamburger menu...'); // DEBUG
+        // console.log('Header loaded, attempting to set up hamburger menu...'); // DEBUG
 
-        // Add Header Button Listener HERE
-        const scheduleHeaderBtn = document.getElementById('schedule-header-btn');
-        if (scheduleHeaderBtn) {
-            console.log('Found schedule-header-btn, adding listener.'); // DEBUG
-            scheduleHeaderBtn.addEventListener('click', function() {
-                openCalendly(calendlyUrl);
+        // --- Load Footer (now that header is confirmed loaded, defer slightly) --- 
+        setTimeout(function() {
+            console.log('[Debug] Footer setTimeout: Checking for footer-placeholder in DOM right before calling loadHTML...');
+            const checkFooterElement = document.getElementById('footer-placeholder');
+            if (checkFooterElement) {
+                console.log('[Debug] Footer setTimeout: SUCCESS - Found footer-placeholder via getElementById:', checkFooterElement);
+            } else {
+                console.log('[Debug] DOM State when footer-placeholder is NULL: document.body.innerHTML was:', document.body.innerHTML); // Log innerHTML of body
+                console.error('[Debug] Footer setTimeout: CRITICAL FAILURE - footer-placeholder is NULL via getElementById right before calling loadHTML.');
+            }
+
+            loadHTML('components/footer.html', 'footer-placeholder', function() {
+                console.log('Footer HTML loaded successfully into footer-placeholder.'); // DEBUG
+                const yearSpan = document.getElementById('copyright-year');
+                if (yearSpan) {
+                    yearSpan.textContent = new Date().getFullYear();
+                    console.log('Copyright year set.'); // DEBUG
+                } else {
+                    console.error('Could not find copyright-year span after loading footer.'); // DEBUG
+                }
             });
-        } else {
-            console.error('Could not find schedule-header-btn after header load.');
-        }
+        }, 0);
 
-        // --- Hamburger Menu Logic --- 
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const mobileNav = document.getElementById('mobile-nav');
-        const bodyEl = document.body;
-        const overlay = document.getElementById('mobile-nav-overlay'); // Get overlay
+        // Wrap header-dependent logic in setTimeout to ensure DOM is ready
+        setTimeout(function() {
+            console.log('Header loaded, (deferred via setTimeout) attempting to set up listeners...'); // DEBUG
 
-        // DEBUG: Log found elements
-        console.log('Hamburger Button Element:', hamburgerBtn);
-        console.log('Mobile Nav Element:', mobileNav);
-        console.log('Overlay Element:', overlay);
-        console.log('Body Element:', bodyEl);
+            // Add Header Button Listener HERE
+            const scheduleHeaderBtn = document.getElementById('schedule-header-btn');
+            if (scheduleHeaderBtn) {
+                console.log('Found schedule-header-btn (after setTimeout), adding listener.'); // DEBUG
+                scheduleHeaderBtn.addEventListener('click', function() {
+                    openCalendly(calendlyUrl);
+                });
+            } else {
+                console.error('Could not find schedule-header-btn even after setTimeout.');
+            }
 
-        if (hamburgerBtn && mobileNav && overlay && bodyEl) { // Check for bodyEl too
-            console.log('Hamburger menu elements FOUND, adding listeners.'); // DEBUG
-            hamburgerBtn.addEventListener('click', function(event) { // Add event parameter
-                console.log('Hamburger button CLICKED!'); // DEBUG
-                // event.stopPropagation(); // Optional: Stop event bubbling if needed
-                bodyEl.classList.toggle('mobile-nav-active');
-                console.log('Toggled mobile-nav-active class. Body classes:', bodyEl.className); // DEBUG
-                const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
-                hamburgerBtn.setAttribute('aria-expanded', !isExpanded);
-            });
+            // --- Hamburger Menu Logic --- 
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileNav = document.getElementById('mobile-nav');
+            const bodyEl = document.body;
+            const overlay = document.getElementById('mobile-nav-overlay'); // Get overlay
 
-            // Close menu when clicking overlay
-            overlay.addEventListener('click', function() {
-                console.log('Overlay CLICKED!'); // DEBUG
-                bodyEl.classList.remove('mobile-nav-active');
-                hamburgerBtn.setAttribute('aria-expanded', 'false');
-            });
-        } else {
-             console.error('Hamburger menu elements NOT FOUND. Check IDs in header partials.'); // DEBUG: Updated error msg
-        }
+            // DEBUG: Log found elements
+            console.log('Hamburger Button Element (after setTimeout):', hamburgerBtn);
+            console.log('Mobile Nav Element (after setTimeout):', mobileNav);
+            console.log('Overlay Element (after setTimeout):', overlay);
+            console.log('Body Element (after setTimeout):', bodyEl);
 
-        // Add listeners for mobile schedule buttons (assuming they use the same Calendly link)
-        const scheduleMobileBtn = document.getElementById('schedule-mobile-btn');
-        if (scheduleMobileBtn) {
-            scheduleMobileBtn.addEventListener('click', function() {
-                openCalendly(calendlyUrl);
-                // Close menu after click - only if it's currently active
-                if (bodyEl.classList.contains('mobile-nav-active')) { 
+            if (hamburgerBtn && mobileNav && overlay && bodyEl) { // Check for bodyEl too
+                console.log('Hamburger menu elements FOUND (after setTimeout), adding listeners.'); // DEBUG
+                hamburgerBtn.addEventListener('click', function(event) { // Add event parameter
+                    console.log('Hamburger button CLICKED! (after setTimeout)'); // DEBUG
+                    // event.stopPropagation(); // Optional: Stop event bubbling if needed
+                    bodyEl.classList.toggle('mobile-nav-active');
+                    console.log('Toggled mobile-nav-active class. Body classes (after setTimeout):', bodyEl.className); // DEBUG
+                    const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
+                    hamburgerBtn.setAttribute('aria-expanded', !isExpanded);
+                });
+
+                // Close menu when clicking overlay
+                overlay.addEventListener('click', function() {
+                    console.log('Overlay CLICKED! (after setTimeout)'); // DEBUG
                     bodyEl.classList.remove('mobile-nav-active');
-                    if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'false');
-                }
-            });
-        }
-        const scheduleMobileSupportBtn = document.getElementById('schedule-mobile-support-btn');
-        if (scheduleMobileSupportBtn) {
-            scheduleMobileSupportBtn.addEventListener('click', function() {
-                openCalendly(calendlyUrl); // Assuming same link
-                 // Close menu after click - only if it's currently active
-                if (bodyEl.classList.contains('mobile-nav-active')) { 
-                    bodyEl.classList.remove('mobile-nav-active'); 
-                    if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'false');
-                }
-            });
-        }
+                    hamburgerBtn.setAttribute('aria-expanded', 'false');
+                });
+            } else {
+                 console.error('Hamburger menu elements NOT FOUND (after setTimeout). Check IDs in header partials.'); // DEBUG: Updated error msg
+            }
+
+            // Add listeners for mobile schedule buttons (assuming they use the same Calendly link)
+            const scheduleMobileBtn = document.getElementById('schedule-mobile-btn');
+            if (scheduleMobileBtn) {
+                scheduleMobileBtn.addEventListener('click', function() {
+                    openCalendly(calendlyUrl);
+                    // Close menu after click - only if it's currently active
+                    if (bodyEl.classList.contains('mobile-nav-active')) { 
+                        bodyEl.classList.remove('mobile-nav-active');
+                        if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+            const scheduleMobileSupportBtn = document.getElementById('schedule-mobile-support-btn');
+            if (scheduleMobileSupportBtn) {
+                scheduleMobileSupportBtn.addEventListener('click', function() {
+                    openCalendly(calendlyUrl); // Assuming same link
+                     // Close menu after click - only if it's currently active
+                    if (bodyEl.classList.contains('mobile-nav-active')) { 
+                        bodyEl.classList.remove('mobile-nav-active'); 
+                        if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+        }, 0); // End of setTimeout
 
     }).catch(error => {
         console.error('Failed to initialize hamburger menu due to header loading error:', error);

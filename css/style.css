@@ -1,12 +1,57 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 /* General page structure */
 body {
     display: flex;
+    flex-direction: column; /* Ensure body stacks header and main vertically */
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif; /* Changed to Poppins */
     background-color: #f4f7f6; /* Light grey background for the page */
     color: #333; /* Default text color */
-    height: 100vh;
-    overflow: hidden; /* Prevent body scroll when sidebar or main content scrolls */
+    line-height: 1.6; /* Added default line height for body text */
+}
+
+/* Typography - Base Headings */
+h1 {
+    font-size: 2.2em;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 25px;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+h3 {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #444;
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+h4 {
+    font-size: 1.1em; /* Sensible default */
+    font-weight: 600;
+    color: #0052cc;
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: 1.2;
 }
 
 /* Sidebar Styles */
@@ -23,11 +68,13 @@ body {
 
 .sidebar h2 {
     font-size: 1.2em;
-    color: #0052cc; /* LTVR Blue */
+    color: #333; /* Changed from LTVR Blue to match base h2 spec */
+    font-weight: 600; /* Added to match base h2 spec */
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Changed from 20px */
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
+    margin-right: 20px; /* Added */
 }
 
 .experience-list {
@@ -109,4 +156,193 @@ body {
 
 .experience-item[data-type="app"] .tag {
     background-color: #DC1625; /* New Red */
+}
+
+/* === HEADER STYLES for class_session.html and potentially others === */
+header { /* This targets the <header> element itself */
+    background-color: #fff; /* White background for the header bar */
+    padding: 10px 0; /* Changed from 15px 20px to 10px vertical only */
+    border-bottom: 1px solid #eee; /* Changed from box-shadow */
+    position: relative; /* For potential absolute/fixed children like mobile nav */
+    z-index: 1100; /* Changed from 1000 */
+}
+
+.header-flex-container { /* This is the div inside <header> */
+    display: flex;
+    justify-content: space-between; /* Key for spacing: logo left, controls right */
+    align-items: center; /* Vertically aligns items in the middle */
+    width: 100%;
+    padding-left: 20px; /* Added */
+    padding-right: 20px; /* Added */
+    box-sizing: border-box; /* Added */
+}
+
+.logo-link {
+    display: inline-block; /* Good practice for image links */
+}
+
+.logo { /* Class for the <img> tag */
+    height: 55px; /* Changed from 50px to 55px */
+    width: auto;   /* Maintain aspect ratio */
+    vertical-align: middle; /* Added from original */
+    transition: transform 0.2s ease; /* Added from original */
+}
+
+header .header-nav {
+    margin-left: auto; /* Pushes nav to the right */
+    display: flex;
+    align-items: center;
+}
+
+header .header-nav > * {
+    margin-left: 20px; /* Space between nav items */
+}
+
+.header-session-controls {
+    display: flex;
+    align-items: center; /* Vertically align buttons with each other */
+}
+
+.header-session-controls .session-control-btn {
+    margin-left: 10px; /* Spacing between buttons */
+    padding: 8px 15px; /* Changed from 10px 15px */
+    border: 1px solid transparent; /* Changed from border: none; */
+    border-radius: 6px; /* Changed from 4px */
+    cursor: pointer;
+    font-size: 0.9em; /* Matches original */
+    text-decoration: none; /* For <a> tags styled as buttons */
+    color: white; /* Default text color for buttons */
+    font-weight: 500; /* Reverted from 600 to 500 as per original spec */
+    box-sizing: border-box; /* Added from original */
+    font-family: inherit; /* Added from original */
+    display: inline-block; /* Added from original for consistency */
+    line-height: 1.4; /* Added from original */
+    vertical-align: middle; /* Added from original */
+}
+
+.header-session-controls .pause-session-btn-header {
+    background-color: #6c757d; /* Matches original */
+    color: #ffffff; /* Added for explicitness, matches original */
+    border-color: #6c757d; /* Added from original */
+}
+
+.header-session-controls .pause-session-btn-header:hover {
+    background-color: #5a6268;
+}
+
+.header-session-controls .end-session-btn-header {
+    background-color: #DC1625; /* Changed from #dc3545 */
+    color: #ffffff; /* Added for explicitness, matches original */
+    border-color: #DC1625; /* Added from original */
+}
+
+.header-session-controls .end-session-btn-header:hover {
+    background-color: #c82333; /* Kept as a darker red, suitable for #DC1625 */
+}
+
+/* === RESPONSIVE HEADER STYLES === */
+
+/* Hamburger Button Base Styles */
+#hamburger-btn {
+    display: none; /* Hidden by default, shown in media query */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: 15px;
+    z-index: 1101; /* Ensure hamburger is above header content */
+}
+
+#hamburger-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #333 !important; /* From provided styles */
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hamburger Animation States (when body has .mobile-nav-active) */
+body.mobile-nav-active #hamburger-btn span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+body.mobile-nav-active #hamburger-btn span:nth-child(2) {
+    opacity: 0;
+}
+
+body.mobile-nav-active #hamburger-btn span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile Nav Base Styles */
+header #mobile-nav { /* Specificity to ensure it's inside the header */
+    display: flex; 
+    flex-direction: column; 
+    position: fixed !important; /* From provided styles */
+    top: 75px; /* Adjust if header height changes */
+    left: 0; 
+    right: 0; 
+    width: 100%; 
+    max-width: none; 
+    background-color: #f8f9fa; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+    padding: 0 20px;
+    z-index: 1050; /* Below hamburger, above content */
+    max-height: 0; /* Collapsed by default */
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+/* Mobile Nav Links/Buttons */
+header #mobile-nav a, 
+header #mobile-nav button {
+    display: block;
+    color: #333;
+    padding: 15px 0;
+    text-decoration: none;
+    font-size: 1.1em;
+    border: none;
+    background: none;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    visibility: visible !important; /* From provided styles */
+    opacity: 1 !important; /* From provided styles */
+    height: auto !important; /* From provided styles */
+    overflow: visible !important; /* From provided styles */
+}
+
+/* Active State for Mobile Nav (when body has .mobile-nav-active) */
+body.mobile-nav-active header #mobile-nav {
+    max-height: 100vh; /* Expands to full viewport height or content */
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Mobile Nav Overlay (Explicitly disabled as per user's original CSS) */
+#mobile-nav-overlay {
+    display: none !important; 
+}
+
+body.mobile-nav-active #mobile-nav-overlay {
+    display: none !important; /* Ensure it stays hidden even when nav is active */
+}
+
+/* Media Queries for Header Responsive Behavior */
+@media (max-width: 768px) { /* Unified breakpoint for session controls and hamburger */
+    .header-session-controls {
+        display: none; /* Hide session controls first */
+    }
+    header .header-nav { /* Assuming .header-nav contains main navigation links */
+        display: none !important; /* Hide standard nav links */
+    }
+    #hamburger-btn {
+        display: block; /* Show hamburger button */
+    }
+}
+
+/* Ensure no-print class works as expected if not globally defined */
+.no-print {
+    /* Potentially add 'display: none !important;' if print styles are overriding */
 }
